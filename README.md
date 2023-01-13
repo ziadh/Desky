@@ -2,7 +2,7 @@
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
 <h3>WHAT IS IT? </h3>
-Desky will contains a plenty of mini-applications™ that will make your everyday life a little easier. New mini-apps will be added with every patch, the updates will generally go out every Tuesday or Wednesday morning ETA. 
+Desky will contains a plenty of mini-applications™ that will make your everyday life a little easier. New mini-apps will be added with every patch, the updates will generally go out every Tuesday or Wednesday morning EST. 
 
 <h3> WHEN </h3>
 The full launch will go out the first week of February.
