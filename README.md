@@ -7,20 +7,13 @@ Desky will contains a plenty of mini-applications™ that will make your everyda
 <h3> WHEN </h3>
 The full launch will go out the first week of February.
 
-Alpha version launching on 1/17 9 AM EST with only a handful of features, more to come in the near future.
+Alpha version launching on 1/17 9 AM EST with only a handful of features. The beta version released on the 24th will have three more mini-applications.
 
 <h3>Alpha features:</h3>
 
 - Downloads Folder Organizer: Got your Downloads folder a big mess? This mini-app will fix it for you in ~~one~~ TWO clicks.
 
 - Youtube Downloader: Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
-
-
-- CLASSIFIED
-
-
-- CLASSIFIED
-
 
 - CLASSIFIED
 
