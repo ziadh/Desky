@@ -29,7 +29,6 @@ Desky will fully launch on 2/7! Beta version will be available on 1/24 with more
 - Fresh Desktop Check List: Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool is your one-stop shop
 
 ![FDCL-ss](https://user-images.githubusercontent.com/15097797/212767534-089cbee6-91b4-447d-a2f1-3d7c261fa3a7.png)
-- CLASSIFIED
 
 
 
