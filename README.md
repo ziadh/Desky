@@ -11,18 +11,24 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 
 <h2> WHEN? </h2>
 
-Alpha version launching on 1/17 9 AM EST with only a handful of features, more to come in the near future.
+Desky will fully launch on 2/7! Beta version will be available on 1/24 with more mini-programs and other improvements.
+
 
 <h2>Alpha features:</h2>
 
 - Downloads Folder Organizer: Got your Downloads folder a big mess? This mini-app will fix it for you in ~~one~~ TWO clicks.
 
+![DO-ss](https://user-images.githubusercontent.com/15097797/212767384-705a4e0a-d27a-4533-b0ed-d933c2070a23.png)
+
+
 - Youtube Downloader: Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
 
+![YTD-ss](https://user-images.githubusercontent.com/15097797/212767423-9eceb127-748c-49fb-94b7-89b2f0ca1fb8.png)
 
-- CLASSIFIED
 
+- Fresh Desktop Check List: Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool is your one-stop shop
 
+![FDCL-ss](https://user-images.githubusercontent.com/15097797/212767534-089cbee6-91b4-447d-a2f1-3d7c261fa3a7.png)
 - CLASSIFIED
 
 
