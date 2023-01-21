@@ -3,7 +3,9 @@ from tkinter import messagebox
 import tkinter.filedialog
 import os
 import shutil
-import customtkinter
+import customtkinter as CTk
+import json
+
 downloads_path = ''
 
 
@@ -49,9 +51,17 @@ def organize():
         error_label.configure(text="Download folder organized successfully!")
 
 
-app = customtkinter.CTk()
-customtkinter.set_appearance_mode("Dark")
-customtkinter.set_default_color_theme("blue")
+with open("settings.json", 'r')as f:
+    settings = json.load(f)
+theme = settings['theme']
+
+
+app = CTk.CTk()
+CTk.set_default_color_theme("blue")
+if theme == 'dark':
+    CTk.set_appearance_mode("dark")
+else:
+    CTk.set_appearance_mode("light")
 
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
@@ -60,21 +70,21 @@ app.geometry(f"290x180")
 app.title("Downloads Organizer")
 app.wm_iconbitmap("src/DO/logo.ico")
 
-welcome_label = customtkinter.CTkLabel(
+welcome_label = CTk.CTkLabel(
     app, text="Welcome to Downloads Organizer!")
 
 welcome_label.place(x=10, y=0)
 
-locate_button = customtkinter.CTkButton(
+locate_button = CTk.CTkButton(
     app, text="Set Downloads Folder", command=set_path, width=20)
 
-organize_button = customtkinter.CTkButton(
+organize_button = CTk.CTkButton(
     app, text="Organize", width=10, command=organize)
 
-help_button = customtkinter.CTkButton(
+help_button = CTk.CTkButton(
     app, text="How Does This Work", width=15, command=help_function)
-exit_button = customtkinter.CTkButton(app, text="Exit", width=5, command=exit)
-error_label = customtkinter.CTkLabel(app, text="")
+exit_button = CTk.CTkButton(app, text="Exit", width=5, command=exit)
+error_label = CTk.CTkLabel(app, text="")
 
 
 error_label.place(x=10, y=35)

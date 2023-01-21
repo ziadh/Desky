@@ -1,4 +1,10 @@
-<h1> Desky - Currently In Alpha</h1>
+<h1> Desky - Currently In Beta</h1>
+
+[![Downloads][downloads-shield]][downloads-url]
+[![License][license-shield]][license-url]
+[![Language][language-shield]][language-url]
+[<img src="https://img.shields.io/github/v/release/ziadh/Desky?style=for-the-badge&color=red" alt="Latest Release">](https://github.com/ziadh/Desky/releases)</p>
+
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
 
@@ -29,8 +35,13 @@ Desky will fully launch on 2/7! Beta version will be available on 1/24 with more
 - Fresh Desktop Check List: Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool is your one-stop shop
 
 ![FDCL-ss](https://user-images.githubusercontent.com/15097797/212767534-089cbee6-91b4-447d-a2f1-3d7c261fa3a7.png)
-- CLASSIFIED
-
-
 
 Check back here on the 24th at 9 AM EST to try out the Beta version and submit your feedback in the [Issues](https://github.com/ziadh/Desky/issues/new) 
+
+
+[downloads-shield]: https://img.shields.io/github/downloads/ziadh/Desky/total?style=for-the-badge&logo=github
+[downloads-url]: https://github.com/ziadh/Desky/releases/latest
+[license-shield]: https://img.shields.io/github/license/ziadh/Desky?style=for-the-badge
+[license-url]: https://github.com/ziadh/Desky/blob/main/LICENSE
+[language-shield]: https://img.shields.io/github/languages/top/ziadh/Desky?logo=python&logoColor=yellow&style=for-the-badge
+[language-url]: https://www.python.org/

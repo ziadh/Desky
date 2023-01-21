@@ -4,7 +4,7 @@ from tkinter import *
 import subprocess
 import requests
 import webbrowser
-from tkinter import ttk
+from tkinter import messagebox
 
 
 def update_username():
@@ -26,14 +26,18 @@ def save_username():
     global username
     username = change_username_entry.get()
 
-    with open("src/settings.json", "r+") as json_file:
+    with open("settings.json", "r+") as json_file:
         data = json.load(json_file)
         data["username"] = username
-    with open('src/settings.json', 'w') as f:
+    with open('settings.json', 'w') as f:
         json.dump(data, f)
     username = data['username']
-    welcome_label.configure(text=f"Welcome, {username}!")
-    cancel_username_changes()
+    if username == '':
+        error = messagebox.showinfo(
+            title="Empty Name", message="Please enter a name.")
+    else:
+        welcome_label.configure(text=f"Welcome, {username}!")
+        cancel_username_changes()
 
 
 def cancel_username_changes():
@@ -43,15 +47,44 @@ def cancel_username_changes():
 
 
 def open_YTD():
-    subprocess.run(["python", "src/YTD/YTD.pyw"])
+    subprocess.run(["python", "src/YTD/YTD.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+def open_DSP():
+    subprocess.run(["python", "src/DSP/DSP.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_DO():
-    subprocess.run(["python", "src/DO/do.pyw"])
+    subprocess.run(["python", "src/DO/do.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+def open_W2PDF():
+    subprocess.run(["python", "src/W2PDF/w2pdf.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_FDCL():
-    subprocess.run(["python", "src/FD/FDCL.pyw"])
+    subprocess.run(["python", "src/FD/FDCL.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+def toggle_theme():
+    with open("settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'dark':
+        CTk.set_appearance_mode("light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'light'
+    if theme == 'light':
+        CTk.set_appearance_mode("dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'dark'
+    with open('settings.json', 'w') as f:
+        json.dump(settings, f)
 
 
 def check_for_updates():
@@ -63,7 +96,7 @@ def check_for_updates():
             text=f"New update v{version} available. Click here to update")
     else:
         version_message.configure(
-            text=f"You are running the latest version v{version}", cursor="")
+            text=f"You are running the latest version v{version}.", cursor="")
         version_message.unbind("<Button-1>")
 
 
@@ -75,7 +108,7 @@ def download_update(event):
     webbrowser.open(link)
 
 
-with open("src/settings.json", 'r')as f:
+with open("settings.json", 'r')as f:
     settings = json.load(f)
 version = settings['version']
 username = settings['username']
@@ -89,39 +122,52 @@ else:
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
 app.geometry("600x600")
-app.title(f"Desky v{version} - Alpha Version")
+app.title(f"Desky v{version} - Beta Version")
 app.resizable(False, False)
 
 
 welcome_label = CTk.CTkLabel(
     app, text=f"Welcome, {username}!", font=("Courier New", 22))
 
+
 welcome_label.place(x=10, y=10)
 change_username_button = CTk.CTkButton(
-    app, text="Change Username", font=("Courier New", 22), command=update_username)
-change_username_button.place(x=380, y=10)
+    app, text="Change Name", font=("Courier New", 22), command=update_username)
+change_username_button.place(x=430, y=10)
 
 top_seperator = CTk.CTkLabel(
     app, text="^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-top_seperator.place(x=- 20, y=50)
+top_seperator.place(x=-20, y=50)
 
 apps_label = CTk.CTkLabel(app, text="My Apps", font=("Courier New", 22))
-apps_label.place(x=250, y=90)
+apps_label.place(x=250, y=70)
+
+DSP_button = CTk.CTkButton(app, text="Daily Sneak Peek", font=(
+    "Courier New", 22), command=open_DSP)
+DSP_button.place(x=10, y=110)
 DO_button = CTk.CTkButton(app, text="Downloads Organizer", font=(
     "Courier New", 22), command=open_DO)
-DO_button.place(x=10, y=150)
+DO_button.place(x=10, y=170)
 
 FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
                             font=("Courier New", 22), command=open_FDCL)
-FDCL_button.place(x=10, y=210)
+FDCL_button.place(x=10, y=230)
+
+W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
+    "Courier New", 22), command=open_W2PDF)
+W2PDF_button.place(x=10, y=290)
 
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
-YTD_button.place(x=10, y=270)
+YTD_button.place(x=10, y=350)
 
 bottom_seperator = CTk.CTkLabel(
     app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
 bottom_seperator.place(x=-20, y=500)
+
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=320, y=560)
 check_for_updates_button = CTk.CTkButton(app, text="Check for Updates", font=(
     "Courier New", 18), command=check_for_updates)
 check_for_updates_button.place(x=370, y=560)

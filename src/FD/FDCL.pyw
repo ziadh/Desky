@@ -1,15 +1,15 @@
 import webbrowser
 from tkinter import *
-import customtkinter
+import customtkinter as CTk
 from tkinter import messagebox
-
-customtkinter.set_appearance_mode("Dark")
-customtkinter.set_default_color_theme("blue")
+import json
+CTk.set_appearance_mode("Dark")
+CTk.set_default_color_theme("blue")
 
 
 def open_downloads():
     vars_list = [var1.get(), var2.get(), var3.get(), var4.get(),
-                 var5.get(), var6.get(), var7.get(), var8.get()]
+                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
@@ -31,6 +31,13 @@ def open_downloads():
             webbrowser.open("https://notepad-plus-plus.org/downloads/")
         if var8.get() == 1:
             webbrowser.open("https://www.skype.com/en/get-skype/")
+        if var9.get() == 1:
+            # var 9 = steam, 10=evernote, 11=itunes
+            webbrowser.open("https://store.steampowered.com/about/")
+        if var10.get() == 1:
+            webbrowser.open("https://evernote.com/download")
+        if var11.get() == 1:
+            webbrowser.open("https://support.apple.com/downloads/itunes")
         reset_selections()
 
 
@@ -43,6 +50,9 @@ def reset_selections():
     var6.set(0)
     var7.set(0)
     var8.set(0)
+    var9.set(0)
+    var10.set(0)
+    var11.set(0)
 
 
 def select_all():
@@ -54,11 +64,14 @@ def select_all():
     var6.set(1)
     var7.set(1)
     var8.set(1)
+    var9.set(1)
+    var10.set(1)
+    var11.set(1)
 
 
-app = customtkinter.CTk()
+app = CTk.CTk()
 app.title("Fresh Desktop Checklist")
-app.geometry("450x380")
+app.geometry("450x440")
 app.resizable(False, False)
 var1 = IntVar()
 var2 = IntVar()
@@ -68,44 +81,66 @@ var5 = IntVar()
 var6 = IntVar()
 var7 = IntVar()
 var8 = IntVar()
+var9 = IntVar()
+var10 = IntVar()
+var11 = IntVar()
 
-chrome = customtkinter.CTkCheckBox(app, text="Chrome", variable=var2)
-discord = customtkinter.CTkCheckBox(app, text="Discord", variable=var4)
-firefox = customtkinter.CTkCheckBox(app, text="Firefox", variable=var3)
-ghd = customtkinter.CTkCheckBox(app, text="GitHub Desktop", variable=var6)
-np = customtkinter.CTkCheckBox(app, text="NotePad++", variable=var7)
-skype = customtkinter.CTkCheckBox(app, text="Skype", variable=var8)
-spotify = customtkinter.CTkCheckBox(app, text="Spotify", variable=var1)
-vs = customtkinter.CTkCheckBox(app, text="VS Code", variable=var5)
+
+with open("settings.json", 'r')as f:
+    settings = json.load(f)
+theme = settings['theme']
+
+if theme == 'dark':
+    CTk.set_appearance_mode("dark")
+else:
+    CTk.set_appearance_mode("light")
+
+
+chrome = CTk.CTkCheckBox(app, text="Chrome", variable=var2)
+evernote = CTk.CTkCheckBox(app, text="Evernote", variable=var10)
+discord = CTk.CTkCheckBox(app, text="Discord", variable=var4)
+firefox = CTk.CTkCheckBox(app, text="Firefox", variable=var3)
+itunes = CTk.CTkCheckBox(app, text="iTunes", variable=var11)
+ghd = CTk.CTkCheckBox(app, text="GitHub Desktop", variable=var6)
+np = CTk.CTkCheckBox(app, text="NotePad++", variable=var7)
+skype = CTk.CTkCheckBox(app, text="Skype", variable=var8)
+spotify = CTk.CTkCheckBox(app, text="Spotify", variable=var1)
+steam = CTk.CTkCheckBox(app, text="Steam", variable=var9)
+vs = CTk.CTkCheckBox(app, text="VS Code", variable=var5)
+
 
 chrome.place(x=120, y=110)
-discord.place(x=120, y=140)
-firefox.place(x=120, y=170)
-ghd.place(x=120, y=200)
+evernote.place(x=120, y=140)
+discord.place(x=120, y=170)
+firefox.place(x=120, y=200)
+ghd.place(x=120, y=230)
+itunes.place(x=120, y=260)
 np.place(x=270, y=110)
 skype.place(x=270, y=140)
 spotify.place(x=270, y=170)
-vs.place(x=270, y=200)
+steam.place(x=270, y=200)
+vs.place(x=270, y=230)
 msg = """
 Welcome to Fresh Desktop Downloads. If your computer recently got through\na factory reset, simply check the boxes for the applications that you would like\nto install then press the download button.
 """
-welcome_label = customtkinter.CTkLabel(
+welcome_label = CTk.CTkLabel(
     app, text=msg, justify=LEFT, padx=10, pady=10)
 welcome_label.grid(row=0, column=0)
-download_button = customtkinter.CTkButton(
-    app, text="Download", command=open_downloads)
-download_button.place(x=70, y=310)
-exit_button = customtkinter.CTkButton(
-    app, text="Exit", command=exit)
-exit_button.place(x=250, y=310)
 
-select_all_button = customtkinter.CTkButton(
+select_all_button = CTk.CTkButton(
     app, text="Select All", command=select_all)
-select_all_button.place(x=70, y=272)
+select_all_button.place(x=70, y=342)
 
-clear_selection_button = customtkinter.CTkButton(
+clear_selection_button = CTk.CTkButton(
     app, text="Clear Selection", command=reset_selections)
-clear_selection_button.place(x=250, y=272)
+clear_selection_button.place(x=250, y=342)
+
+download_button = CTk.CTkButton(
+    app, text="Download", command=open_downloads)
+download_button.place(x=70, y=390)
+
+exit_button = CTk.CTkButton(app, text="Exit", command=exit)
+exit_button.place(x=250, y=390)
 
 
 app.mainloop()
