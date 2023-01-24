@@ -8,7 +8,7 @@
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
 
-![main_menu](https://user-images.githubusercontent.com/15097797/212766983-66526351-fa77-4c70-960a-8ee92ab7674c.png)
+![main_menu](https://user-images.githubusercontent.com/15097797/213949277-07e3039e-5b17-4090-8dc2-0841ef84a371.png)
 
 
 
@@ -17,28 +17,49 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 
 <h2> WHEN? </h2>
 
-Desky will fully launch on 2/7! Beta version will be available on 1/24 with more mini-programs and other improvements.
+Desky will fully launch on 1/31 with at least two more mini-apps and improvements across the board!
 
 
-<h2>Alpha features:</h2>
+# Downloads Folder Organizer
+## Got your Downloads folder a big mess? This mini-app will fix it for you in ~~one~~ TWO clicks.
 
-- Downloads Folder Organizer: Got your Downloads folder a big mess? This mini-app will fix it for you in ~~one~~ TWO clicks.
-
-![DO-ss](https://user-images.githubusercontent.com/15097797/212767384-705a4e0a-d27a-4533-b0ed-d933c2070a23.png)
-
-
-- Youtube Downloader: Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
-
-![YTD-ss](https://user-images.githubusercontent.com/15097797/212767423-9eceb127-748c-49fb-94b7-89b2f0ca1fb8.png)
+![DO-ss](https://user-images.githubusercontent.com/15097797/213949236-c43f22fd-01ca-4bb5-acd5-62381eb10e12.png)
 
 
-- Fresh Desktop Check List: Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool is your one-stop shop
+# Youtube Downloader
+## Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
 
-![FDCL-ss](https://user-images.githubusercontent.com/15097797/212767534-089cbee6-91b4-447d-a2f1-3d7c261fa3a7.png)
+![YTD-ss](https://user-images.githubusercontent.com/15097797/213949295-00380d31-2d0c-457f-8cfc-abf6a0ddfd6f.png)
 
 
 
-Check back here on the 24th at 9 AM EST to try out the Beta version and submit your feedback in the [Issues](https://github.com/ziadh/Desky/issues/new) 
+# Fresh Desktop Check List
+## Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool is your one-stop shop
+- Added Github, Evernote, and iTunes in Beta
+![FDCL-ss](https://user-images.githubusercontent.com/15097797/213949265-6bcddb48-1b34-4833-a487-e13c7bcf3a75.png)
+
+# Daily Sneak Peek:
+
+## Stay up to date with your day. Currently only shows today's weather for your zipcode, launch will include daily reminders as well as all-time To-Do list.
+## Launch will also include support for intentional cities!
+
+![DSP-ss](https://user-images.githubusercontent.com/15097797/213949255-a7ec03f7-7fbc-4a83-8bc4-9424e675b8a8.png)
+
+
+# Word2PDF Converter
+## Self explanatory, quick mini-app that converts your word documents to PDF
+- Will improve its functionality in the launch update!
+![W2PDF-ss](https://user-images.githubusercontent.com/15097797/213949286-bf0eb27e-d4ec-4c43-8803-4d981840b845.png)
+
+
+# On the 31st...
+Check back here on the 31st at 9 AM EST to enjoy the launched version and submit your feedback in the [Issues](https://github.com/ziadh/Desky/issues/new) 
+
+# Known Issues:
+
+-When opening any of the mini-apps, the Desky window might freeze.
+
+                    ETA: Hopefully fixed by launch
 
 
 [downloads-shield]: https://img.shields.io/github/downloads/ziadh/Desky/total?style=for-the-badge&logo=github
