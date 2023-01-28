@@ -5,6 +5,22 @@ import subprocess
 import requests
 import webbrowser
 from tkinter import messagebox
+import sys
+import os
+import time
+
+file_path = None
+language = None
+
+log_folder = "errors_logged"
+log_prefix = "errors_log_from_.txt"
+
+if not os.path.exists(log_folder):
+    os.makedirs(log_folder)
+current_time = time.strftime("%m%d%Y-%H-%M-%S")
+log_file = log_prefix + current_time + ".txt"
+log_path = os.path.join(log_folder, log_file)
+sys.stderr = open(log_path, "a")
 
 
 def update_username():
@@ -122,7 +138,7 @@ else:
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
 app.geometry("600x600")
-app.title(f"Desky v{version} - Beta Version")
+app.title(f"Desky v{version}")
 app.resizable(False, False)
 
 
@@ -175,3 +191,8 @@ version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
 version_message.bind("<Button-1>", download_update)
 version_message.place(x=-0, y=520)
 app.mainloop()
+
+sys.stderr.close()
+if os.path.getsize(log_path) == 0:
+    os.remove(log_path)
+    os.rmdir(log_folder)

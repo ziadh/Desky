@@ -83,7 +83,7 @@ organize_button = CTk.CTkButton(
 
 help_button = CTk.CTkButton(
     app, text="How Does This Work", width=15, command=help_function)
-exit_button = CTk.CTkButton(app, text="Exit", width=5, command=exit)
+exit_button = CTk.CTkButton(app, text="Exit", width=65, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
 
