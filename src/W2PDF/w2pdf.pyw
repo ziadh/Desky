@@ -3,6 +3,7 @@ from tkinter import filedialog
 import comtypes.client
 import customtkinter as CTk
 import json
+import subprocess
 
 global word_file
 word_file = ""
@@ -37,6 +38,12 @@ def clear_selection():
     label.configure(text="File selection cleared.")
 
 
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
@@ -69,4 +76,7 @@ clear_button.place(x=0, y=90)
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
 exit_button.place(x=150, y=90)
 
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", command=back_to_desky)
+back_to_desky_button.place(x=75, y=130)
 app.mainloop()

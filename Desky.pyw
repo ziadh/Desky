@@ -63,26 +63,29 @@ def cancel_username_changes():
 
 
 def open_YTD():
-    subprocess.run(["python", "src/YTD/YTD.pyw"],
-                   creationflags=subprocess.CREATE_NO_WINDOW)
-
+    app.destroy()
+    subprocess.run(["python", "src/YTD/YTD.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
 
 def open_DSP():
+    app.destroy()
     subprocess.run(["python", "src/DSP/DSP.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_DO():
+    app.destroy()
     subprocess.run(["python", "src/DO/do.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_W2PDF():
+    app.destroy()
     subprocess.run(["python", "src/W2PDF/w2pdf.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_FDCL():
+    app.destroy()
     subprocess.run(["python", "src/FD/FDCL.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
@@ -140,6 +143,7 @@ app = CTk.CTk()
 app.geometry("600x600")
 app.title(f"Desky v{version}")
 app.resizable(False, False)
+app.wm_iconbitmap('assets/logos/Desky-logo.ico')
 
 
 welcome_label = CTk.CTkLabel(

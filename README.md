@@ -1,4 +1,7 @@
-<h1> Desky - Currently In Beta</h1>
+![read-me-wide](assets/logos/read-me-wide.png)
+
+
+<h1> Desky</h1>
 
 [![Downloads][downloads-shield]][downloads-url]
 [![License][license-shield]][license-url]

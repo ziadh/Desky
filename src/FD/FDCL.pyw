@@ -2,6 +2,7 @@ import webbrowser
 from tkinter import *
 import customtkinter as CTk
 from tkinter import messagebox
+import subprocess
 import json
 CTk.set_appearance_mode("Dark")
 CTk.set_default_color_theme("blue")
@@ -68,6 +69,9 @@ def select_all():
     var10.set(1)
     var11.set(1)
 
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
 
 app = CTk.CTk()
 app.title("Fresh Desktop Checklist")
@@ -129,18 +133,21 @@ welcome_label.grid(row=0, column=0)
 
 select_all_button = CTk.CTkButton(
     app, text="Select All", command=select_all)
-select_all_button.place(x=70, y=342)
+select_all_button.place(x=70, y=312)
 
 clear_selection_button = CTk.CTkButton(
     app, text="Clear Selection", command=reset_selections)
-clear_selection_button.place(x=250, y=342)
+clear_selection_button.place(x=250, y=312)
 
 download_button = CTk.CTkButton(
     app, text="Download", command=open_downloads)
-download_button.place(x=70, y=390)
+download_button.place(x=70, y=360)
 
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
-exit_button.place(x=250, y=390)
+exit_button.place(x=250, y=360)
 
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", command=back_to_desky)
+back_to_desky_button.place(x=160, y=401)
 
 app.mainloop()

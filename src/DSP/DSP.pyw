@@ -4,6 +4,8 @@ import customtkinter as CTk
 from tkinter import *
 import json
 from tkinter import messagebox
+import os
+import subprocess
 
 API_KEY = "6c55313b14fc0b07b3ea751d41103c12"
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
@@ -13,6 +15,16 @@ with open("settings.json", 'r')as f:
 version = settings['version']
 username = settings['username']
 theme = settings['theme']
+
+
+if not os.path.exists('src/DSP/tasks.json'):
+    with open('src/DSP/tasks.json', 'w') as file:
+        json.dump([], file)
+
+if not os.path.exists('src/DSP/reminders.json'):
+    with open('src/DSP/reminders.json', 'w') as file:
+        json.dump([], file)
+
 global zip_code
 zip_code = settings['zip_code']
 
@@ -23,7 +35,7 @@ else:
 
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
-app.geometry("1200x600")
+app.geometry("1500x600")
 app.title("Daily Sneak Peek")
 app.resizable(False, False)
 
@@ -106,6 +118,126 @@ def kelvin_to_celsius_fahrenheit(kelvin):
     return celsius, fahreinheit
 
 
+if os.path.getsize('src/DSP/tasks.json') == 0:
+    tasks = []
+else:
+    with open('src/DSP/tasks.json', 'r') as file:
+        tasks = json.load(file)
+
+
+def save_tasks():
+    with open("src/DSP/tasks.json", "w") as file:
+        json.dump(tasks, file)
+
+
+def load_tasks():
+    global tasks
+    try:
+        with open("src/DSP/tasks.json", "r")as file:
+            tasks = json.load(file)
+            create_task_labels()
+    except:
+        pass
+
+
+def add_task():
+    task = todo_entry.get()
+    if task == "":
+        pass
+    else:
+        task = todo_entry.get()
+        tasks.append(task)
+        with open('src/DSP/tasks.json', 'w') as file:
+            json.dump(tasks, file)
+        create_task_labels()
+        todo_entry.delete(0, END)
+
+
+def create_task_labels():
+    for i, task in enumerate(tasks):
+        tasklabel = CTk.CTkLabel(app, text=task)
+        tasklabel.place(x=370, y=120+(i+1)*30)
+        tasklabels.append(tasklabel)
+
+
+def delete_all_tasks():
+    for tasklabel in tasklabels:
+        tasklabel.destroy()
+    tasks.clear()
+    tasklabels.clear()
+    with open("src/DSP/tasks.json", "w") as f:
+        json.dump([], f)
+
+
+# reminders
+if os.path.getsize('src/DSP/reminders.json') == 0:
+    reminders = []
+else:
+    with open('src/DSP/reminders.json', 'r') as file:
+        reminders = json.load(file)
+
+
+def save_reminders():
+    with open("src/DSP/reminders.json", "w") as file:
+        json.dump(reminders, file)
+
+
+def load_reminders():
+    global reminders
+    try:
+        with open("src/DSP/reminders.json", "r")as file:
+            reminders = json.load(file)
+            create_reminder_labels()
+    except:
+        pass
+
+
+def add_reminder():
+    reminder = reminder_entry.get()
+    if reminder == "":
+        pass
+    else:
+        reminder = reminder_entry.get()
+        reminders.append(reminder)
+        with open('src/DSP/reminders.json', 'w') as file:
+            json.dump(reminders, file)
+        create_reminder_labels()
+        reminder_entry.delete(0, END)
+
+
+def create_reminder_labels():
+    for i, reminder in enumerate(reminders):
+        reminderlabel = CTk.CTkLabel(app, text=reminder)
+        reminderlabel.place(x=760, y=120+(i+1)*30)
+        reminderlabels.append(reminderlabel)
+
+
+def delete_all_reminders():
+    for reminderlabel in reminderlabels:
+        reminderlabel.destroy()
+    reminders.clear()
+    reminderlabels.clear()
+    with open("src/DSP/reminders.json", "w") as f:
+        json.dump([], f)
+
+
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+tasklabels = []
+taskbuttons = []
+reminderlabels = []
+reminderbuttons = []
+
+load_reminders()
+create_reminder_labels()
+
+load_tasks()
+create_task_labels()
+
 welcome_label = CTk.CTkLabel(
     app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Courier New", 20))
 welcome_label.place(x=0, y=0)
@@ -120,21 +252,36 @@ weather_info = CTk.CTkLabel(app, text="")
 weather_info.place(x=5, y=110)
 
 todo_top_label = CTk.CTkLabel(
-    app, text="Today's To-Do", font=("Courier New", 20))
+    app, text="Today's To-Dos", font=("Courier New", 20))
 todo_top_label.place(x=370, y=60)
-todo_label = CTk.CTkLabel(app, text="COMING IN V1.0", font=("Courier New", 20))
-todo_label.place(x=370, y=100)
+
+todo_entry = CTk.CTkEntry(app, width=260)
+todo_entry.place(x=370, y=120)
+add_todo_button = CTk.CTkButton(
+    app, text="+", font=("Courier New", 20), width=40, command=add_task)
+add_todo_button.place(x=650, y=120)
+
+delete_all_button = CTk.CTkButton(app, text="Delete All", font=(
+    "Courier New", 20), width=40, command=delete_all_tasks)
+delete_all_button.place(x=370, y=520)
 
 reminders_top_label = CTk.CTkLabel(
-    app, text="Reminders", font=("Courier New", 20))
+    app, text="All-Time Reminders", font=("Courier New", 20))
 reminders_top_label.place(x=760, y=60)
+reminder_entry = CTk.CTkEntry(app, width=260)
+reminder_entry.place(x=760, y=120)
+add_reminder_button = CTk.CTkButton(
+    app, text="+", font=("Courier New", 20), width=40, command=add_reminder)
+add_reminder_button.place(x=1040, y=120)
 
-reminders_label = CTk.CTkLabel(
-    app, text="COMING IN V1.0", font=("Courier New", 20))
-reminders_label.place(x=760, y=100)
+delete_all_reminders_button = CTk.CTkButton(app, text="Delete All", font=(
+    "Courier New", 20), width=40, command=delete_all_reminders)
+delete_all_reminders_button.place(x=960, y=520)
 
-
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
+back_to_desky_button.place(x=1150, y=550)
 exit_button = CTk.CTkButton(
     app, text="Exit", font=("Courier New", 20), command=exit)
-exit_button.place(x=1030, y=550)
+exit_button.place(x=1330, y=550)
 app.mainloop()

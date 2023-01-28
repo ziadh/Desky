@@ -5,6 +5,7 @@ import os
 import shutil
 import customtkinter as CTk
 import json
+import subprocess
 
 downloads_path = ''
 
@@ -51,6 +52,12 @@ def organize():
         error_label.configure(text="Download folder organized successfully!")
 
 
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
@@ -66,7 +73,7 @@ else:
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 app.resizable(False, False)
-app.geometry(f"290x180")
+app.geometry(f"290x200")
 app.title("Downloads Organizer")
 app.wm_iconbitmap("src/DO/logo.ico")
 
@@ -86,11 +93,14 @@ help_button = CTk.CTkButton(
 exit_button = CTk.CTkButton(app, text="Exit", width=65, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", command=back_to_desky)
+back_to_desky_button.place(x=60, y=155)
 
 error_label.place(x=10, y=35)
 
-locate_button.place(x=10, y=96)
-organize_button.place(x=180, y=96)
-help_button.place(x=10, y=135)
-exit_button.place(x=180, y=135)
+locate_button.place(x=10, y=76)
+organize_button.place(x=180, y=76)
+help_button.place(x=10, y=115)
+exit_button.place(x=180, y=115)
 app.mainloop()

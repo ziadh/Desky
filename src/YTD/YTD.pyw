@@ -2,7 +2,7 @@ import tkinter
 import customtkinter as CTk
 from pytube import YouTube
 import json
-
+import subprocess
 
 def download_highest_res():
     try:
@@ -65,6 +65,9 @@ def on_progress(stream, chunk, bytes_remaining):
     progressPercent.update()
     progressBar.set(float(percentage_of_compeletion)/100)
 
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
 
 CTk.set_appearance_mode("System")
 CTk.set_default_color_theme("blue")
@@ -104,14 +107,22 @@ progressBar.pack(padx=10, pady=10)
 
 download_highest_res_button = CTk.CTkButton(
     app, text="Highest Res Download", command=download_highest_res)
-download_highest_res_button.place(x=13, y=229)
+download_highest_res_button.place(x=13, y=189)
 lowest_res_button = CTk.CTkButton(
     app, text="Lowest Res Download", command=download_lowest_res)
-lowest_res_button.place(x=169, y=229)
+lowest_res_button.place(x=169, y=189)
 download_in_720p = CTk.CTkButton(
     app, text="Download in 720p60p", command=download_720p)
-download_in_720p.place(x=13, y=270)
+download_in_720p.place(x=13, y=230)
 audio_only_button = CTk.CTkButton(app,
                                   text="Audio Only", command=audio_only)
-audio_only_button.place(x=169, y=270)
+audio_only_button.place(x=169, y=230)
+
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", command=back_to_desky)
+back_to_desky_button.place(x=13, y=271)
+
+exit_button = CTk.CTkButton(
+    app, text="Exit", command=exit)
+exit_button.place(x=169, y=271)
 app.mainloop()
