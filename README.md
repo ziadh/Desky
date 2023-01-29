@@ -8,6 +8,15 @@
 [![Language][language-shield]][language-url]
 [<img src="https://img.shields.io/github/v/release/ziadh/Desky?style=for-the-badge&color=red" alt="Latest Release">](https://github.com/ziadh/Desky/releases)</p>
 
+## Table of Contents
+- [About Desky](#about)
+- [Downloads Folder Organizer](#downloads-folder-organizer)
+- [Youtube Downloader](#youtube-downloader)
+- [Fresh Desktop Check List](#fresh-desktop-check-list)
+- [Your Daily Sneak Peek](#daily-sneak-peek)
+- [Word2PDF Converter](#word2pdf-converter)
+- [Known Issues](#known-issues)
+
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
 
@@ -15,7 +24,7 @@
 
 
 
-<h2>WHAT IS IT? </h2>
+## About  
 Desky contains a plenty of mini-applications™ that aims to make your everyday life a little easier. New mini-apps will be added with every update. Updates usually go out every Tuesday or Wednesday mornings EST. 
 
 <h2> WHEN? </h2>
@@ -54,15 +63,10 @@ Desky will fully launch on 1/31 with at least two more mini-apps and improvement
 - Will improve its functionality in the launch update!
 ![W2PDF-ss](https://user-images.githubusercontent.com/15097797/213949286-bf0eb27e-d4ec-4c43-8803-4d981840b845.png)
 
-
-# On the 31st...
-Check back here on the 31st at 9 AM EST to enjoy the launched version and submit your feedback in the [Issues](https://github.com/ziadh/Desky/issues/new) 
-
 # Known Issues:
 
--When opening any of the mini-apps, the Desky window might freeze.
+-Will add edit/remove tasks and reminders in the near future
 
-                    ETA: Hopefully fixed by launch
 
 
 [downloads-shield]: https://img.shields.io/github/downloads/ziadh/Desky/total?style=for-the-badge&logo=github

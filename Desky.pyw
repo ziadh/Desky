@@ -187,10 +187,16 @@ bottom_seperator.place(x=-20, y=500)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Courier New", 18), width=3, command=toggle_theme)
-toggle_theme_button.place(x=320, y=560)
+toggle_theme_button.place(x=385, y=560)
 check_for_updates_button = CTk.CTkButton(app, text="Check for Updates", font=(
     "Courier New", 18), command=check_for_updates)
-check_for_updates_button.place(x=370, y=560)
+check_for_updates_button.place(x=170, y=560)
+
+exit_button = CTk.CTkButton(app, text="Exit", font=(
+    "Courier New", 18), command=exit)
+exit_button.place(x=430, y=560)
+
+
 version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
 version_message.bind("<Button-1>", download_update)
 version_message.place(x=-0, y=520)

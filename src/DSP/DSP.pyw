@@ -35,7 +35,7 @@ else:
 
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
-app.geometry("1500x600")
+app.geometry("1200x600")
 app.title("Daily Sneak Peek")
 app.resizable(False, False)
 
@@ -226,7 +226,6 @@ def back_to_desky():
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
-
 tasklabels = []
 taskbuttons = []
 reminderlabels = []
@@ -280,8 +279,8 @@ delete_all_reminders_button.place(x=960, y=520)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
-back_to_desky_button.place(x=1150, y=550)
+back_to_desky_button.place(x=5, y=550)
 exit_button = CTk.CTkButton(
     app, text="Exit", font=("Courier New", 20), command=exit)
-exit_button.place(x=1330, y=550)
+exit_button.place(x=190, y=550)
 app.mainloop()
