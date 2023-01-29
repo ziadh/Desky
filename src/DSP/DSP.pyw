@@ -36,7 +36,8 @@ else:
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
 app.geometry("1200x600")
-app.title("Daily Sneak Peek")
+app.wm_iconbitmap("assets/logos/DSP-logo.ico")
+app.title(f"Daily Sneak Peek v{version}")
 app.resizable(False, False)
 
 

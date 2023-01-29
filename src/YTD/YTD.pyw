@@ -75,6 +75,7 @@ CTk.set_default_color_theme("blue")
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
+version = settings['version']
 
 if theme == 'dark':
     CTk.set_appearance_mode("dark")
@@ -83,7 +84,9 @@ else:
 
 app = CTk.CTk()
 app.geometry("320x320")
-app.title("YouTube Downloader")
+app.title(f"YouTube Downloader v{version}")
+app.wm_iconbitmap("assets/logos/yd-logo.ico")
+
 app.resizable(False, False)
 title = CTk.CTkLabel(
     app, text="Please insert a YouTube link below:")

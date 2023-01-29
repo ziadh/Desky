@@ -73,8 +73,16 @@ def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
 
+with open("settings.json", 'r')as f:
+    settings = json.load(f)
+theme = settings['theme']
+version = settings['version']
+
+
 app = CTk.CTk()
-app.title("Fresh Desktop Checklist")
+app.title(f"Fresh Desktop Checklist v{version}")
+app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
+
 app.geometry("450x440")
 app.resizable(False, False)
 var1 = IntVar()
@@ -90,9 +98,6 @@ var10 = IntVar()
 var11 = IntVar()
 
 
-with open("settings.json", 'r')as f:
-    settings = json.load(f)
-theme = settings['theme']
 
 if theme == 'dark':
     CTk.set_appearance_mode("dark")

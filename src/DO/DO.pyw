@@ -61,6 +61,7 @@ def back_to_desky():
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
+version = settings['version']
 
 
 app = CTk.CTk()
@@ -73,9 +74,9 @@ else:
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 app.resizable(False, False)
-app.geometry(f"290x200")
-app.title("Downloads Organizer")
-app.wm_iconbitmap("src/DO/logo.ico")
+app.geometry(f"350x200")
+app.title(f"Downloads Organizer v{version}")
+app.wm_iconbitmap("assets/logos/DO-logo.ico")
 
 welcome_label = CTk.CTkLabel(
     app, text="Welcome to Downloads Organizer!")
@@ -95,12 +96,12 @@ error_label = CTk.CTkLabel(app, text="")
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=60, y=155)
 
-error_label.place(x=10, y=35)
+error_label.place(x=30, y=35)
 
-locate_button.place(x=10, y=76)
-organize_button.place(x=180, y=76)
-help_button.place(x=10, y=115)
-exit_button.place(x=180, y=115)
+locate_button.place(x=50, y=76)
+organize_button.place(x=220, y=76)
+help_button.place(x=50, y=115)
+exit_button.place(x=220, y=115)
+back_to_desky_button.place(x=100, y=155)
 app.mainloop()
