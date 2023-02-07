@@ -39,6 +39,8 @@ app.geometry("1200x600")
 app.wm_iconbitmap("assets/logos/DSP-logo.ico")
 app.title(f"Daily Sneak Peek v{version}")
 app.resizable(False, False)
+global show_12_hour_button
+global twlve_hour_time
 
 
 def update_zip_code():
@@ -83,6 +85,19 @@ def cancel_zip_code_changes():
 
 
 def get_weather():
+    global show_12_hour_button
+
+    def check_and_convert_time(sunrise_time, sunset_time):
+        global twlve_hour_time
+        twlve_hour_time = CTk.CTkLabel(app, text='')
+        twlve_hour_time.place(x=40, y=420)
+        if sunrise_time.strftime('%H:%M') == sunrise_time.strftime('%I:%M %p') and sunset_time.strftime('%H:%M') == sunset_time.strftime('%I:%M %p'):
+            twlve_hour_time.configure(text='Already 12 formats')
+        else:
+            sunrise_12hr = sunrise_time.strftime('%I:%M %p')
+            sunset_12hr = sunset_time.strftime('%I:%M %p')
+            twlve_hour_time.configure(
+                text=f"Sunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
     global zip_code
     try:
         request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
@@ -108,6 +123,9 @@ def get_weather():
         weather_info.configure(
             text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
              or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
+        show_12_hour_button = CTk.CTkButton(
+            app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
+        show_12_hour_button.place(x=40, y=380)
     except:
         weather_info.configure(
             text="Something went wrong...\nPlease try again later. \nCurrently only USA zip codes are supported.")
@@ -227,6 +245,12 @@ def back_to_desky():
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+def clear_weather_info():
+    weather_info.configure(text='')
+    show_12_hour_button.destroy()
+    twlve_hour_time.configure(text='')
+
+    
 tasklabels = []
 taskbuttons = []
 reminderlabels = []
@@ -251,6 +275,9 @@ get_weather_button.place(x=30, y=60)
 weather_info = CTk.CTkLabel(app, text="")
 weather_info.place(x=5, y=110)
 
+clear_weather_info_button = CTk.CTkButton(
+    app, text='Clear All', font=("Courier New", 20), command = clear_weather_info)
+clear_weather_info_button.place(x=70, y=500)
 todo_top_label = CTk.CTkLabel(
     app, text="Today's To-Dos", font=("Courier New", 20))
 todo_top_label.place(x=370, y=60)

@@ -31,6 +31,7 @@ def organize():
         os.makedirs(downloads_path+"/Downloaded PDFs", exist_ok=True)
         os.makedirs(downloads_path+"/Downloaded ZIPs", exist_ok=True)
         os.makedirs(downloads_path+"/Downloaded Docs", exist_ok=True)
+        os.makedirs(downloads_path+"/Downloaded EXEs", exist_ok=True)
 
         file_types = {
             "jpg": "Downloaded Images",
@@ -41,6 +42,7 @@ def organize():
             "pdf": "Downloaded PDFs",
             "zip": "Downloaded ZIPs",
             "rar": "Downloaded ZIPs",
+            "exe": "Downloaded EXEs",
             "doc": "Downloaded Docs",
             "docx": "Downloaded Docs"
         }
