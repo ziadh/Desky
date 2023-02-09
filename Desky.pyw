@@ -66,6 +66,7 @@ def open_YTD():
     app.destroy()
     subprocess.run(["python", "src/YTD/YTD.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 def open_DSP():
     app.destroy()
     subprocess.run(["python", "src/DSP/DSP.pyw"],
@@ -83,6 +84,11 @@ def open_W2PDF():
     subprocess.run(["python", "src/W2PDF/w2pdf.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
+def open_V2TXT():
+    app.destroy()
+    subprocess.run(["python", "src/V2TXT/V2TXT.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 def open_FDCL():
     app.destroy()
@@ -177,9 +183,13 @@ W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
     "Courier New", 22), command=open_W2PDF)
 W2PDF_button.place(x=10, y=290)
 
+v2txt_button = CTk.CTkButton(app, text="Voice to Text", font=(
+    "Courier New", 22), command=open_V2TXT)
+v2txt_button.place(x=10, y=350)
+
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
-YTD_button.place(x=10, y=350)
+YTD_button.place(x=10, y=410)
 
 bottom_seperator = CTk.CTkLabel(
     app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
