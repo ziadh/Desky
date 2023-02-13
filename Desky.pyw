@@ -42,10 +42,10 @@ def save_username():
     global username
     username = change_username_entry.get()
 
-    with open("settings.json", "r+") as json_file:
+    with open("user_settings.json", "r+") as json_file:
         data = json.load(json_file)
         data["username"] = username
-    with open('settings.json', 'w') as f:
+    with open('user_settings.json', 'w') as f:
         json.dump(data, f)
     username = data['username']
     if username == '':
@@ -135,8 +135,10 @@ def download_update(event):
 
 with open("settings.json", 'r')as f:
     settings = json.load(f)
+with open("user_settings.json", 'r')as f:
+    user_settings = json.load(f)    
 version = settings['version']
-username = settings['username']
+username = user_settings['username']
 theme = settings['theme']
 
 if theme == 'dark':

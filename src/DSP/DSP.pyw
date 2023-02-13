@@ -12,10 +12,11 @@ BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 with open("settings.json", 'r')as f:
     settings = json.load(f)
+with open("user_settings.json", 'r')as f:
+    user_settings = json.load(f)
 version = settings['version']
-username = settings['username']
+username = user_settings['username']
 theme = settings['theme']
-
 
 if not os.path.exists('src/DSP/tasks.json'):
     with open('src/DSP/tasks.json', 'w') as file:
@@ -26,7 +27,7 @@ if not os.path.exists('src/DSP/reminders.json'):
         json.dump([], file)
 
 global zip_code
-zip_code = settings['zip_code']
+zip_code = user_settings['zip_code']
 
 if theme == 'dark':
     CTk.set_appearance_mode("dark")
@@ -62,10 +63,10 @@ def save_zip_code():
     global zip_code
     zip_code = change_zip_code_entry.get()
 
-    with open("settings.json", "r+") as json_file:
+    with open("user_settings.json", "r+") as json_file:
         data = json.load(json_file)
         data["zip_code"] = zip_code
-    with open('settings.json', 'w') as f:
+    with open('user_settings.json', 'w') as f:
         json.dump(data, f)
     zip_code = data['zip_code']
     if zip_code == '':

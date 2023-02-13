@@ -46,8 +46,9 @@ else:
 app = CTk.CTk()
 app.title(f"Voice-To-Text Transcriber v{version}")
 app.geometry('400x400')
+app.resizable(False,False)
 welcome_label = CTk.CTkLabel(
-    app, text='Welcome to Voice 2 Text Transcriber!', font=('Helvetica', 16))
+    app, text='Welcome to Voice To Text Transcriber!', font=('Helvetica', 16))
 welcome_label.place(x=10, y=20)
 label1 = CTk.CTkLabel(
     app, text='Press the button to start transcribing....', font=('Helvetica', 16))
