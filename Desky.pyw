@@ -90,11 +90,16 @@ def open_V2TXT():
     subprocess.run(["python", "src/V2TXT/V2TXT.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 def open_FDCL():
     app.destroy()
     subprocess.run(["python", "src/FD/FDCL.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+def open_TT():
+    app.destroy()
+    subprocess.run(["python", "src/TT/TT.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 def toggle_theme():
     with open("settings.json", "r")as f:
@@ -181,17 +186,20 @@ FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
                             font=("Courier New", 22), command=open_FDCL)
 FDCL_button.place(x=10, y=230)
 
+TT_button = CTk.CTkButton(app,text='Tok Tik',
+                            font=("Courier New", 22), command=open_TT)
+TT_button.place(x=10, y=290)
 W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
     "Courier New", 22), command=open_W2PDF)
-W2PDF_button.place(x=10, y=290)
+W2PDF_button.place(x=10, y=350)
 
 v2txt_button = CTk.CTkButton(app, text="Voice to Text", font=(
     "Courier New", 22), command=open_V2TXT)
-v2txt_button.place(x=10, y=350)
+v2txt_button.place(x=10, y=410)
 
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
-YTD_button.place(x=10, y=410)
+YTD_button.place(x=10, y=470)
 
 bottom_seperator = CTk.CTkLabel(
     app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
