@@ -2,6 +2,10 @@ import tkinter as tk
 import customtkinter as CTk
 import subprocess
 import json
+import pytz
+from datetime import datetime
+import time
+
 
 def start_stopwatch():
     global sw_running, sw_time_elapsed
@@ -100,6 +104,7 @@ def back_to_desky():
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 version = settings['version']
@@ -132,13 +137,14 @@ reset_button.place(x=170, y=160)
 ############ END OF STOPWATCH ############
 
 ############ START OF COUNTDOWN ############
-countdown_label =CTk.CTkLabel(app,text='Countdown', font=('Arial', 18))
-countdown_label.place(x=420,y=10)
+countdown_label = CTk.CTkLabel(app, text='Countdown', font=('Arial', 18))
+countdown_label.place(x=420, y=10)
 time_label = CTk.CTkLabel(app, text='00:00:00', font=('Arial', 24))
 cd_start_button = CTk.CTkButton(app, text='Start', command=start_countdown)
 cd_stop_button = CTk.CTkButton(app, text='Stop', command=stop_countdown)
 cd_reset_button = CTk.CTkButton(app, text='Reset', command=reset_countdown)
 
+presets_label = CTk.CTkLabel(app, text='Presets: ', font=('Arial', 20))
 five_minutes_button = CTk.CTkButton(
     app, text='5', command=lambda: set_countdown(5), width=50)
 ten_minutes_button = CTk.CTkButton(
@@ -155,13 +161,69 @@ time_label.place(x=450, y=90)
 cd_start_button.place(x=420, y=160)
 cd_stop_button.place(x=570, y=160)
 cd_reset_button.place(x=495, y=200)
-five_minutes_button.place(x=520, y=10)
-ten_minutes_button.place(x=590, y=10)
-fifteen_minutes_button.place(x=660, y=10)
-custom_time_label.place(x=420,y=260)
-custom_time_entry.place(x=420,y=310)
-custom_time_button.place(x=610,y=310)
+presets_label.place(x=420, y=360)
+five_minutes_button.place(x=500, y=360)
+ten_minutes_button.place(x=570, y=360)
+fifteen_minutes_button.place(x=640, y=360)
+custom_time_label.place(x=420, y=260)
+custom_time_entry.place(x=420, y=310)
+custom_time_button.place(x=610, y=310)
 ############ END OF COUNTDOWN ############
+
+
+############ START OF WORLD CLOCK ############
+def wc_update_time():
+    la_time = datetime.now(LA).strftime(
+        '%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+    NYC_time = datetime.now(NYC).strftime(
+        '%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+    London_time = datetime.now(London).strftime(
+        '%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+    Istanbul_time = datetime.now(Istanbul).strftime(
+        '%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+    Shanghai_time = datetime.now(Shanghai).strftime(
+        '%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+
+    la_actual_time.configure(text=la_time)
+    NYC_actual_time.configure(text=NYC_time)
+    London_actual_time.configure(text=London_time)
+    Instabul_actual_time.configure(text=Istanbul_time)
+    Shanghai_actual_time.configure(text=Shanghai_time)
+
+    app.after(1000, wc_update_time)
+
+
+wc_top_label = CTk.CTkLabel(app, text='World Clock', font=('Arial', 18))
+wc_top_label.place(x=780, y=10)
+LA = pytz.timezone('America/Los_Angeles')
+NYC = pytz.timezone('America/New_York')
+London = pytz.timezone('Europe/London')
+Istanbul = pytz.timezone('Europe/Istanbul')
+Shanghai = pytz.timezone('Asia/Shanghai')
+
+user_time_format = time.strftime('%H:%M:%S') == '00:00:00'
+la_label = CTk.CTkLabel(app, text='LA Time: ', font=('Arial', 18))
+la_label.place(x=790, y=90)
+nyc_label = CTk.CTkLabel(app, text='NYC Time: ', font=('Arial', 18))
+nyc_label.place(x=790, y=130)
+London_label = CTk.CTkLabel(app, text='London Time: ', font=('Arial', 18))
+London_label.place(x=790, y=170)
+Instabul_label = CTk.CTkLabel(app, text='Instabul Time: ', font=('Arial', 18))
+Instabul_label.place(x=790, y=210)
+Shanghai_label = CTk.CTkLabel(app, text='Shanghai Time: ', font=('Arial', 18))
+Shanghai_label.place(x=790, y=250)
+la_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
+la_actual_time.place(x=890, y=90)
+NYC_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
+NYC_actual_time.place(x=890, y=130)
+London_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
+London_actual_time.place(x=920, y=170)
+Instabul_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
+Instabul_actual_time.place(x=920, y=210)
+Shanghai_actual_time= CTk.CTkLabel(app, text='', font=('Arial', 18))
+Shanghai_actual_time.place(x=940,y=250)
+wc_update_time()
+############ END OF WORLD CLOCK ############
 
 back_to_desky_button = CTk.CTkButton(
     app, text='Back To Desky', command=back_to_desky)

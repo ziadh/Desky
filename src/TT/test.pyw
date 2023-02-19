@@ -10,9 +10,6 @@ LONDON = pytz.timezone('Europe/London')
 ISTANBUL = pytz.timezone('Europe/Istanbul')
 CHINA = pytz.timezone('Asia/Shanghai')
 
-# Get the user's time format preference
-user_time_format = time.strftime('%H:%M:%S') == '00:00:00'
-
 # Create a window
 root = tk.Tk()
 root.title("World Clocks")
@@ -31,11 +28,11 @@ china_label.pack(side=tk.LEFT)
 
 # Update the time labels
 def update_time():
-    la_time = datetime.now(LA).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    nyc_time = datetime.now(NYC).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    london_time = datetime.now(LONDON).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    istanbul_time = datetime.now(ISTANBUL).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    china_time = datetime.now(CHINA).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+    la_time = datetime.now(LA).strftime('%H:%M:%S')
+    nyc_time = datetime.now(NYC).strftime('%H:%M:%S')
+    london_time = datetime.now(LONDON).strftime('%H:%M:%S')
+    istanbul_time = datetime.now(ISTANBUL).strftime('%H:%M:%S')
+    china_time = datetime.now(CHINA).strftime('%H:%M:%S')
     
     la_label.config(text=la_time)
     nyc_label.config(text=nyc_time)
