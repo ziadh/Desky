@@ -186,8 +186,8 @@ FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
                             font=("Courier New", 22), command=open_FDCL)
 FDCL_button.place(x=10, y=230)
 
-TT_button = CTk.CTkButton(app,text='Tok Tik',
-                            font=("Courier New", 22), command=open_TT)
+TT_button = CTk.CTkButton(app,text='Tock Tick',
+                            font=("Courier New", 22), command=open_TT,width=20, anchor="w")
 TT_button.place(x=10, y=290)
 W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
     "Courier New", 22), command=open_W2PDF)
@@ -203,7 +203,7 @@ YTD_button.place(x=10, y=470)
 
 bottom_seperator = CTk.CTkLabel(
     app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
-bottom_seperator.place(x=-20, y=500)
+bottom_seperator.place(x=-20, y=510)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Courier New", 18), width=3, command=toggle_theme)
@@ -219,7 +219,7 @@ exit_button.place(x=430, y=560)
 
 version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
 version_message.bind("<Button-1>", download_update)
-version_message.place(x=-0, y=520)
+version_message.place(x=-0, y=530)
 app.mainloop()
 
 sys.stderr.close()

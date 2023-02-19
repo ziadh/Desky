@@ -162,12 +162,12 @@ cd_start_button.place(x=420, y=160)
 cd_stop_button.place(x=570, y=160)
 cd_reset_button.place(x=495, y=200)
 presets_label.place(x=420, y=360)
-five_minutes_button.place(x=500, y=360)
-ten_minutes_button.place(x=570, y=360)
-fifteen_minutes_button.place(x=640, y=360)
+five_minutes_button.place(x=540, y=360)
+ten_minutes_button.place(x=600, y=360)
+fifteen_minutes_button.place(x=660, y=360)
 custom_time_label.place(x=420, y=260)
 custom_time_entry.place(x=420, y=310)
-custom_time_button.place(x=610, y=310)
+custom_time_button.place(x=570, y=310)
 ############ END OF COUNTDOWN ############
 
 
