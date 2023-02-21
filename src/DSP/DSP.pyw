@@ -1,51 +1,315 @@
-import tkinter as tk
-import pytz
-from datetime import datetime
-import time
+import requests
+import datetime as dt
+import customtkinter as CTk
+from tkinter import *
+import json
+from tkinter import messagebox
+import os
+import subprocess
 
-# Define timezones
-LA = pytz.timezone('America/Los_Angeles')
-NYC = pytz.timezone('America/New_York')
-LONDON = pytz.timezone('Europe/London')
-ISTANBUL = pytz.timezone('Europe/Istanbul')
-CHINA = pytz.timezone('Asia/Shanghai')
+API_KEY = "6c55313b14fc0b07b3ea751d41103c12"
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
-# Get the user's time format preference
-user_time_format = time.strftime('%H:%M:%S') == '00:00:00'
+with open("settings.json", 'r')as f:
+    settings = json.load(f)
+with open("user_settings.json", 'r')as f:
+    user_settings = json.load(f)
+version = settings['version']
+username = user_settings['username']
+theme = settings['theme']
 
-# Create a window
-root = tk.Tk()
-root.title("World Clocks")
+if not os.path.exists('src/DSP/tasks.json'):
+    with open('src/DSP/tasks.json', 'w') as file:
+        json.dump([], file)
 
-# Create labels for displaying times
-la_label = tk.Label(root, text="LA")
-la_label.pack(side=tk.LEFT)
-nyc_label = tk.Label(root, text="NYC")
-nyc_label.pack(side=tk.LEFT)
-london_label = tk.Label(root, text="London")
-london_label.pack(side=tk.LEFT)
-istanbul_label = tk.Label(root, text="Istanbul")
-istanbul_label.pack(side=tk.LEFT)
-china_label = tk.Label(root, text="China")
-china_label.pack(side=tk.LEFT)
+if not os.path.exists('src/DSP/reminders.json'):
+    with open('src/DSP/reminders.json', 'w') as file:
+        json.dump([], file)
 
-# Update the time labels
-def update_time():
-    la_time = datetime.now(LA).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    nyc_time = datetime.now(NYC).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    london_time = datetime.now(LONDON).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    istanbul_time = datetime.now(ISTANBUL).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
-    china_time = datetime.now(CHINA).strftime('%I:%M:%S %p' if user_time_format else '%H:%M:%S')
+global zip_code
+zip_code = user_settings['zip_code']
+
+if theme == 'dark':
+    CTk.set_appearance_mode("dark")
+else:
+    CTk.set_appearance_mode("light")
+
+CTk.set_default_color_theme("blue")
+app = CTk.CTk()
+app.geometry("1200x600")
+app.wm_iconbitmap("assets/logos/DSP-logo.ico")
+app.title(f"Daily Sneak Peek v{version}")
+app.resizable(False, False)
+global show_12_hour_button
+global twlve_hour_time
+
+
+def update_zip_code():
+    global change_zip_code_entry
+    change_zip_code_entry = CTk.CTkEntry(app, width=230)
+    change_zip_code_entry.focus()
+    change_zip_code_entry.place(x=580, y=50)
+    global update_zip_code_button
+    update_zip_code_button = CTk.CTkButton(
+        app, text="\u2714", width=5, font=("Courier New", 20), command=save_zip_code)
+    update_zip_code_button.place(x=820, y=50)
+    global cancel_change_button
+    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
+        "Courier New", 20), command=cancel_zip_code_changes)
+    cancel_change_button.place(x=860, y=50)
+
+
+def save_zip_code():
+    global zip_code
+    zip_code = change_zip_code_entry.get()
+
+    with open("user_settings.json", "r+") as json_file:
+        data = json.load(json_file)
+        data["zip_code"] = zip_code
+    with open('user_settings.json', 'w') as f:
+        json.dump(data, f)
+    zip_code = data['zip_code']
+    if zip_code == '':
+        error = messagebox.showinfo(
+            title="Empty entry", message="Please enter a zip code.")
+    else:
+        welcome_label.configure(
+            text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
+        cancel_zip_code_changes()
+    weather_info.configure(text="")
+
+
+def cancel_zip_code_changes():
+    update_zip_code_button.destroy()
+    change_zip_code_entry.destroy()
+    cancel_change_button.destroy()
+
+
+def get_weather():
+    global show_12_hour_button
+
+    def check_and_convert_time(sunrise_time, sunset_time):
+        global twlve_hour_time
+        twlve_hour_time = CTk.CTkLabel(app, text='')
+        twlve_hour_time.place(x=40, y=420)
+        if sunrise_time.strftime('%H:%M') == sunrise_time.strftime('%I:%M %p') and sunset_time.strftime('%H:%M') == sunset_time.strftime('%I:%M %p'):
+            twlve_hour_time.configure(text='Already 12 formats')
+        else:
+            sunrise_12hr = sunrise_time.strftime('%I:%M %p')
+            sunset_12hr = sunset_time.strftime('%I:%M %p')
+            twlve_hour_time.configure(
+                text=f"Sunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
+    global zip_code
+    try:
+        request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
+        response = requests.get(request_url).json()
+        state_response = requests.get(
+            f'http://api.zippopotam.us/us/{zip_code}')
+        data = state_response.json()
+        state = data['places'][0]['state']
+        city_name = response['name']
+        temp_kelvin = response['main']['temp']
+        temp_celsius, temp_fahrenheit = kelvin_to_celsius_fahrenheit(
+            temp_kelvin)
+        feels_like_kelvin = response["main"]['feels_like']
+        feels_like_celsius, feels_like_fahrenheit = kelvin_to_celsius_fahrenheit(
+            feels_like_kelvin)
+        wind_speed = response['wind']['speed']
+        humidity = response["main"]['humidity']
+        description = response["weather"][0]["description"]
+        sunrise_time = dt.datetime.utcfromtimestamp(
+            response['sys']['sunrise']+response['timezone'])
+        sunset_time = dt.datetime.utcfromtimestamp(
+            response['sys']['sunset']+response['timezone'])
+        weather_info.configure(
+            text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
+             or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
+        show_12_hour_button = CTk.CTkButton(
+            app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
+        show_12_hour_button.place(x=40, y=380)
+    except:
+        weather_info.configure(
+            text="Something went wrong...\nPlease try again later. \nCurrently only USA zip codes are supported.")
+
+
+def kelvin_to_celsius_fahrenheit(kelvin):
+    celsius = kelvin - 273.15
+    fahreinheit = celsius * (9/5) + 32
+    return celsius, fahreinheit
+
+
+if os.path.getsize('src/DSP/tasks.json') == 0:
+    tasks = []
+else:
+    with open('src/DSP/tasks.json', 'r') as file:
+        tasks = json.load(file)
+
+
+def save_tasks():
+    with open("src/DSP/tasks.json", "w") as file:
+        json.dump(tasks, file)
+
+
+def load_tasks():
+    global tasks
+    try:
+        with open("src/DSP/tasks.json", "r")as file:
+            tasks = json.load(file)
+            create_task_labels()
+    except:
+        pass
+
+
+def add_task():
+    task = todo_entry.get()
+    if task == "":
+        pass
+    else:
+        task = todo_entry.get()
+        tasks.append(task)
+        with open('src/DSP/tasks.json', 'w') as file:
+            json.dump(tasks, file)
+        create_task_labels()
+        todo_entry.delete(0, END)
+
+
+def create_task_labels():
+    for i, task in enumerate(tasks):
+        tasklabel = CTk.CTkLabel(app, text=task)
+        tasklabel.place(x=370, y=120+(i+1)*30)
+        tasklabels.append(tasklabel)
+
+
+def delete_all_tasks():
+    for tasklabel in tasklabels:
+        tasklabel.destroy()
+    tasks.clear()
+    tasklabels.clear()
+    with open("src/DSP/tasks.json", "w") as f:
+        json.dump([], f)
+
+
+# reminders
+if os.path.getsize('src/DSP/reminders.json') == 0:
+    reminders = []
+else:
+    with open('src/DSP/reminders.json', 'r') as file:
+        reminders = json.load(file)
+
+
+def save_reminders():
+    with open("src/DSP/reminders.json", "w") as file:
+        json.dump(reminders, file)
+
+
+def load_reminders():
+    global reminders
+    try:
+        with open("src/DSP/reminders.json", "r")as file:
+            reminders = json.load(file)
+            create_reminder_labels()
+    except:
+        pass
+
+
+def add_reminder():
+    reminder = reminder_entry.get()
+    if reminder == "":
+        pass
+    else:
+        reminder = reminder_entry.get()
+        reminders.append(reminder)
+        with open('src/DSP/reminders.json', 'w') as file:
+            json.dump(reminders, file)
+        create_reminder_labels()
+        reminder_entry.delete(0, END)
+
+
+def create_reminder_labels():
+    for i, reminder in enumerate(reminders):
+        reminderlabel = CTk.CTkLabel(app, text=reminder)
+        reminderlabel.place(x=760, y=120+(i+1)*30)
+        reminderlabels.append(reminderlabel)
+
+
+def delete_all_reminders():
+    for reminderlabel in reminderlabels:
+        reminderlabel.destroy()
+    reminders.clear()
+    reminderlabels.clear()
+    with open("src/DSP/reminders.json", "w") as f:
+        json.dump([], f)
+
+
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+def clear_weather_info():
+    weather_info.configure(text='')
+    show_12_hour_button.destroy()
+    twlve_hour_time.configure(text='')
+
     
-    la_label.config(text=la_time)
-    nyc_label.config(text=nyc_time)
-    london_label.config(text=london_time)
-    istanbul_label.config(text=istanbul_time)
-    china_label.config(text=china_time)
-    
-    root.after(1000, update_time) # Update every second
+tasklabels = []
+taskbuttons = []
+reminderlabels = []
+reminderbuttons = []
 
-update_time()
+load_reminders()
+create_reminder_labels()
 
-# Run the program
-root.mainloop()
+load_tasks()
+create_task_labels()
+
+welcome_label = CTk.CTkLabel(
+    app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Courier New", 20))
+welcome_label.place(x=0, y=0)
+change_zip_code_button = CTk.CTkButton(
+    app, text="Change", font=("Courier New", 22), command=update_zip_code)
+change_zip_code_button.place(x=770, y=10)
+
+get_weather_button = CTk.CTkButton(
+    app, text="Get Today's Weather", font=("Courier New", 20), command=get_weather)
+get_weather_button.place(x=30, y=60)
+weather_info = CTk.CTkLabel(app, text="")
+weather_info.place(x=5, y=110)
+
+clear_weather_info_button = CTk.CTkButton(
+    app, text='Clear All', font=("Courier New", 20), command = clear_weather_info)
+clear_weather_info_button.place(x=70, y=500)
+todo_top_label = CTk.CTkLabel(
+    app, text="Today's To-Dos", font=("Courier New", 20))
+todo_top_label.place(x=370, y=60)
+
+todo_entry = CTk.CTkEntry(app, width=260)
+todo_entry.place(x=370, y=120)
+add_todo_button = CTk.CTkButton(
+    app, text="+", font=("Courier New", 20), width=40, command=add_task)
+add_todo_button.place(x=650, y=120)
+
+delete_all_button = CTk.CTkButton(app, text="Delete All", font=(
+    "Courier New", 20), width=40, command=delete_all_tasks)
+delete_all_button.place(x=370, y=520)
+
+reminders_top_label = CTk.CTkLabel(
+    app, text="All-Time Reminders", font=("Courier New", 20))
+reminders_top_label.place(x=760, y=60)
+reminder_entry = CTk.CTkEntry(app, width=260)
+reminder_entry.place(x=760, y=120)
+add_reminder_button = CTk.CTkButton(
+    app, text="+", font=("Courier New", 20), width=40, command=add_reminder)
+add_reminder_button.place(x=1040, y=120)
+
+delete_all_reminders_button = CTk.CTkButton(app, text="Delete All", font=(
+    "Courier New", 20), width=40, command=delete_all_reminders)
+delete_all_reminders_button.place(x=960, y=520)
+
+back_to_desky_button = CTk.CTkButton(
+    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
+back_to_desky_button.place(x=5, y=550)
+exit_button = CTk.CTkButton(
+    app, text="Exit", font=("Courier New", 20), command=exit)
+exit_button.place(x=190, y=550)
+app.mainloop()
