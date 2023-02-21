@@ -62,6 +62,12 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 ![W2PDF-ss](assets/ss/W2PDF-ss.png)
 
 
+# Tock Tick
+## 3-in-1 clock related miniapps
+![TT-ss](assets/ss/TT-ss.png)
+# Voice 2 TXT Transcriber
+## Transcribe voice messages for you when Windows dictation wouldn't
+![V2TXT-ss](assets/ss/v2t-ss.png)
 # Known Issues:
 
 -Will add edit/remove tasks and reminders in the near future
