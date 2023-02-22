@@ -15,6 +15,8 @@
 - [Fresh Desktop Check List](#fresh-desktop-check-list)
 - [Your Daily Sneak Peek](#daily-sneak-peek)
 - [Word2PDF Converter](#word2pdf-converter)
+- [Tock Tick](#tock-tick)
+- [Voice 2 TXT Transcriber](#voice-2-txt-transcriber)
 - [Known Issues](#known-issues)
 
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
