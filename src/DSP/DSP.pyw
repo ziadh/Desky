@@ -91,7 +91,7 @@ def get_weather():
     def check_and_convert_time(sunrise_time, sunset_time):
         global twlve_hour_time
         twlve_hour_time = CTk.CTkLabel(app, text='')
-        twlve_hour_time.place(x=40, y=420)
+        twlve_hour_time.place(x=10, y=420)
         if sunrise_time.strftime('%H:%M') == sunrise_time.strftime('%I:%M %p') and sunset_time.strftime('%H:%M') == sunset_time.strftime('%I:%M %p'):
             twlve_hour_time.configure(text='Already 12 formats')
         else:
@@ -246,12 +246,13 @@ def back_to_desky():
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 def clear_weather_info():
     weather_info.configure(text='')
     show_12_hour_button.destroy()
     twlve_hour_time.configure(text='')
 
-    
+
 tasklabels = []
 taskbuttons = []
 reminderlabels = []
@@ -277,7 +278,7 @@ weather_info = CTk.CTkLabel(app, text="")
 weather_info.place(x=5, y=110)
 
 clear_weather_info_button = CTk.CTkButton(
-    app, text='Clear All', font=("Courier New", 20), command = clear_weather_info)
+    app, text='Clear All', font=("Courier New", 20), command=clear_weather_info)
 clear_weather_info_button.place(x=70, y=500)
 todo_top_label = CTk.CTkLabel(
     app, text="Today's To-Dos", font=("Courier New", 20))
@@ -289,9 +290,9 @@ add_todo_button = CTk.CTkButton(
     app, text="+", font=("Courier New", 20), width=40, command=add_task)
 add_todo_button.place(x=650, y=120)
 
-delete_all_button = CTk.CTkButton(app, text="Delete All", font=(
+delete_all_button = CTk.CTkButton(app, text="Delete All To-Dos", font=(
     "Courier New", 20), width=40, command=delete_all_tasks)
-delete_all_button.place(x=370, y=520)
+delete_all_button.place(x=370, y=550)
 
 reminders_top_label = CTk.CTkLabel(
     app, text="All-Time Reminders", font=("Courier New", 20))
@@ -302,9 +303,9 @@ add_reminder_button = CTk.CTkButton(
     app, text="+", font=("Courier New", 20), width=40, command=add_reminder)
 add_reminder_button.place(x=1040, y=120)
 
-delete_all_reminders_button = CTk.CTkButton(app, text="Delete All", font=(
+delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
     "Courier New", 20), width=40, command=delete_all_reminders)
-delete_all_reminders_button.place(x=960, y=520)
+delete_all_reminders_button.place(x=810, y=550)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
