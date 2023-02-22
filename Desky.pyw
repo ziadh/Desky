@@ -64,7 +64,8 @@ def cancel_username_changes():
 
 def open_YTD():
     app.destroy()
-    subprocess.run(["python", "src/YTD/YTD.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
+    subprocess.run(["python", "src/YTD/YTD.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def open_DSP():
@@ -96,10 +97,18 @@ def open_FDCL():
     subprocess.run(["python", "src/FD/FDCL.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 def open_TT():
     app.destroy()
     subprocess.run(["python", "src/TT/TT.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+def open_PCW():
+    app.destroy()
+    subprocess.run(["python", "src/PCW/PCW.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
 
 def toggle_theme():
     with open("settings.json", "r")as f:
@@ -141,7 +150,7 @@ def download_update(event):
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 with open("user_settings.json", 'r')as f:
-    user_settings = json.load(f)    
+    user_settings = json.load(f)
 version = settings['version']
 username = user_settings['username']
 theme = settings['theme']
@@ -186,20 +195,26 @@ FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
                             font=("Courier New", 22), command=open_FDCL)
 FDCL_button.place(x=10, y=230)
 
-TT_button = CTk.CTkButton(app,text='Tock Tick',
-                            font=("Courier New", 22), command=open_TT,width=20, anchor="w")
-TT_button.place(x=10, y=290)
+PCW_button = CTk.CTkButton(app, text="PC Watcher", font=(
+    "Courier New", 22), command=open_PCW, width=20, anchor="w")
+PCW_button.place(x=10, y=290)
+
+TT_button = CTk.CTkButton(app, text='Tock Tick',
+                          font=("Courier New", 22), command=open_TT, width=20, anchor="w")
+TT_button.place(x=10, y=350)
+
+
 W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
     "Courier New", 22), command=open_W2PDF)
-W2PDF_button.place(x=10, y=350)
+W2PDF_button.place(x=10, y=410)
 
 v2txt_button = CTk.CTkButton(app, text="Voice to Text", font=(
     "Courier New", 22), command=open_V2TXT)
-v2txt_button.place(x=10, y=410)
+v2txt_button.place(x=10, y=470)
 
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
-YTD_button.place(x=10, y=470)
+YTD_button.place(x=410, y=110)
 
 bottom_seperator = CTk.CTkLabel(
     app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
