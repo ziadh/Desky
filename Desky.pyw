@@ -8,6 +8,7 @@ from tkinter import messagebox
 import sys
 import os
 import time
+from PIL import Image
 
 file_path = None
 language = None
@@ -161,6 +162,11 @@ def exit_app():
         app.destroy()
 
 
+def open_github_page():
+    link = "https://github.com/ziadh/Desky/"
+    webbrowser.open(link)
+
+
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 with open("user_settings.json", 'r')as f:
@@ -179,6 +185,7 @@ CTk.set_default_color_theme("blue")
 
 app = CTk.CTk()
 app.bind("<Return>", lambda _: update_password_button.invoke())
+app.bind("<Escape>", lambda _: cancel_change_button.invoke())
 app.geometry("600x630")
 app.title(f"Desky v{version}")
 app.resizable(False, False)
@@ -234,6 +241,11 @@ YTD_button.place(x=410, y=110)
 
 bottom_seperator = CTk.CTkLabel(app, text="v"*157)
 bottom_seperator.place(x=-20, y=510)
+
+
+github_page_button = CTk.CTkButton(
+    app, text='GitHub', width=30, command=open_github_page)
+github_page_button.place(x=110, y=585)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Courier New", 18), width=3, command=toggle_theme)

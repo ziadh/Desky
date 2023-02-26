@@ -40,6 +40,7 @@ app.geometry("1200x600")
 app.wm_iconbitmap("assets/logos/DSP-logo.ico")
 app.title(f"Daily Sneak Peek v{version}")
 app.bind("<Return>", lambda _: update_zip_code_button.invoke())
+app.bind("<Escape>", lambda _: cancel_change_button.invoke())
 app.resizable(False, False)
 global show_12_hour_button
 global twlve_hour_time
