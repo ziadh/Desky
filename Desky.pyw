@@ -125,6 +125,8 @@ def toggle_theme():
     with open('settings.json', 'w') as f:
         json.dump(settings, f)
 
+# TODO: bind versionmessage to open release notes
+
 
 def check_for_updates():
     r = requests.get("https://api.github.com/repos/ziadh/Desky/releases")
@@ -132,11 +134,16 @@ def check_for_updates():
     newest_version = json_data[0]["tag_name"]
     if float(newest_version) > float(version):
         version_message.configure(
-            text=f"New update v{version} available. Click here to update")
+            text=f"New update v{version} available. Click me to update.")
     else:
         version_message.configure(
-            text=f"You are running the latest version v{version}.", cursor="")
+            text=f"You are running the latest version v{version}. Click me to view \nthe latest changes.", cursor="")
         version_message.unbind("<Button-1>")
+        version_message.bind("<Button-1>", open_release_notes)
+
+
+def open_release_notes():
+    print('hi')
 
 
 def download_update(event):
@@ -145,6 +152,13 @@ def download_update(event):
     newest_version = json_data[0]["tag_name"]
     link = "https://github.com/ziadh/Desky/archive/refs/tags/"+newest_version+".zip"
     webbrowser.open(link)
+
+
+def exit_app():
+    confirm = messagebox.askyesno(
+        title='Confirm Exit', message=' Are you sure you would like to exit?')
+    if confirm:
+        app.destroy()
 
 
 with open("settings.json", 'r')as f:
@@ -161,12 +175,14 @@ else:
     CTk.set_appearance_mode("light")
 
 CTk.set_default_color_theme("blue")
+
+
 app = CTk.CTk()
-app.geometry("600x600")
+app.bind("<Return>", lambda _: update_password_button.invoke())
+app.geometry("600x630")
 app.title(f"Desky v{version}")
 app.resizable(False, False)
 app.wm_iconbitmap('assets/logos/Desky-logo.ico')
-
 
 welcome_label = CTk.CTkLabel(
     app, text=f"Welcome, {username}!", font=("Courier New", 22))
@@ -178,7 +194,7 @@ change_username_button = CTk.CTkButton(
 change_username_button.place(x=430, y=10)
 
 top_seperator = CTk.CTkLabel(
-    app, text="^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+    app, text="^"*157)
 top_seperator.place(x=-20, y=50)
 
 apps_label = CTk.CTkLabel(app, text="My Apps", font=("Courier New", 22))
@@ -216,20 +232,19 @@ YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
 YTD_button.place(x=410, y=110)
 
-bottom_seperator = CTk.CTkLabel(
-    app, text="vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+bottom_seperator = CTk.CTkLabel(app, text="v"*157)
 bottom_seperator.place(x=-20, y=510)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Courier New", 18), width=3, command=toggle_theme)
-toggle_theme_button.place(x=385, y=560)
+toggle_theme_button.place(x=385, y=585)
 check_for_updates_button = CTk.CTkButton(app, text="Check for Updates", font=(
     "Courier New", 18), command=check_for_updates)
-check_for_updates_button.place(x=170, y=560)
+check_for_updates_button.place(x=170, y=585)
 
 exit_button = CTk.CTkButton(app, text="Exit", font=(
-    "Courier New", 18), command=exit)
-exit_button.place(x=430, y=560)
+    "Courier New", 18), command=exit_app)
+exit_button.place(x=430, y=585)
 
 
 version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
