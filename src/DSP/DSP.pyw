@@ -60,7 +60,7 @@ def update_zip_code():
         "Courier New", 20), command=cancel_zip_code_changes)
     cancel_change_button.place(x=860, y=50)
 
-
+#TODO: add a checker if the zip code is not numeric
 def save_zip_code():
     global zip_code
     zip_code = change_zip_code_entry.get()
@@ -72,8 +72,10 @@ def save_zip_code():
         json.dump(data, f)
     zip_code = data['zip_code']
     if zip_code == '':
-        error = messagebox.showinfo(
-            title="Empty entry", message="Please enter a zip code.")
+        zip_code = '00000'
+        welcome_label.configure(
+            text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
+        cancel_zip_code_changes()
     else:
         welcome_label.configure(
             text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
