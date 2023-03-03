@@ -22,123 +22,118 @@ def back_to_desky():
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
-class NotesApp:
-    def __init__(self, master):
-        self.master = master
-        master.title("My Notes")
-        master.geometry("1050x800")
-        master.resizable(False, False)
 
-        self.notes = []
+def load_notes():
+    if os.path.exists("src/MN/notes.json") and os.path.getsize("src/MN/notes.json") > 0:
+        with open("src/MN/notes.json", "r") as f:
+            notes = json.load(f)
+        for note in notes:
+            notes_list.insert(CTk.END, note["title"])
 
-        self.notes_list = tk.Listbox(self.master, width=50, height=41)
-        self.notes_list.place(x=40, y=70)
 
-        self.notes_list.bind("<<ListboxSelect>>", self.show_note)
+def save_notes(notes):
+    with open("src/MN/notes.json", "w") as f:
+        json.dump(notes, f)
 
-        self.title_label = CTk.CTkLabel(
-            self.master, text="Title:", font=('Courier New', 25))
-        self.title_label.place(x=380, y=70)
 
-        self.title_entry = CTk.CTkEntry(self.master, width=520)
-        self.title_entry.place(x=480, y=70)
+def save_note():
+    title = title_entry.get()
+    content = note_text.get("1.0", CTk.END)
 
-        self.note_text = CTk.CTkTextbox(self.master, width=620, height=620)
-        self.note_text.place(x=380, y=120)
+    note = {"title": title, "content": content}
 
-        self.save_button = CTk.CTkButton(
-            self.master, text="Save", command=self.save_note, font=("Courier New", 20))
-        self.save_button.place(x=520, y=750)
+    for i in range(len(notes)):
+        if notes[i]["title"] == title:
+            notes[i] = note
+            break
+    else:
+        notes.append(note)
+        notes_list.insert(CTk.END, title)
 
-        self.add_button = CTk.CTkButton(
-            self.master, text="Add Note", command=self.add_note)
-        self.add_button.place(x=50, y=750)
+    save_notes(notes)
 
-        self.delete_button = CTk.CTkButton(
-            self.master, text="Delete Note", command=self.delete_note)
-        self.delete_button.place(x=200, y=750)
+    title_entry.delete(0, CTk.END)
+    note_text.delete("1.0", CTk.END)
 
-        self.load_notes()
 
-    def load_notes(self):
-        if os.path.exists("src/MN/notes.json") and os.path.getsize("src/MN/notes.json") > 0:
-            with open("src/MN/notes.json", "r") as f:
-                self.notes = json.load(f)
-            for note in self.notes:
-                self.notes_list.insert(CTk.END, note["title"])
-
-    def save_note(self):
-        title = self.title_entry.get()
-        content = self.note_text.get("1.0", CTk.END)
-
-        note = {"title": title, "content": content}
-
-        for i in range(len(self.notes)):
-            if self.notes[i]["title"] == title:
-                self.notes[i] = note
+def show_note( event):
+    selection = event.widget.curselection()
+    if selection:
+        index = selection[0]
+        title = notes_list.get(index)
+        for note in notes:
+            if note["title"] == title:
+                title_entry.delete(0, CTk.END)
+                title_entry.insert(0, note["title"])
+                note_text.delete("1.0", CTk.END)
+                note_text.insert("1.0", note["content"])
                 break
-        else:
-            self.notes.append(note)
-            self.notes_list.insert(CTk.END, title)
-
-        with open(f"src/MN/{title}.json", "w") as f:
-            json.dump(note, f)
-
-        with open("src/MN/notes.json", "w") as f:
-            json.dump(self.notes, f)
-
-        self.title_entry.delete(0, CTk.END)
-        self.note_text.delete("1.0", CTk.END)
-
-    def show_note(self, event):
-            selection = event.widget.curselection()
-            if selection:
-                index = selection[0]
-                title = self.notes_list.get(index)
-                for note in self.notes:
-                    if note["title"] == title:
-                        self.title_entry.delete(0, CTk.END)
-                        self.title_entry.insert(0, note["title"])
-                        self.note_text.delete("1.0", CTk.END)
-                        self.note_text.insert("1.0", note["content"])
-                        break
-
-    def add_note(self):
-            self.title_entry.delete(0, CTk.END)
-            self.note_text.delete("1.0", CTk.END)
-
-    def delete_note(self):
-        selection = self.notes_list.curselection()
-        if selection:
-            index = selection[0]
-            title = self.notes_list.get(index)
-            for note in self.notes:
-                if note["title"] == title:
-                    self.notes.remove(note)
-                    self.notes_list.delete(index)
-                    break
-
-            with open("src/MN/notes.json", "w") as f:
-                json.dump(self.notes, f)
-
-            # note_file_path = f"src/MN/{title}.json"
-            # if os.path.exists(note_file_path):
-            #     os.remove(note_file_path)
-            # else:
-            #     print(f"Note file {note_file_path} not found.")
 
 
+def add_note():
+    title_entry.delete(0, CTk.END)
+    note_text.delete("1.0", CTk.END)
 
-root = CTk.CTk()
-app = NotesApp(root)
-notes_top_title = CTk.CTkLabel(root, text='Notes', font=('Courier New', 35))
+
+def delete_note():
+    selection = notes_list.curselection()
+    if selection:
+        index = selection[0]
+        title = notes_list.get(index)
+        for note in notes:
+            if note["title"] == title:
+                notes.remove(note)
+                notes_list.delete(index)
+                break
+
+        save_notes(notes)
+    load_notes()
+
+
+app = CTk.CTk()
+app.title("My Notes")
+app.geometry("1050x800")
+app.resizable(False, False)
+
+notes = []
+
+notes_list = tk.Listbox(app, width=50, height=41)
+notes_list.place(x=40, y=70)
+
+notes_list.bind("<<ListboxSelect>>", show_note)
+
+title_label = CTk.CTkLabel(
+    app, text="Title:", font=('Courier New', 25))
+title_label.place(x=380, y=70)
+
+title_entry = CTk.CTkEntry(app, width=520)
+title_entry.place(x=480, y=70)
+
+note_text = CTk.CTkTextbox(app, width=620, height=620)
+note_text.place(x=380, y=120)
+
+save_button = CTk.CTkButton(
+    app, text="Save", command=save_note, font=("Courier New", 20))
+save_button.place(x=520, y=750)
+
+add_button = CTk.CTkButton(
+    app, text="Add Note", command=add_note)
+add_button.place(x=50, y=750)
+
+delete_button = CTk.CTkButton(
+    app, text="Delete Note", command=delete_note)
+delete_button.place(x=200, y=750)
+
+load_notes()
+
+notes_top_title = CTk.CTkLabel(app, text='Notes', font=('Courier New', 35))
 notes_top_title.place(x=10, y=20)
 
 back_to_desky_button = CTk.CTkButton(
-    root, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
+    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
 back_to_desky_button.place(x=670, y=750)
 
 exit_button = CTk.CTkButton(
-    root, text="Exit", font=("Courier New", 20), command=exit)
+    app, text="Exit", font=("Courier New", 20), command=exit)
 exit_button.place(x=860, y=750)
-root.mainloop()
+app.mainloop()
