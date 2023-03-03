@@ -121,11 +121,11 @@ class NotesApp:
             with open("src/MN/notes.json", "w") as f:
                 json.dump(self.notes, f)
 
-            note_file_path = f"src/MN/{title}.json"
-            if os.path.exists(note_file_path):
-                os.remove(note_file_path)
-            else:
-                print(f"Note file {note_file_path} not found.")
+            # note_file_path = f"src/MN/{title}.json"
+            # if os.path.exists(note_file_path):
+            #     os.remove(note_file_path)
+            # else:
+            #     print(f"Note file {note_file_path} not found.")
 
 
 
