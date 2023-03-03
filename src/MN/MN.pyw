@@ -56,7 +56,7 @@ def save_note():
     note_text.delete("1.0", CTk.END)
 
 
-def show_note( event):
+def show_note(event):
     selection = event.widget.curselection()
     if selection:
         index = selection[0]
@@ -114,15 +114,20 @@ note_text.place(x=380, y=120)
 
 save_button = CTk.CTkButton(
     app, text="Save", command=save_note, font=("Courier New", 20))
-save_button.place(x=520, y=750)
+save_button.place(x=530, y=750)
 
 add_button = CTk.CTkButton(
-    app, text="Add Note", command=add_note)
-add_button.place(x=50, y=750)
+    app, text="+", command=add_note, width=50)
+add_button.place(x=40, y=750)
 
 delete_button = CTk.CTkButton(
-    app, text="Delete Note", command=delete_note)
-delete_button.place(x=200, y=750)
+    app, text="-", command=delete_note, width=50)
+delete_button.place(x=160, y=750)
+
+refresh_button = CTk.CTkButton(
+    app, text="\u27F3", command=load_notes, width=50)
+refresh_button.place(x=290, y=750)
+
 
 load_notes()
 
@@ -131,7 +136,7 @@ notes_top_title.place(x=10, y=20)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
-back_to_desky_button.place(x=670, y=750)
+back_to_desky_button.place(x=680, y=750)
 
 exit_button = CTk.CTkButton(
     app, text="Exit", font=("Courier New", 20), command=exit)
