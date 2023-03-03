@@ -46,17 +46,16 @@ def save_username():
     with open("user_settings.json", "r+") as json_file:
         data = json.load(json_file)
         data["username"] = username
-    username = data['username']
-    if username == '':
-        username = 'New User'
-        welcome_label.configure(text=f"Welcome, {username}!")
-        cancel_username_changes()
-    else:
-        welcome_label.configure(text=f"Welcome, {username}!")
-        cancel_username_changes()
+        if not username:
+            username = "New User"
+            data["username"] = username
+
+    welcome_label.configure(text=f"Welcome, {username}!")
+    cancel_username_changes()
 
     with open('user_settings.json', 'w') as f:
         json.dump(data, f)
+
 
 def cancel_username_changes():
     update_password_button.destroy()
