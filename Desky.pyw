@@ -8,7 +8,6 @@ from tkinter import messagebox
 import sys
 import os
 import time
-from PIL import Image
 
 file_path = None
 language = None

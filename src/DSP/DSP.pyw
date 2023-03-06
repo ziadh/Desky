@@ -60,24 +60,25 @@ def update_zip_code():
         "Courier New", 20), command=cancel_zip_code_changes)
     cancel_change_button.place(x=860, y=50)
 
+
 def save_zip_code():
     global zip_code
     zip_code = change_zip_code_entry.get()
     with open("user_settings.json", "r+") as json_file:
         data = json.load(json_file)
-        data["zip_code"] = zip_code
-    with open('user_settings.json', 'w') as f:
-        json.dump(data, f)
-    zip_code = data['zip_code']
-    if not zip_code.isnumeric():
+    if not zip_code:
         zip_code = '00000'
+        data['zip_code'] = zip_code
         welcome_label.configure(
             text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
     else:
+        data["zip_code"] = zip_code
         welcome_label.configure(
             text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
+    with open('user_settings.json', 'w') as f:
+        json.dump(data, f)
     weather_info.configure(text="")
 
 
