@@ -91,7 +91,7 @@ def delete_note():
 
 
 app = CTk.CTk()
-app.title("My Notes")
+app.title(f"My Notes v{version}")
 app.geometry("1050x800")
 app.resizable(False, False)
 

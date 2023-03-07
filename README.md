@@ -17,7 +17,6 @@
 - [Word2PDF Converter](#word2pdf-converter)
 - [Tock Tick](#tock-tick)
 - [Voice 2 TXT Transcriber](#voice-2-txt-transcriber)
-- [Known Issues](#known-issues)
 
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
@@ -31,7 +30,7 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 # Daily Sneak Peek:
 
 ## Stay up to date with your day. Currently only shows today's weather for your zipcode, launch will include daily reminders as well as all-time To-Do list.
-## Launch will also include support for intentional cities!
+Support for cities outside the U.S. will be added in a future update.
 
 ![DSP-ss](assets/ss/DSP-ss.png)
 
@@ -41,16 +40,6 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 
 ![DO-ss](assets/ss/DO-ss.png)
 
-
-
-# Youtube Downloader
-## Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
-
-![YTD-ss](assets/ss/YTD-ss.png)
-
-
-
-
 # Fresh Desktop Check List
 ## Recently reset your desktop or would just want to download the newest versions of these popular free programs? This tool will get you caught up with all the desktop apps that you need!
 
@@ -58,22 +47,34 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 ![FDCL-ss](assets/ss/FDCL-ss.png)
 
 
+# My Notes
 
-# Word2PDF Converter
-## Self explanatory, quick mini-app that converts your word documents to PDF
-![W2PDF-ss](assets/ss/W2PDF-ss.png)
+## Simple note taking application that will be updated with more features regularly in the near future!
+![MN-ss](assets/ss/MN-ss.png)
+
+
+# PC Watcher
+## Think you might be running short on CPU or storage? PC Watcher got you covered!
+
+![PCW-ss](assets/ss/PCW-ss.png)
 
 
 # Tock Tick
 ## 3-in-1 clock related miniapps
 ![TT-ss](assets/ss/TT-ss.png)
+
+# Word2PDF Converter
+## Self explanatory, quick mini-app that converts your word documents to PDF
+![W2PDF-ss](assets/ss/W2PDF-ss.png)
+
 # Voice 2 TXT Transcriber
 ## Transcribe voice messages for you when Windows dictation wouldn't
 ![V2TXT-ss](assets/ss/v2t-ss.png)
-# Known Issues:
 
--Will add edit/remove tasks and reminders in the near future
+# Youtube Downloader
+## Pretty self explanatory name, it will contain customizable options as far as the downloaded resolution goes.
 
+![YTD-ss](assets/ss/YTD-ss.png)
 
 
 [downloads-shield]: https://img.shields.io/github/downloads/ziadh/Desky/total?style=for-the-badge&logo=github
