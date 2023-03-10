@@ -138,7 +138,7 @@ def check_for_updates():
         version_message.configure(text=f"New update v{newest_version} available. Click me to update.")
         version_message.bind("<Button-1>", download_update)
     else:
-        whats_new_label.configure(text=f"You are running the latest version v{version}. Click me to view the latest changes.")
+        whats_new_label.configure(text=f"You are running the latest version v{version}. Click me to view\nthe latest changes.")
         whats_new_label.bind("<Button-1>", open_release_notes)
 
 
