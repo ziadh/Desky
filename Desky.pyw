@@ -33,8 +33,7 @@ def update_username():
         app, text="\u2714", width=5, font=("Courier New", 20), command=save_username)
     update_password_button.place(x=250, y=50)
     global cancel_change_button
-    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
-        "Courier New", 20), command=cancel_username_changes)
+    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=("Courier New", 20), command=cancel_username_changes)
     cancel_change_button.place(x=290, y=50)
 
 
@@ -129,7 +128,6 @@ def toggle_theme():
     with open('settings.json', 'w') as f:
         json.dump(settings, f)
 
-# TODO: bind versionmessage to open release notes
 
 
 def check_for_updates():
@@ -137,17 +135,20 @@ def check_for_updates():
     json_data = r.json()
     newest_version = json_data[0]["tag_name"]
     if float(newest_version) > float(version):
-        version_message.configure(
-            text=f"New update v{version} available. Click me to update.")
+        version_message.configure(text=f"New update v{newest_version} available. Click me to update.")
+        version_message.bind("<Button-1>", download_update)
     else:
-        version_message.configure(
-            text=f"You are running the latest version v{version}. Click me to view \nthe latest changes.", cursor="")
-        version_message.unbind("<Button-1>")
-        version_message.bind("<Button-1>", open_release_notes)
+        whats_new_label.configure(text=f"You are running the latest version v{version}. Click me to view the latest changes.")
+        whats_new_label.bind("<Button-1>", open_release_notes)
 
 
-def open_release_notes():
-    print('hi')
+
+def open_release_notes(event):
+    r = requests.get("https://api.github.com/repos/ziadh/Safe-Data/releases")
+    json_data = r.json()
+    newest_version = json_data[0]["tag_name"]
+    notes_link = f"https://github.com/ziadh/Safe-Data/releases/tag/{newest_version}"
+    webbrowser.open(notes_link)
 
 
 def download_update(event):
@@ -266,8 +267,10 @@ exit_button.place(x=430, y=585)
 
 
 version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
-version_message.bind("<Button-1>", download_update)
-version_message.place(x=-0, y=530)
+version_message.place(x=0, y=530)
+whats_new_label = CTk.CTkLabel(app,text="", font=("Courier New", 16))
+whats_new_label.place(x=0, y=530)
+
 app.mainloop()
 
 sys.stderr.close()
