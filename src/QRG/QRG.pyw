@@ -42,9 +42,7 @@ else:
     CTk.set_appearance_mode("light")
 
 CTk.set_default_color_theme("blue")
-# todo: add backtodesky
 app = CTk.CTk()
-# todo: add version
 app.title(f'QR Code Generator v{version}')
 app.geometry('400x500')
 app.resizable(False, False)
