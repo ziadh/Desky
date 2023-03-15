@@ -95,8 +95,10 @@ def open_FDCL():
     app.destroy()
     subprocess.run(["python", "src/FD/FDCL.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
-
-
+def open_GPTS():
+    app.destroy()
+    subprocess.run(["python", "src/GPTS/GPTS.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 def open_TT():
     app.destroy()
     subprocess.run(["python", "src/TT/TT.pyw"],
@@ -227,31 +229,35 @@ FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
                             font=("Courier New", 22), command=open_FDCL)
 FDCL_button.place(x=10, y=230)
 
+
+GPTS_button = CTk.CTkButton(app,text='GPT Search',font=("Courier New", 22), command=open_GPTS)
+GPTS_button.place(x=10, y=290)
+
 MN_button = CTk.CTkButton(app, text="My Notes",
                             font=("Courier New", 22), command=open_MN, anchor="w",width=20)
-MN_button.place(x=10, y=290)
+MN_button.place(x=10, y=350)
 PCW_button = CTk.CTkButton(app, text="PC Watcher", font=("Courier New", 22), command=open_PCW, width=20, anchor="w")
-PCW_button.place(x=10, y=350)
+PCW_button.place(x=10, y=410)
 
 QRG_button = CTk.CTkButton(app, text="QR Generator", font=("Courier New", 22), command=open_QRG, width=20, anchor="w")
-QRG_button.place(x=10, y=410)
+QRG_button.place(x=10, y=470)
 
 TT_button = CTk.CTkButton(app, text='Tock Tick',
                           font=("Courier New", 22), command=open_TT, width=20, anchor="w")
-TT_button.place(x=10, y=470)
+TT_button.place(x=410, y=110)
 
 
 W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
     "Courier New", 22), command=open_W2PDF)
-W2PDF_button.place(x=410, y=110)
+W2PDF_button.place(x=410, y=170)
 
 v2txt_button = CTk.CTkButton(app, text="Voice to Text", font=(
     "Courier New", 22), command=open_V2TXT)
-v2txt_button.place(x=410, y=170)
+v2txt_button.place(x=410, y=230)
 
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
     "Courier New", 22), command=open_YTD)
-YTD_button.place(x=410, y=230)
+YTD_button.place(x=410, y=290)
 
 bottom_seperator = CTk.CTkLabel(app, text="v"*157)
 bottom_seperator.place(x=-20, y=510)

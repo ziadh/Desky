@@ -20,6 +20,24 @@
 
 <h2>Your daily one-stop shop desktop companion with a versatile list of useful tools.</h2>
 
+## How to Install 
+
+- Download [Python](https://www.python.org/downloads/) from here
+- Download the [source file](https://github.com/ziadh/Desky/archive/refs/heads/main.zip) from here
+- After unzipping the source file and navigating to where the main.py file is located, press on the address bar as shown below then type cmd.
+
+
+![how-to](assets/ss/how-to-ss.png)
+
+
+
+Run the following command to download all the required packages
+
+```
+pip install -r requirements.txt
+```
+
+When it is finished, close the cmd and simply double click the Safe-Data.pyw file or the .exe file.
 
 ![main_menu](assets/ss/main_menu.png)
 
