@@ -1,9 +1,10 @@
 customtkinter==5.0.2
-SpeechRecognition==3.9.0
-pytube==12.1.2
-comtypes==1.1.14
 PyAutoGUI==0.9.53
-psutil==5.9.4
 Pillow==9.4.0
+psutil==5.9.4
 qrcode==7.4.2
+requests==2.26.0
 pytz==2022.7.1
+SpeechRecognition==3.9.0
+comtypes==1.1.14
+pytube==12.1.2

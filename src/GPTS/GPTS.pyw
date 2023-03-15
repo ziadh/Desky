@@ -3,6 +3,7 @@ import pyautogui as pe
 from time import sleep
 import customtkinter as CTk
 import json
+
 def search():
     query = entry.get()
     url = f"https://chat.openai.com/chat"
