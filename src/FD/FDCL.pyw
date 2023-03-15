@@ -9,12 +9,14 @@ CTk.set_default_color_theme("blue")
 
 
 def open_downloads():
-    vars_list = [var1.get(), var2.get(), var3.get(), var4.get(),
+    vars_list = [var0.get(),var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
     else:
+        if var0.get() == 1:
+            webbrowser.open("https://www.blizzard.com/en-us/apps/battle.net/desktop")
         if var1.get() == 1:
             webbrowser.open("https://www.spotify.com/us/download/")
         if var2.get() == 1:
@@ -43,6 +45,7 @@ def open_downloads():
 
 
 def reset_selections():
+    var0.set(0)
     var1.set(0)
     var2.set(0)
     var3.set(0)
@@ -57,6 +60,7 @@ def reset_selections():
 
 
 def select_all():
+    var0.set(1)
     var1.set(1)
     var2.set(1)
     var3.set(1)
@@ -85,6 +89,7 @@ app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
 
 app.geometry("450x440")
 app.resizable(False, False)
+var0 = IntVar()
 var1 = IntVar()
 var2 = IntVar()
 var3 = IntVar()
@@ -104,7 +109,7 @@ if theme == 'dark':
 else:
     CTk.set_appearance_mode("light")
 
-
+BattleNet = CTk.CTkCheckBox(app, text="BattleNet", variable=var0)
 chrome = CTk.CTkCheckBox(app, text="Chrome", variable=var2)
 evernote = CTk.CTkCheckBox(app, text="Evernote", variable=var10)
 discord = CTk.CTkCheckBox(app, text="Discord", variable=var4)
@@ -117,18 +122,18 @@ spotify = CTk.CTkCheckBox(app, text="Spotify", variable=var1)
 steam = CTk.CTkCheckBox(app, text="Steam", variable=var9)
 vs = CTk.CTkCheckBox(app, text="VS Code", variable=var5)
 
-
-chrome.place(x=120, y=110)
-evernote.place(x=120, y=140)
-discord.place(x=120, y=170)
-firefox.place(x=120, y=200)
-ghd.place(x=120, y=230)
-itunes.place(x=120, y=260)
-np.place(x=270, y=110)
-skype.place(x=270, y=140)
-spotify.place(x=270, y=170)
-steam.place(x=270, y=200)
-vs.place(x=270, y=230)
+BattleNet.place(x=120,y=110)
+chrome.place(x=120, y=140)
+evernote.place(x=120, y=170)
+discord.place(x=120, y=200)
+firefox.place(x=120, y=230)
+ghd.place(x=120, y=260)
+itunes.place(x=270, y=110)
+np.place(x=270, y=140)
+skype.place(x=270, y=170)
+spotify.place(x=270, y=200)
+steam.place(x=270, y=230)
+vs.place(x=270, y=260)
 msg = """
 Welcome to Fresh Desktop Downloads. If your computer recently got through\na factory reset, simply check the boxes for the applications that you would like\nto install then press the download button.
 """
