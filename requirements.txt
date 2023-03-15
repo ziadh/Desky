@@ -4,3 +4,6 @@ pytube==12.1.2
 comtypes==1.1.14
 PyAutoGUI==0.9.53
 psutil==5.9.4
+Pillow==9.4.0
+qrcode==7.4.2
+pytz==2022.7.1
