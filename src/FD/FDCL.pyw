@@ -11,14 +11,15 @@ CTk.set_default_color_theme("blue")
 
 
 def open_downloads():
-    vars_list = [var0.get(),var1.get(), var2.get(), var3.get(), var4.get(),
+    vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
     else:
         if var0.get() == 1:
-            webbrowser.open("https://www.blizzard.com/en-us/apps/battle.net/desktop")
+            webbrowser.open(
+                "https://www.blizzard.com/en-us/apps/battle.net/desktop")
         if var1.get() == 1:
             webbrowser.open("https://www.spotify.com/us/download/")
         if var2.get() == 1:
@@ -74,9 +75,12 @@ def select_all():
     var10.set(1)
     var11.set(1)
 
+
 def back_to_desky():
     app.destroy()
-    subprocess.run(["python", "Desky.pyw"], creationflags=subprocess.CREATE_NO_WINDOW)
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
 
 with open("settings.json", 'r')as f:
     settings = json.load(f)
@@ -88,7 +92,7 @@ app = CTk.CTk()
 app.title(f"Fresh Desktop Checklist v{version}")
 app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
 
-app.geometry("450x440")
+app.geometry("600x440")
 app.resizable(False, False)
 var0 = IntVar()
 var1 = IntVar()
@@ -102,7 +106,6 @@ var8 = IntVar()
 var9 = IntVar()
 var10 = IntVar()
 var11 = IntVar()
-
 
 
 if theme == 'dark':
@@ -123,20 +126,20 @@ spotify = CTk.CTkCheckBox(app, text="Spotify", variable=var1)
 steam = CTk.CTkCheckBox(app, text="Steam", variable=var9)
 vs = CTk.CTkCheckBox(app, text="VS Code", variable=var5)
 
-BattleNet.place(x=120,y=110)
-chrome.place(x=120, y=140)
-evernote.place(x=120, y=170)
-discord.place(x=120, y=200)
-firefox.place(x=120, y=230)
-ghd.place(x=120, y=260)
-itunes.place(x=270, y=110)
-np.place(x=270, y=140)
-skype.place(x=270, y=170)
-spotify.place(x=270, y=200)
-steam.place(x=270, y=230)
-vs.place(x=270, y=260)
+BattleNet.place(x=40, y=90)
+chrome.place(x=40, y=120)
+evernote.place(x=40, y=150)
+discord.place(x=170, y=90)
+firefox.place(x=170, y=120)
+ghd.place(x=170, y=150)
+itunes.place(x=300, y=90)
+np.place(x=300, y=120)
+skype.place(x=300, y=150)
+spotify.place(x=430, y=90)
+steam.place(x=430, y=120)
+vs.place(x=430, y=150)
 msg = """
-Welcome to Fresh Desktop Downloads. If your computer recently got through\na factory reset, simply check the boxes for the applications that you would like\nto install then press the download button.
+Welcome to Fresh Desktop Downloads. If your computer recently got through a factory reset, simply \ncheck the boxes for the applications that you would like to install then press the download button.
 """
 welcome_label = CTk.CTkLabel(
     app, text=msg, justify=LEFT, padx=10, pady=10)
@@ -144,21 +147,21 @@ welcome_label.grid(row=0, column=0)
 
 select_all_button = CTk.CTkButton(
     app, text="Select All", command=select_all)
-select_all_button.place(x=70, y=312)
+select_all_button.place(x=40, y=212)
 
 clear_selection_button = CTk.CTkButton(
     app, text="Clear Selection", command=reset_selections)
-clear_selection_button.place(x=250, y=312)
+clear_selection_button.place(x=200, y=212)
 
 download_button = CTk.CTkButton(
     app, text="Download", command=open_downloads)
-download_button.place(x=70, y=360)
+download_button.place(x=360, y=212)
 
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
-exit_button.place(x=250, y=360)
+exit_button.place(x=430, y=401)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=160, y=401)
+back_to_desky_button.place(x=270, y=401)
 
 app.mainloop()
