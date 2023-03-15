@@ -93,17 +93,17 @@ organize_button = CTk.CTkButton(
 
 help_button = CTk.CTkButton(
     app, text="How Does This Work", width=15, command=help_function)
-exit_button = CTk.CTkButton(app, text="Exit", width=65, command=exit)
+exit_button = CTk.CTkButton(app, text="Exit", width=40, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", command=back_to_desky)
+    app, text="Back To Desky", command=back_to_desky,width=20)
 
 error_label.place(x=30, y=35)
 
 locate_button.place(x=50, y=76)
 organize_button.place(x=220, y=76)
-help_button.place(x=100, y=115)
-back_to_desky_button.place(x=50, y=155)
-exit_button.place(x=220, y=155)
+help_button.place(x=50, y=115)
+back_to_desky_button.place(x=220, y=115)
+exit_button.place(x=170, y=155)
 app.mainloop()
