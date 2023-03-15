@@ -4,6 +4,8 @@ import customtkinter as CTk
 from tkinter import messagebox
 import subprocess
 import json
+
+
 CTk.set_appearance_mode("Dark")
 CTk.set_default_color_theme("blue")
 
@@ -35,7 +37,6 @@ def open_downloads():
         if var8.get() == 1:
             webbrowser.open("https://www.skype.com/en/get-skype/")
         if var9.get() == 1:
-            # var 9 = steam, 10=evernote, 11=itunes
             webbrowser.open("https://store.steampowered.com/about/")
         if var10.get() == 1:
             webbrowser.open("https://evernote.com/download")
