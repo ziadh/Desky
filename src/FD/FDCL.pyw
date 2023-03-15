@@ -82,6 +82,10 @@ def back_to_desky():
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
+def download_it_for_me():
+    pass
+
+
 with open("settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
@@ -92,7 +96,7 @@ app = CTk.CTk()
 app.title(f"Fresh Desktop Checklist v{version}")
 app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
 
-app.geometry("600x440")
+app.geometry("600x540")
 app.resizable(False, False)
 var0 = IntVar()
 var1 = IntVar()
@@ -157,11 +161,29 @@ download_button = CTk.CTkButton(
     app, text="Download", command=open_downloads)
 download_button.place(x=360, y=212)
 
+or_text_label = CTk.CTkLabel(app, text='Or')
+or_text_label.place(x=320, y=250)
+
+download_it_for_me_label = CTk.CTkLabel(app, text='Download them for me: ')
+download_it_for_me_label.place(x=20, y=280)
+
+choose_os_label = CTk.CTkLabel(app, text='Choose your operating system ')
+choose_os_label.place(x=20, y=310)
+
+os_choice_box = CTk.CTkOptionMenu(app, values=["Windows", "Mac"])
+os_choice_box.set('Windows')
+
+user_os = os_choice_box.get()
+
+download_it_for_me_button = CTk.CTkButton(
+    app, text='Download it for me', command=download_it_for_me)
+download_it_for_me_button.place(x=370, y=310)
+os_choice_box.place(x=200, y=310)
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
-exit_button.place(x=430, y=401)
+exit_button.place(x=430, y=501)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=270, y=401)
+back_to_desky_button.place(x=270, y=501)
 
 app.mainloop()
