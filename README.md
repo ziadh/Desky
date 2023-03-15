@@ -10,6 +10,7 @@
 
 ## Table of Contents
 - [About Desky](#about)
+- [How to Install](#how-to-install)
 - [Downloads Folder Organizer](#downloads-folder-organizer)
 - [Youtube Downloader](#youtube-downloader)
 - [Fresh Desktop Check List](#fresh-desktop-check-list)
