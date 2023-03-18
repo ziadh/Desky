@@ -83,7 +83,7 @@ def back_to_desky():
 #FIXME: finish the function
 #TODO: add mac links in the json file
 def download_it_for_me():
-    with open('apps.json','r') as f:
+    with open('src/FD/apps.json','r') as f:
         apps=json.load(f)
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
@@ -91,12 +91,12 @@ def download_it_for_me():
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
     else:
-        os = platform.system()
-        for i, app in enumerate(apps):
-            if vars_list[i] == 1:
-                url = app['url'][os]
-                urllib.request.urlretrieve(url, f"{app['name']}.{app['extension']}")
-        reset_selections()
+        for i, var in enumerate(vars_list):
+            if var==1:
+                app_name=apps['applications'][i]['name']
+                download_link=apps['applications'][i][f'{user_platform}_download_link']
+                webbrowser.open(download_link)
+
 
 
 
@@ -188,7 +188,7 @@ os_choice_box = CTk.CTkOptionMenu(app, values=["Windows", "Mac"])
 os_choice_box.set('Windows')
 
 user_os = os_choice_box.get()
-
+user_platform=user_os.lower()
 download_it_for_me_button = CTk.CTkButton(
     app, text='Download it for me', command=download_it_for_me)
 download_it_for_me_button.place(x=370, y=310)

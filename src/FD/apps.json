@@ -3,62 +3,62 @@
         {
             "name": "Bnet",
             "windows_download_link": "https://www.blizzard.com/download/confirmation?product=bnetdesk",
-            "mac_download_link": "https://www.blizzard.com/download/confirmation?product=bnetdesk"
+            "darwin_download_link": "https://www.blizzard.com/download/confirmation?product=bnetdesk"
         },
         {
             "name": "Chrome",
             "windows_download_link": "https://www.google.com/chrome/thank-you.html?statcb=1&installdataindex=empty&defaultbrowser=0#",
-            "mac_download_link": "NEEDS LINK"
+            "darwin_download_link": "https://chromeenterprise.google/browser/download/thank-you/?platform=MAC_DMG&channel=stable&usagestats=0#"
         },
         {
             "name": "Evernote",
             "windows_download_link": "https://cdn1.evernote.com/boron/win/builds/Evernote-10.54.4-win-ddl-ga-3978-986a1704b8-setup.exe",
-            "mac_download_link": "NEEDS LINK"
+            "darwin_download_link": "https://apps.apple.com/app/evernote/id281796108"
         },
         {
             "name": "Discord",
             "windows_download_link": "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86",
-            "mac_download_link": "https://discord.com/api/download?platform=osx"
+            "darwin_download_link": "https://discord.com/api/download?platform=osx"
         },
         {
             "name": "Firefox",
             "windows_download_link": "https://www.mozilla.org/en-US/firefox/download/thanks/",
-            "mac_download_link": "https://download.mozilla.org/?product=firefox-latest-ssl&os=osx&lang=en-US"
+            "darwin_download_link": "https://download.mozilla.org/?product=firefox-latest-ssl&os=osx&lang=en-US"
         },
         {
             "name": "GitHub Desktop",
             "windows_download_link": "https://central.github.com/deployments/desktop/desktop/latest/win32",
-            "mac_download_link": "https://central.github.com/deployments/desktop/desktop/latest/darwin"
+            "darwin_download_link": "https://central.github.com/deployments/desktop/desktop/latest/darwin"
         },
         {
             "name": "iTunes",
             "windows_download_link": "https://secure-appldnld.apple.com/itunes12/001-80053-20210422-E8A3B28C-A3B2-11EB-BE07-CE1B67FC6302/iTunes64Setup.exe",
-            "mac_download_link": "https://secure-appldnld.apple.com/itunes12/041-56365-20210413-79A5AC6D-6B0A-46EC-B399-5A381183E3BE/iTunes12.8.3.dmg"
+            "darwin_download_link": "https://secure-appldnld.apple.com/itunes12/041-56365-20210413-79A5AC6D-6B0A-46EC-B399-5A381183E3BE/iTunes12.8.3.dmg"
         },
         {
             "name": "NotePad++",
             "windows_download_link": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5/npp.8.5.Installer.x64.exe",
-            "mac_download_link": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5/npp.8.5.Installer.x64.exe"
+            "darwin_download_link": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5/npp.8.5.Installer.x64.exe"
         },
         {
             "name": "Skype",
             "windows_download_link": "ms-windows-store://pdp/?productid=9WZDNCRFJ364&cid=scom-web-store",
-            "mac_download_link": "https://go.skype.com/skype.download"
+            "darwin_download_link": "https://go.skype.com/skype.download"
         },
         {
             "name": "Spotify",
             "windows_download_link": "https://download.scdn.co/SpotifySetup.exe",
-            "mac_download_link": "https://download.scdn.co/SpotifyInstaller.zip"
+            "darwin_download_link": "https://download.scdn.co/SpotifyInstaller.zip"
         },
         {
             "name": "Steam",
             "windows_download_link": "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe",
-            "mac_download_link": "https://cdn.akamai.steamstatic.com/client/installer/steam.dmg"
+            "darwin_download_link": "https://cdn.akamai.steamstatic.com/client/installer/steam.dmg"
         },
         {
             "name": "VS Code",
             "windows_download_link": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user",
-            "mac_download_link": "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
+            "darwin_download_link": "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
         }
     ]
 }
