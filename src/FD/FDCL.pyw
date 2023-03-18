@@ -9,7 +9,7 @@ import json
 CTk.set_appearance_mode("Dark")
 CTk.set_default_color_theme("blue")
 
-
+#TODO: add a suggest app function soon™
 def open_downloads():
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
