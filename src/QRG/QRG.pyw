@@ -30,7 +30,7 @@ def back_to_desky():
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
 
 theme = settings['theme']

@@ -10,9 +10,9 @@ import subprocess
 API_KEY = "6c55313b14fc0b07b3ea751d41103c12"
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
-with open("user_settings.json", 'r')as f:
+with open("src/user_settings.json", 'r')as f:
     user_settings = json.load(f)
 version = settings['version']
 username = user_settings['username']
@@ -64,7 +64,7 @@ def update_zip_code():
 def save_zip_code():
     global zip_code
     zip_code = change_zip_code_entry.get()
-    with open("user_settings.json", "r+") as json_file:
+    with open("src/user_settings.json", "r+") as json_file:
         data = json.load(json_file)
     if not zip_code:
         zip_code = '00000'
@@ -77,7 +77,7 @@ def save_zip_code():
         welcome_label.configure(
             text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
-    with open('user_settings.json', 'w') as f:
+    with open('src/user_settings.json', 'w') as f:
         json.dump(data, f)
     weather_info.configure(text="")
 

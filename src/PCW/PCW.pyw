@@ -10,7 +10,7 @@ app.geometry('400x400')
 app.resizable(False, False)
 
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
 version = settings['version']

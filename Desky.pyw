@@ -41,7 +41,7 @@ def save_username():
     global username
     username = change_username_entry.get()
 
-    with open("user_settings.json", "r+") as json_file:
+    with open("src/user_settings.json", "r+") as json_file:
         data = json.load(json_file)
         data["username"] = username
         if not username:
@@ -51,7 +51,7 @@ def save_username():
     welcome_label.configure(text=f"Welcome, {username}!")
     cancel_username_changes()
 
-    with open('user_settings.json', 'w') as f:
+    with open('src/user_settings.json', 'w') as f:
         json.dump(data, f)
 
 
@@ -121,7 +121,7 @@ def open_MN():
 
 
 def toggle_theme():
-    with open("settings.json", "r")as f:
+    with open("src/settings.json", "r")as f:
         settings = json.load(f)
     theme = settings['theme']
     if theme == 'dark':
@@ -132,7 +132,7 @@ def toggle_theme():
         CTk.set_appearance_mode("dark")
         toggle_theme_button.configure(text="\u2600")
         settings['theme'] = 'dark'
-    with open('settings.json', 'w') as f:
+    with open('src/settings.json', 'w') as f:
         json.dump(settings, f)
 
 
@@ -178,9 +178,9 @@ def open_github_page():
     webbrowser.open(link)
 
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
-with open("user_settings.json", 'r')as f:
+with open("src/user_settings.json", 'r')as f:
     user_settings = json.load(f)
 version = settings['version']
 username = user_settings['username']

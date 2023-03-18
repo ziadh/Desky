@@ -72,7 +72,7 @@ def back_to_desky():
 CTk.set_appearance_mode("System")
 CTk.set_default_color_theme("blue")
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
 theme = settings['theme']
 version = settings['version']

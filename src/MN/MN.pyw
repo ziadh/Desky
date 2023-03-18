@@ -5,7 +5,7 @@ import customtkinter as CTk
 import subprocess
 
 
-with open("settings.json", 'r')as f:
+with open("src/settings.json", 'r')as f:
     settings = json.load(f)
 
 version = settings['version']
