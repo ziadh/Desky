@@ -4,7 +4,8 @@ import customtkinter as CTk
 from tkinter import messagebox
 import subprocess
 import json
-
+import platform
+import urllib.request
 
 CTk.set_appearance_mode("Dark")
 CTk.set_default_color_theme("blue")
@@ -75,15 +76,28 @@ def select_all():
     var10.set(1)
     var11.set(1)
 
-
 def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
-
-#FIXME: Finish this function
+#FIXME: finish the function
+#TODO: add mac links in the json file
 def download_it_for_me():
-    pass
+    with open('apps.json','r') as f:
+        apps=json.load(f)
+    vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
+                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
+    if not any(var == 1 for var in vars_list):
+        result = messagebox.showinfo(
+            title="Nothing selected", message="Please select at least one.")
+    else:
+        os = platform.system()
+        for i, app in enumerate(apps):
+            if vars_list[i] == 1:
+                url = app['url'][os]
+                urllib.request.urlretrieve(url, f"{app['name']}.{app['extension']}")
+        reset_selections()
+
 
 
 with open("settings.json", 'r')as f:
