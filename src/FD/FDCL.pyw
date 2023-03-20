@@ -15,7 +15,7 @@ CTk.set_default_color_theme("blue")
 
 def open_downloads():
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
-                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
+                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get(), var12.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
@@ -45,6 +45,8 @@ def open_downloads():
             webbrowser.open("https://evernote.com/download")
         if var11.get() == 1:
             webbrowser.open("https://support.apple.com/downloads/itunes")
+        if var12.get() == 1:
+            webbrowser.open("https://git-scm.com/downloads")
         reset_selections()
 
 
@@ -61,6 +63,7 @@ def reset_selections():
     var9.set(0)
     var10.set(0)
     var11.set(0)
+    var12.set(0)
 
 
 def select_all():
@@ -76,6 +79,7 @@ def select_all():
     var9.set(1)
     var10.set(1)
     var11.set(1)
+    var12.set(1)
 
 
 def back_to_desky():
@@ -88,7 +92,7 @@ def download_it_for_me():
     with open('src/apps.json', 'r') as f:
         apps = json.load(f)
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
-                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
+                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get(),var12.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
@@ -124,6 +128,7 @@ var8 = IntVar()
 var9 = IntVar()
 var10 = IntVar()
 var11 = IntVar()
+var12 = IntVar()
 
 
 if theme == 'Dark':
@@ -137,6 +142,7 @@ evernote = CTk.CTkCheckBox(app, text="Evernote", variable=var10)
 discord = CTk.CTkCheckBox(app, text="Discord", variable=var4)
 firefox = CTk.CTkCheckBox(app, text="Firefox", variable=var3)
 itunes = CTk.CTkCheckBox(app, text="iTunes", variable=var11)
+git = CTk.CTkCheckBox(app, text="Git", variable=var12)
 ghd = CTk.CTkCheckBox(app, text="GitHub Desktop", variable=var6)
 np = CTk.CTkCheckBox(app, text="NotePad++", variable=var7)
 skype = CTk.CTkCheckBox(app, text="Skype", variable=var8)
@@ -144,18 +150,19 @@ spotify = CTk.CTkCheckBox(app, text="Spotify", variable=var1)
 steam = CTk.CTkCheckBox(app, text="Steam", variable=var9)
 vs = CTk.CTkCheckBox(app, text="VS Code", variable=var5)
 
-BattleNet.place(x=40, y=90)
-chrome.place(x=40, y=120)
-evernote.place(x=40, y=150)
-discord.place(x=170, y=90)
-firefox.place(x=170, y=120)
-ghd.place(x=170, y=150)
-itunes.place(x=300, y=90)
-np.place(x=300, y=120)
-skype.place(x=300, y=150)
-spotify.place(x=430, y=90)
-steam.place(x=430, y=120)
-vs.place(x=430, y=150)
+BattleNet.place(x=10, y=90)
+chrome.place(x=10, y=120)
+evernote.place(x=10, y=150)
+discord.place(x=140, y=90)
+firefox.place(x=140, y=120)
+git.place(x=140,y=150)
+ghd.place(x=270, y=90)
+itunes.place(x=270, y=120)
+np.place(x=270, y=150)
+skype.place(x=400, y=90)
+spotify.place(x=400, y=120)
+steam.place(x=400, y=150)
+vs.place(x=480, y=90)
 msg = """
 Welcome to Fresh Desktop Downloads. If your computer recently got through a factory reset, simply \ncheck the boxes for the applications that you would like to install then press the download button.
 """

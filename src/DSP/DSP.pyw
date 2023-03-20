@@ -308,7 +308,7 @@ add_reminder_button.place(x=1040, y=120)
 
 delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
     "Courier New", 20), width=40, command=delete_all_reminders)
-delete_all_reminders_button.place(x=810, y=550)
+delete_all_reminders_button.place(x=760, y=550)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)

@@ -26,6 +26,11 @@
             "darwin_download_link": "https://download.mozilla.org/?product=firefox-latest-ssl&os=osx&lang=en-US"
         },
         {
+            "name": "Git",
+            "windows_download_link": "https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe",
+            "darwin_download_link": "https://sourceforge.net/projects/git-osx-installer/files/git-2.33.0-intel-universal-mavericks.dmg/download?use_mirror=autoselect"
+        },
+        {
             "name": "GitHub Desktop",
             "windows_download_link": "https://central.github.com/deployments/desktop/desktop/latest/win32",
             "darwin_download_link": "https://central.github.com/deployments/desktop/desktop/latest/darwin"
