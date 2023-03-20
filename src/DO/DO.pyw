@@ -53,6 +53,17 @@ def organize():
                             downloads_path+"/"+file_types[file_ext]+"/"+file_name)
         error_label.configure(text="Download folder organized successfully!")
 
+def undo():
+    global downloads_path
+    if downloads_path == '':
+        error_label.configure(text="Please set your downloads folder first.")
+    else:
+        error_label.configure(text="")
+        folders = ["Downloaded Images", "Downloaded Videos", "Downloaded PDFs", "Downloaded ZIPs", "Downloaded Docs", "Downloaded EXEs"]
+        for folder in folders:
+            folder_path = os.path.join(downloads_path, folder)
+            for file_name in os.listdir(folder_path):
+                shutil.move(os.path.join(folder_path, file_name), downloads_path)
 
 def back_to_desky():
     app.destroy()
@@ -90,7 +101,9 @@ locate_button = CTk.CTkButton(
 
 organize_button = CTk.CTkButton(
     app, text="Organize", width=10, command=organize)
-
+undo_button = CTk.CTkButton(
+    app, text="Undo", width=10, command=undo)
+undo_button.place(x=50,y=155)
 help_button = CTk.CTkButton(
     app, text="How Does This Work", width=15, command=help_function)
 exit_button = CTk.CTkButton(app, text="Exit", width=40, command=exit)
