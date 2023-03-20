@@ -28,8 +28,7 @@ def open_downloads():
         if var2.get() == 1:
             webbrowser.open("https://www.google.com/chrome/")
         if var3.get() == 1:
-            webbrowser.open(
-                "https://www.mozilla.org/en-US/firefox/new/")
+            webbrowser.open("https://www.mozilla.org/en-US/firefox/new/")
         if var4.get() == 1:
             webbrowser.open("https://discord.com/download")
         if var5.get() == 1:
@@ -191,8 +190,8 @@ os_choice_box.set('Windows')
 user_os = os_choice_box.get()
 user_platform = user_os.lower()
 download_it_for_me_button = CTk.CTkButton(
-    app, text='Download it for me', command=download_it_for_me)
-download_it_for_me_button.place(x=370, y=310)
+    app, text='One-Click Download', command=download_it_for_me)
+download_it_for_me_button.place(x=350, y=310)
 os_choice_box.place(x=200, y=310)
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
 exit_button.place(x=430, y=401)
