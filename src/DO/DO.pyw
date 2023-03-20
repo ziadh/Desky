@@ -59,8 +59,8 @@ def undo():
         error_label.configure(text="Please set your downloads folder first.")
     else:
         error_label.configure(text="")
-        folders = ["Downloaded Images", "Downloaded Videos", "Downloaded PDFs", "Downloaded ZIPs", "Downloaded Docs", "Downloaded EXEs"]
-        for folder in folders:
+        downloaded_folders = ["Downloaded Images", "Downloaded Videos", "Downloaded PDFs", "Downloaded ZIPs", "Downloaded Docs", "Downloaded EXEs"]
+        for folder in downloaded_folders:
             folder_path = os.path.join(downloads_path, folder)
             for file_name in os.listdir(folder_path):
                 shutil.move(os.path.join(folder_path, file_name), downloads_path)
