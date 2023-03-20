@@ -10,7 +10,9 @@ import urllib.request
 CTk.set_appearance_mode("Dark")
 CTk.set_default_color_theme("blue")
 
-#TODO: add a suggest app function soon™
+# TODO: add a suggest app function soon™
+
+
 def open_downloads():
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
@@ -76,14 +78,16 @@ def select_all():
     var10.set(1)
     var11.set(1)
 
+
 def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
+
 def download_it_for_me():
-    with open('src/apps.json','r') as f:
-        apps=json.load(f)
+    with open('src/apps.json', 'r') as f:
+        apps = json.load(f)
     vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
                  var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get()]
     if not any(var == 1 for var in vars_list):
@@ -91,12 +95,10 @@ def download_it_for_me():
             title="Nothing selected", message="Please select at least one.")
     else:
         for i, var in enumerate(vars_list):
-            if var==1:
-                app_name=apps['applications'][i]['name']
-                download_link=apps['applications'][i][f'{user_platform}_download_link']
+            if var == 1:
+                app_name = apps['applications'][i]['name']
+                download_link = apps['applications'][i][f'{user_platform}_download_link']
                 webbrowser.open(download_link)
-
-
 
 
 with open("src/settings.json", 'r')as f:
@@ -109,7 +111,7 @@ app = CTk.CTk()
 app.title(f"Fresh Desktop Checklist v{version}")
 app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
 
-app.geometry("600x540")
+app.geometry("600x450")
 app.resizable(False, False)
 var0 = IntVar()
 var1 = IntVar()
@@ -125,10 +127,10 @@ var10 = IntVar()
 var11 = IntVar()
 
 
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 BattleNet = CTk.CTkCheckBox(app, text="BattleNet", variable=var0)
 chrome = CTk.CTkCheckBox(app, text="Chrome", variable=var2)
@@ -187,16 +189,16 @@ os_choice_box = CTk.CTkOptionMenu(app, values=["Windows", "Mac"])
 os_choice_box.set('Windows')
 
 user_os = os_choice_box.get()
-user_platform=user_os.lower()
+user_platform = user_os.lower()
 download_it_for_me_button = CTk.CTkButton(
     app, text='Download it for me', command=download_it_for_me)
 download_it_for_me_button.place(x=370, y=310)
 os_choice_box.place(x=200, y=310)
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
-exit_button.place(x=430, y=501)
+exit_button.place(x=430, y=401)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=270, y=501)
+back_to_desky_button.place(x=270, y=401)
 
 app.mainloop()

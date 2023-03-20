@@ -38,10 +38,10 @@ with open("src/settings.json", 'r')as f:
 theme = settings['theme']
 version = settings['version']
 CTk.set_default_color_theme('blue')
-if theme == 'dark':
-    CTk.set_appearance_mode('dark')
+if theme == 'Dark':
+    CTk.set_appearance_mode('Dark')
 else:
-    CTk.set_appearance_mode('light')
+    CTk.set_appearance_mode('Light')
 
 app = CTk.CTk()
 app.title(f"Voice-To-Text Transcriber v{version}")

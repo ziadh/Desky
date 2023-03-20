@@ -29,10 +29,10 @@ if not os.path.exists('src/DSP/reminders.json'):
 global zip_code
 zip_code = user_settings['zip_code']
 
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()

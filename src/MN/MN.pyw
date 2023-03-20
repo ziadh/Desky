@@ -11,10 +11,10 @@ with open("src/settings.json", 'r')as f:
 version = settings['version']
 theme = settings['theme']
 
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 
 def back_to_desky():

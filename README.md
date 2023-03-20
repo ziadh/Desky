@@ -65,6 +65,14 @@ Support for cities outside the U.S. will be added in a future update.
 
 ![FDCL-ss](assets/ss/FDCL-ss.png)
 
+# Chat GPT Quick Search
+## Got a question on your mind for Chat GPT that you want to ask right away? This mini-app launches your web browser and types in the query for you in one click! 
+
+![GPTS-ss](assets/ss/GPTS-ss.png)
+
+
+### It does not track or save your queries and it also requires that you're already logged in to OpenAI's ChatGPT
+
 
 # My Notes
 
@@ -77,7 +85,9 @@ Support for cities outside the U.S. will be added in a future update.
 
 ![PCW-ss](assets/ss/PCW-ss.png)
 
-
+# QR Generator
+## This simple QR generator will generate a QR code for a message, link, or anything that your heart desires!
+![QRG-ss](assets/ss/QRG-ss.png)
 # Tock Tick
 ## 3-in-1 clock related miniapps
 ![TT-ss](assets/ss/TT-ss.png)

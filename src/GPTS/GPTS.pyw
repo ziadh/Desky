@@ -51,13 +51,13 @@ with open('src/settings.json', 'r') as f:
 version = settings['version']
 theme = settings['theme']
 
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 app = CTk.CTk()
-app.geometry('380x280')
+app.geometry('380x220')
 app.resizable(False, False)
 app.title(f'GPT Search v{version}')
 
@@ -75,12 +75,12 @@ submit_button = CTk.CTkButton(app, text='Ask ChatGPT', command=search)
 submit_button.place(x=190, y=130)
 
 help_button = CTk.CTkButton(app, text='README', command=help, width=60)
-help_button.place(x=185, y=190)
+help_button.place(x=185, y=170)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=30, y=190)
+back_to_desky_button.place(x=30, y=170)
 
 exit_button = CTk.CTkButton(app, text='Exit', command=exit, width=60)
-exit_button.place(x=270, y=190)
+exit_button.place(x=270, y=170)
 app.mainloop()

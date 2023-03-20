@@ -124,14 +124,14 @@ def toggle_theme():
     with open("src/settings.json", "r")as f:
         settings = json.load(f)
     theme = settings['theme']
-    if theme == 'dark':
-        CTk.set_appearance_mode("light")
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
         toggle_theme_button.configure(text="\u26ee")
-        settings['theme'] = 'light'
-    if theme == 'light':
-        CTk.set_appearance_mode("dark")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
         toggle_theme_button.configure(text="\u2600")
-        settings['theme'] = 'dark'
+        settings['theme'] = 'Dark'
     with open('src/settings.json', 'w') as f:
         json.dump(settings, f)
 
@@ -151,10 +151,10 @@ def check_for_updates():
 
 
 def open_release_notes(event):
-    r = requests.get("https://api.github.com/repos/ziadh/Safe-Data/releases")
+    r = requests.get("https://api.github.com/repos/ziadh/Desky/releases")
     json_data = r.json()
     newest_version = json_data[0]["tag_name"]
-    notes_link = f"https://github.com/ziadh/Safe-Data/releases/tag/{newest_version}"
+    notes_link = f"https://github.com/ziadh/Desky/releases/tag/{newest_version}"
     webbrowser.open(notes_link)
 
 
@@ -186,10 +186,10 @@ version = settings['version']
 username = user_settings['username']
 theme = settings['theme']
 
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 CTk.set_default_color_theme("blue")
 

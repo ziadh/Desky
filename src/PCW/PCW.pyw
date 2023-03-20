@@ -18,10 +18,10 @@ app.title(f'PC Watcher v{version}')
 
 
 CTk.set_default_color_theme("blue")
-if theme == 'dark':
-    CTk.set_appearance_mode("dark")
+if theme == 'Dark':
+    CTk.set_appearance_mode("Dark")
 else:
-    CTk.set_appearance_mode("light")
+    CTk.set_appearance_mode("Light")
 
 
 def back_to_desky():

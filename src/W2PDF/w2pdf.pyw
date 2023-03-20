@@ -51,10 +51,10 @@ version = settings['version']
 
 app = CTk.CTk()
 CTk.set_default_color_theme('blue')
-if theme == 'dark':
-    CTk.set_appearance_mode('dark')
+if theme == 'Dark':
+    CTk.set_appearance_mode('Dark')
 else:
-    CTk.set_appearance_mode('light')
+    CTk.set_appearance_mode('Light')
 
 app.resizable(False, False)
 app.geometry("350x180")
