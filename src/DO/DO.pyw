@@ -15,9 +15,9 @@ def set_path():
     downloads_path = tkinter.filedialog.askdirectory()
 
 
-def help_function():
+def README_function():
     message = messagebox.showinfo(
-        title="Help", message="This program organizes your Downloads folder into seperate folders. Each folder containing all files from a certain file type (e.g. Downloaded Videos, Downloaded Images,etc.)")
+        title="README", message="This program organizes your Downloads folder into seperate folders. Each folder containing all files from a certain file type (e.g. Downloaded Videos, Downloaded Images,etc.)")
 
 
 def organize():
@@ -64,6 +64,7 @@ def undo():
             folder_path = os.path.join(downloads_path, folder)
             for file_name in os.listdir(folder_path):
                 shutil.move(os.path.join(folder_path, file_name), downloads_path)
+            os.rmdir(folder_path)
 
 def back_to_desky():
     app.destroy()
@@ -103,9 +104,8 @@ organize_button = CTk.CTkButton(
     app, text="Organize", width=10, command=organize)
 undo_button = CTk.CTkButton(
     app, text="Undo", width=10, command=undo)
-undo_button.place(x=50,y=155)
-help_button = CTk.CTkButton(
-    app, text="How Does This Work", width=15, command=help_function)
+README_button = CTk.CTkButton(
+    app, text="README", width=15, command=README_function)
 exit_button = CTk.CTkButton(app, text="Exit", width=40, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
@@ -115,8 +115,9 @@ back_to_desky_button = CTk.CTkButton(
 error_label.place(x=30, y=35)
 
 locate_button.place(x=50, y=76)
-organize_button.place(x=220, y=76)
-help_button.place(x=50, y=115)
-back_to_desky_button.place(x=220, y=115)
-exit_button.place(x=170, y=155)
+organize_button.place(x=50, y=115)
+undo_button.place(x=170,y=115)
+README_button.place(x=170, y=155)
+back_to_desky_button.place(x=50, y=155)
+exit_button.place(x=250, y=155)
 app.mainloop()
