@@ -1,5 +1,4 @@
 import customtkinter as CTk
-import tkinter as tk
 import psutil
 import platform
 import subprocess
@@ -47,7 +46,7 @@ def show_sysinfo():
 
 top_label = CTk.CTkLabel(app, text="PC Watcher", font=('Arial', 25))
 top_label.place(x=140, y=50)
-sysinfo_label = CTk.CTkLabel(app, text="", font=('Arial', 12), justify="left")
+sysinfo_label = CTk.CTkLabel(app, text="", font=('Arial', 18), justify="left")
 sysinfo_label.place(x=20, y=140)
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)

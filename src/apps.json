@@ -1,7 +1,7 @@
 {
     "applications": [
         {
-            "name": "Bnet",
+            "name": "BattleNet",
             "windows_download_link": "https://www.blizzard.com/download/confirmation?product=bnetdesk",
             "darwin_download_link": "https://www.blizzard.com/download/confirmation?product=bnetdesk"
         },

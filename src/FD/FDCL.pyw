@@ -14,72 +14,72 @@ CTk.set_default_color_theme("blue")
 
 
 def open_downloads():
-    vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
-                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get(), var12.get()]
+    vars_list = [bnetvar.get(), spotifyvar.get(), chromevar.get(), firefoxvar.get(), discordvar.get(),
+                 vscvar.get(), ghdvar.get(), npppvar.get(), skypevar.get(), steamvar.get(), evernotevar.get(), itunesvar.get(), gitvar.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
     else:
-        if var0.get() == 1:
+        if bnetvar.get() == 1:
             webbrowser.open(
                 "https://www.blizzard.com/en-us/apps/battle.net/desktop")
-        if var1.get() == 1:
+        if spotifyvar.get() == 1:
             webbrowser.open("https://www.spotify.com/us/download/")
-        if var2.get() == 1:
+        if chromevar.get() == 1:
             webbrowser.open("https://www.google.com/chrome/")
-        if var3.get() == 1:
+        if firefoxvar.get() == 1:
             webbrowser.open("https://www.mozilla.org/en-US/firefox/new/")
-        if var4.get() == 1:
+        if discordvar.get() == 1:
             webbrowser.open("https://discord.com/download")
-        if var5.get() == 1:
+        if vscvar.get() == 1:
             webbrowser.open("https://code.visualstudio.com/download")
-        if var6.get() == 1:
+        if ghdvar.get() == 1:
             webbrowser.open("https://desktop.github.com/")
-        if var7.get() == 1:
+        if npppvar.get() == 1:
             webbrowser.open("https://notepad-plus-plus.org/downloads/")
-        if var8.get() == 1:
+        if skypevar.get() == 1:
             webbrowser.open("https://www.skype.com/en/get-skype/")
-        if var9.get() == 1:
+        if steamvar.get() == 1:
             webbrowser.open("https://store.steampowered.com/about/")
-        if var10.get() == 1:
+        if evernotevar.get() == 1:
             webbrowser.open("https://evernote.com/download")
-        if var11.get() == 1:
+        if itunesvar.get() == 1:
             webbrowser.open("https://support.apple.com/downloads/itunes")
-        if var12.get() == 1:
+        if gitvar.get() == 1:
             webbrowser.open("https://git-scm.com/downloads")
         reset_selections()
 
 
 def reset_selections():
-    var0.set(0)
-    var1.set(0)
-    var2.set(0)
-    var3.set(0)
-    var4.set(0)
-    var5.set(0)
-    var6.set(0)
-    var7.set(0)
-    var8.set(0)
-    var9.set(0)
-    var10.set(0)
-    var11.set(0)
-    var12.set(0)
+    bnetvar.set(0)
+    spotifyvar.set(0)
+    chromevar.set(0)
+    firefoxvar.set(0)
+    discordvar.set(0)
+    vscvar.set(0)
+    ghdvar.set(0)
+    npppvar.set(0)
+    skypevar.set(0)
+    steamvar.set(0)
+    evernotevar.set(0)
+    itunesvar.set(0)
+    gitvar.set(0)
 
 
 def select_all():
-    var0.set(1)
-    var1.set(1)
-    var2.set(1)
-    var3.set(1)
-    var4.set(1)
-    var5.set(1)
-    var6.set(1)
-    var7.set(1)
-    var8.set(1)
-    var9.set(1)
-    var10.set(1)
-    var11.set(1)
-    var12.set(1)
+    bnetvar.set(1)
+    spotifyvar.set(1)
+    chromevar.set(1)
+    firefoxvar.set(1)
+    discordvar.set(1)
+    vscvar.set(1)
+    ghdvar.set(1)
+    npppvar.set(1)
+    skypevar.set(1)
+    steamvar.set(1)
+    evernotevar.set(1)
+    itunesvar.set(1)
+    gitvar.set(1)
 
 
 def back_to_desky():
@@ -91,17 +91,32 @@ def back_to_desky():
 def download_it_for_me():
     with open('src/apps.json', 'r') as f:
         apps = json.load(f)
-    vars_list = [var0.get(), var1.get(), var2.get(), var3.get(), var4.get(),
-                 var5.get(), var6.get(), var7.get(), var8.get(), var9.get(), var10.get(), var11.get(),var12.get()]
-    if not any(var == 1 for var in vars_list):
+    vars_list = {'BattleNet': bnetvar.get(),
+                 'Spotify': spotifyvar.get(),
+                 'Chrome': chromevar.get(),
+                 'Firefox': firefoxvar.get(),
+                 'Discord': discordvar.get(),
+                 'VSC': vscvar.get(),
+                 'GitHubDesktop': ghdvar.get(),
+                 'Notepad++': npppvar.get(),
+                 'Skype': skypevar.get(),
+                 'Steam': steamvar.get(),
+                 'Evernote': evernotevar.get(),
+                 'iTunes': itunesvar.get(),
+                 'Git': gitvar.get()}
+    selected_apps = [app_name for app_name,
+                     var in vars_list.items() if var == 1]
+    if not selected_apps:
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
     else:
-        for i, var in enumerate(vars_list):
-            if var == 1:
-                app_name = apps['applications'][i]['name']
-                download_link = apps['applications'][i][f'{user_platform}_download_link']
+        for app_name in selected_apps:
+            app_data = next(
+                (app for app in apps['applications'] if app['name'] == app_name), None)
+            if app_data:
+                download_link = app_data[f'{user_platform}_download_link']
                 webbrowser.open(download_link)
+                reset_selections()
 
 
 with open("src/settings.json", 'r')as f:
@@ -116,19 +131,19 @@ app.wm_iconbitmap("assets/logos/FDCL-logo.ico")
 
 app.geometry("600x450")
 app.resizable(False, False)
-var0 = IntVar()
-var1 = IntVar()
-var2 = IntVar()
-var3 = IntVar()
-var4 = IntVar()
-var5 = IntVar()
-var6 = IntVar()
-var7 = IntVar()
-var8 = IntVar()
-var9 = IntVar()
-var10 = IntVar()
-var11 = IntVar()
-var12 = IntVar()
+bnetvar = IntVar()
+spotifyvar = IntVar()
+chromevar = IntVar()
+firefoxvar = IntVar()
+discordvar = IntVar()
+vscvar = IntVar()
+ghdvar = IntVar()
+npppvar = IntVar()
+skypevar = IntVar()
+steamvar = IntVar()
+evernotevar = IntVar()
+itunesvar = IntVar()
+gitvar = IntVar()
 
 
 if theme == 'Dark':
@@ -136,26 +151,26 @@ if theme == 'Dark':
 else:
     CTk.set_appearance_mode("Light")
 
-BattleNet = CTk.CTkCheckBox(app, text="BattleNet", variable=var0)
-chrome = CTk.CTkCheckBox(app, text="Chrome", variable=var2)
-evernote = CTk.CTkCheckBox(app, text="Evernote", variable=var10)
-discord = CTk.CTkCheckBox(app, text="Discord", variable=var4)
-firefox = CTk.CTkCheckBox(app, text="Firefox", variable=var3)
-itunes = CTk.CTkCheckBox(app, text="iTunes", variable=var11)
-git = CTk.CTkCheckBox(app, text="Git", variable=var12)
-ghd = CTk.CTkCheckBox(app, text="GitHub Desktop", variable=var6)
-np = CTk.CTkCheckBox(app, text="NotePad++", variable=var7)
-skype = CTk.CTkCheckBox(app, text="Skype", variable=var8)
-spotify = CTk.CTkCheckBox(app, text="Spotify", variable=var1)
-steam = CTk.CTkCheckBox(app, text="Steam", variable=var9)
-vs = CTk.CTkCheckBox(app, text="VS Code", variable=var5)
+BattleNet = CTk.CTkCheckBox(app, text="BattleNet", variable=bnetvar)
+Chrome = CTk.CTkCheckBox(app, text="Chrome", variable=chromevar)
+evernote = CTk.CTkCheckBox(app, text="Evernote", variable=evernotevar)
+discord = CTk.CTkCheckBox(app, text="Discord", variable=discordvar)
+firefox = CTk.CTkCheckBox(app, text="Firefox", variable=firefoxvar)
+itunes = CTk.CTkCheckBox(app, text="iTunes", variable=itunesvar)
+git = CTk.CTkCheckBox(app, text="Git", variable=gitvar)
+ghd = CTk.CTkCheckBox(app, text="GitHub Desktop", variable=ghdvar)
+np = CTk.CTkCheckBox(app, text="NotePad++", variable=npppvar)
+skype = CTk.CTkCheckBox(app, text="Skype", variable=skypevar)
+spotify = CTk.CTkCheckBox(app, text="Spotify", variable=spotifyvar)
+steam = CTk.CTkCheckBox(app, text="Steam", variable=steamvar)
+vs = CTk.CTkCheckBox(app, text="VS Code", variable=vscvar)
 
 BattleNet.place(x=10, y=90)
-chrome.place(x=10, y=120)
+Chrome.place(x=10, y=120)
 evernote.place(x=10, y=150)
 discord.place(x=140, y=90)
 firefox.place(x=140, y=120)
-git.place(x=140,y=150)
+git.place(x=140, y=150)
 ghd.place(x=270, y=90)
 itunes.place(x=270, y=120)
 np.place(x=270, y=150)
@@ -185,10 +200,12 @@ download_button.place(x=360, y=212)
 or_text_label = CTk.CTkLabel(app, text='Or')
 or_text_label.place(x=320, y=250)
 
-download_it_for_me_label = CTk.CTkLabel(app, text='Download them for me: ')
+download_it_for_me_label = CTk.CTkLabel(
+    app, text='Download them for me: ', font=("Arial", 15))
 download_it_for_me_label.place(x=20, y=280)
 
-choose_os_label = CTk.CTkLabel(app, text='Choose your operating system ')
+choose_os_label = CTk.CTkLabel(
+    app, text='Choose your operating system ', font=("Arial", 12))
 choose_os_label.place(x=20, y=310)
 
 os_choice_box = CTk.CTkOptionMenu(app, values=["Windows", "Mac"])
