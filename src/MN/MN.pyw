@@ -16,6 +16,20 @@ if theme == 'Dark':
 else:
     CTk.set_appearance_mode("Light")
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
 
 def back_to_desky():
     app.destroy()
@@ -111,6 +125,10 @@ title_entry.place(x=480, y=70)
 
 note_text = CTk.CTkTextbox(app, width=620, height=620)
 note_text.place(x=380, y=120)
+
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=470, y=750)
 
 save_button = CTk.CTkButton(
     app, text="Save", command=save_note, font=("Courier New", 20))

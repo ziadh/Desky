@@ -105,6 +105,22 @@ def back_to_desky():
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
+
+
 with open("src/settings.json", 'r')as f:
     settings = json.load(f)
 version = settings['version']
@@ -220,11 +236,13 @@ London_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
 London_actual_time.place(x=920, y=170)
 Instabul_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
 Instabul_actual_time.place(x=920, y=210)
-Shanghai_actual_time= CTk.CTkLabel(app, text='', font=('Arial', 18))
-Shanghai_actual_time.place(x=940,y=250)
+Shanghai_actual_time = CTk.CTkLabel(app, text='', font=('Arial', 18))
+Shanghai_actual_time.place(x=940, y=250)
 wc_update_time()
 ############ END OF WORLD CLOCK ############
-
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=430, y=450)
 back_to_desky_button = CTk.CTkButton(
     app, text='Back To Desky', command=back_to_desky)
 back_to_desky_button.place(x=480, y=450)

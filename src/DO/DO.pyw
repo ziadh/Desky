@@ -20,6 +20,22 @@ def README_function():
         title="README", message="This program organizes your Downloads folder into seperate folders. Each folder containing all files from a certain file type (e.g. Downloaded Videos, Downloaded Images,etc.)")
 
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
+
+
 def organize():
     global downloads_path
     if downloads_path == '':
@@ -53,18 +69,22 @@ def organize():
                             downloads_path+"/"+file_types[file_ext]+"/"+file_name)
         error_label.configure(text="Download folder organized successfully!")
 
+
 def undo():
     global downloads_path
     if downloads_path == '':
         error_label.configure(text="Please set your downloads folder first.")
     else:
         error_label.configure(text="")
-        downloaded_folders = ["Downloaded Images", "Downloaded Videos", "Downloaded PDFs", "Downloaded ZIPs", "Downloaded Docs", "Downloaded EXEs"]
+        downloaded_folders = ["Downloaded Images", "Downloaded Videos",
+                              "Downloaded PDFs", "Downloaded ZIPs", "Downloaded Docs", "Downloaded EXEs"]
         for folder in downloaded_folders:
             folder_path = os.path.join(downloads_path, folder)
             for file_name in os.listdir(folder_path):
-                shutil.move(os.path.join(folder_path, file_name), downloads_path)
+                shutil.move(os.path.join(
+                    folder_path, file_name), downloads_path)
             os.rmdir(folder_path)
+
 
 def back_to_desky():
     app.destroy()
@@ -109,14 +129,18 @@ README_button = CTk.CTkButton(
 exit_button = CTk.CTkButton(app, text="Exit", width=40, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", command=back_to_desky,width=20)
+    app, text="Back To Desky", command=back_to_desky, width=20)
 
 error_label.place(x=30, y=35)
 
 locate_button.place(x=50, y=76)
 organize_button.place(x=50, y=115)
-undo_button.place(x=170,y=115)
+undo_button.place(x=170, y=115)
+toggle_theme_button.place(x=225, y=115)
 README_button.place(x=170, y=155)
 back_to_desky_button.place(x=50, y=155)
 exit_button.place(x=250, y=155)

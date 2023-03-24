@@ -43,6 +43,20 @@ def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
 
 
 with open('src/settings.json', 'r') as f:
@@ -69,6 +83,10 @@ query_entry = CTk.CTkEntry(app, width=300)
 query_entry.place(x=30, y=90)
 clear_button = CTk.CTkButton(app, text='Clear', command=clear, width=70)
 clear_button.place(x=30, y=130)
+
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=120, y=130)
 
 app.bind("<Return>", lambda _: submit_button.invoke())
 submit_button = CTk.CTkButton(app, text='Ask ChatGPT', command=search)

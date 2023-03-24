@@ -46,6 +46,22 @@ global show_12_hour_button
 global twlve_hour_time
 
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
+
+
 def update_zip_code():
     global change_zip_code_entry
     change_zip_code_entry = CTk.CTkEntry(app, width=230)
@@ -266,7 +282,9 @@ create_reminder_labels()
 
 load_tasks()
 create_task_labels()
-
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=240, y=500)
 welcome_label = CTk.CTkLabel(
     app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Courier New", 20))
 welcome_label.place(x=0, y=0)

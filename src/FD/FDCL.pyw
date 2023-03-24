@@ -118,6 +118,20 @@ def download_it_for_me():
                 webbrowser.open(download_link)
                 reset_selections()
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
 
 with open("src/settings.json", 'r')as f:
     settings = json.load(f)
@@ -220,6 +234,9 @@ os_choice_box.place(x=200, y=310)
 exit_button = CTk.CTkButton(app, text="Exit", command=exit)
 exit_button.place(x=430, y=401)
 
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=220, y=401)
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
 back_to_desky_button.place(x=270, y=401)

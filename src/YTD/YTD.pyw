@@ -73,6 +73,22 @@ def back_to_desky():
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
+
+
 CTk.set_appearance_mode("System")
 CTk.set_default_color_theme("blue")
 
@@ -87,7 +103,7 @@ else:
     CTk.set_appearance_mode("Light")
 
 app = CTk.CTk()
-app.geometry("320x400")
+app.geometry("320x420")
 app.title(f"YouTube Downloader v{version}")
 app.wm_iconbitmap("assets/logos/yd-logo.ico")
 
@@ -130,11 +146,15 @@ audio_only_button = CTk.CTkButton(app,
                                   text="Audio Only", command=audio_only)
 audio_only_button.place(x=169, y=300)
 
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=170, y=340)
+
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
 back_to_desky_button.place(x=13, y=340)
 
 exit_button = CTk.CTkButton(
-    app, text="Exit", command=exit)
-exit_button.place(x=169, y=340)
+    app, text="Exit", command=exit, width=50)
+exit_button.place(x=259, y=340)
 app.mainloop()

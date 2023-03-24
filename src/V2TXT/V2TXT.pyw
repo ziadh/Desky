@@ -31,6 +31,20 @@ def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
 
 
 with open("src/settings.json", 'r')as f:
@@ -71,5 +85,7 @@ exit_button.place(x=240, y=350)
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
 back_to_desky_button.place(x=10, y=350)
-
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=180, y=350)
 app.mainloop()

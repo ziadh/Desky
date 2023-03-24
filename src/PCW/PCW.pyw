@@ -44,6 +44,22 @@ def show_sysinfo():
     app.after(1000, show_sysinfo)
 
 
+def toggle_theme():
+    with open("src/settings.json", "r")as f:
+        settings = json.load(f)
+    theme = settings['theme']
+    if theme == 'Dark':
+        CTk.set_appearance_mode("Light")
+        toggle_theme_button.configure(text="\u26ee")
+        settings['theme'] = 'Light'
+    if theme == 'Light':
+        CTk.set_appearance_mode("Dark")
+        toggle_theme_button.configure(text="\u2600")
+        settings['theme'] = 'Dark'
+    with open('src/settings.json', 'w') as f:
+        json.dump(settings, f)
+
+
 top_label = CTk.CTkLabel(app, text="PC Watcher", font=('Arial', 25))
 top_label.place(x=140, y=50)
 sysinfo_label = CTk.CTkLabel(app, text="", font=('Arial', 18), justify="left")
@@ -51,6 +67,9 @@ sysinfo_label.place(x=20, y=140)
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)
 back_to_desky_button.place(x=40, y=355)
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
+    "Courier New", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=190, y=355)
 exit_button = CTk.CTkButton(app, text='Exit', command=exit)
 exit_button.place(x=230, y=355)
 
