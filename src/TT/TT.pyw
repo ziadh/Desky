@@ -241,7 +241,7 @@ Shanghai_actual_time.place(x=940, y=250)
 wc_update_time()
 ############ END OF WORLD CLOCK ############
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 16), width=3, command=toggle_theme)
 toggle_theme_button.place(x=430, y=450)
 back_to_desky_button = CTk.CTkButton(
     app, text='Back To Desky', command=back_to_desky)

@@ -117,7 +117,7 @@ notes_list.place(x=40, y=70)
 notes_list.bind("<<ListboxSelect>>", show_note)
 
 title_label = CTk.CTkLabel(
-    app, text="Title:", font=('Courier New', 25))
+    app, text="Title:", font=('Arial', 25))
 title_label.place(x=380, y=70)
 
 title_entry = CTk.CTkEntry(app, width=520)
@@ -127,11 +127,11 @@ note_text = CTk.CTkTextbox(app, width=620, height=620)
 note_text.place(x=380, y=120)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=470, y=750)
 
 save_button = CTk.CTkButton(
-    app, text="Save", command=save_note, font=("Courier New", 20))
+    app, text="Save", command=save_note, font=("Arial", 20))
 save_button.place(x=530, y=750)
 
 add_button = CTk.CTkButton(
@@ -149,14 +149,14 @@ refresh_button.place(x=290, y=750)
 
 load_notes()
 
-notes_top_title = CTk.CTkLabel(app, text='Notes', font=('Courier New', 35))
+notes_top_title = CTk.CTkLabel(app, text='Notes', font=('Arial', 35))
 notes_top_title.place(x=10, y=20)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
+    app, text="Back To Desky", font=("Arial", 20), command=back_to_desky)
 back_to_desky_button.place(x=680, y=750)
 
 exit_button = CTk.CTkButton(
-    app, text="Exit", font=("Courier New", 20), command=exit)
+    app, text="Exit", font=("Arial", 20), command=exit)
 exit_button.place(x=860, y=750)
 app.mainloop()

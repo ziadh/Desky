@@ -130,7 +130,7 @@ exit_button = CTk.CTkButton(app, text="Exit", width=40, command=exit)
 error_label = CTk.CTkLabel(app, text="")
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky, width=20)

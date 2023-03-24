@@ -235,7 +235,7 @@ exit_button = CTk.CTkButton(app, text="Exit", command=exit)
 exit_button.place(x=430, y=401)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=220, y=401)
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", command=back_to_desky)

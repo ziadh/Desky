@@ -64,12 +64,12 @@ app.geometry('400x500')
 app.resizable(False, False)
 app.bind("<Return>", lambda _: generate_button.invoke())
 top_label = CTk.CTkLabel(
-    app, text='Welcome to QR Generator', font=("Courier New", 20))
+    app, text='Welcome to QR Generator', font=("Arial", 20))
 top_label.place(x=10, y=30)
 link_entry = CTk.CTkEntry(app, width=220)
 link_entry.place(x=10, y=70)
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=240, y=450)
 generate_button = CTk.CTkButton(
     app, text='Generate QR Code', command=generate_qr)
@@ -79,10 +79,10 @@ qr_label = CTk.CTkLabel(app, text='')
 qr_label.place(x=50, y=120)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky, width=10)
+    app, text="Back To Desky", font=("Arial", 16), command=back_to_desky, width=10)
 back_to_desky_button.place(x=50, y=450)
 exit_button = CTk.CTkButton(
-    app, text="Exit", font=("Courier New", 20), command=exit, width=10)
+    app, text="Exit", font=("Arial", 16), command=exit, width=10)
 exit_button.place(x=300, y=450)
 
 app.mainloop()

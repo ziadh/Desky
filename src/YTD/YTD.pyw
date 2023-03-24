@@ -103,17 +103,17 @@ else:
     CTk.set_appearance_mode("Light")
 
 app = CTk.CTk()
-app.geometry("320x420")
+app.geometry("320x400")
 app.title(f"YouTube Downloader v{version}")
 app.wm_iconbitmap("assets/logos/yd-logo.ico")
 
 app.resizable(False, False)
 
 top_label = CTk.CTkLabel(
-    app, text="Welcome to YT Downloader!", font=("Courier New", 20))
+    app, text="Welcome to YT Downloader!", font=("Arial", 20))
 top_label.place(x=10, y=20)
 insert_title_label = CTk.CTkLabel(
-    app, text="Please insert a YouTube link below:", font=("Courier New", 14))
+    app, text="Please insert a YouTube link below:", font=("Arial", 14))
 insert_title_label.place(x=10, y=80)
 
 url_var = tkinter.StringVar()
@@ -123,10 +123,10 @@ link_entry = CTk.CTkEntry(
 link_entry.focus()
 link_entry.place(x=10, y=110)
 
-finishLabel = CTk.CTkLabel(app, text="", font=("Courier New", 10))
+finishLabel = CTk.CTkLabel(app, text="", font=("Arial", 10))
 finishLabel.place(x=10, y=150)
 
-progressPercent = CTk.CTkLabel(app, text="0%", font=("Courier New", 16))
+progressPercent = CTk.CTkLabel(app, text="0%", font=("Arial", 16))
 progressPercent.place(x=140, y=180)
 
 progressBar = CTk.CTkProgressBar(app, width=400)
@@ -134,27 +134,27 @@ progressBar.set(0)
 progressBar.place(x=10, y=230)
 
 download_highest_res_button = CTk.CTkButton(
-    app, text="Highest Res Download", command=download_highest_res)
+    app, text="Highest Res Download", command=download_highest_res, font=("Arial", 12))
 download_highest_res_button.place(x=13, y=260)
 lowest_res_button = CTk.CTkButton(
-    app, text="Lowest Res Download", command=download_lowest_res)
+    app, text="Lowest Res Download", command=download_lowest_res, font=("Arial", 12))
 lowest_res_button.place(x=169, y=260)
 download_in_720p = CTk.CTkButton(
-    app, text="Download in 720p60p", command=download_720p)
+    app, text="Download in 720p60p", command=download_720p, font=("Arial", 12))
 download_in_720p.place(x=13, y=300)
 audio_only_button = CTk.CTkButton(app,
-                                  text="Audio Only", command=audio_only)
+                                  text="Audio Only", command=audio_only, font=("Arial", 12))
 audio_only_button.place(x=169, y=300)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 12), width=3, command=toggle_theme)
 toggle_theme_button.place(x=170, y=340)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", command=back_to_desky)
+    app, text="Back To Desky", command=back_to_desky, font=("Arial", 12))
 back_to_desky_button.place(x=13, y=340)
 
 exit_button = CTk.CTkButton(
-    app, text="Exit", command=exit, width=50)
+    app, text="Exit", command=exit, width=50, font=("Arial", 12))
 exit_button.place(x=259, y=340)
 app.mainloop()

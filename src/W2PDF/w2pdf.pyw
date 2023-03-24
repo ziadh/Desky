@@ -73,32 +73,37 @@ else:
     CTk.set_appearance_mode('Light')
 
 app.resizable(False, False)
-app.geometry("350x180")
+app.geometry("350x320")
 app.wm_iconbitmap("assets/logos/w2pdf-logo.ico")
 
 app.title(f"Word to PDF Converter v{version}")
 
+top_label = CTk.CTkLabel(app, text=f"Welcome to Word to PDF Converter v{version}!", font=(
+    "Arial", 17))
+top_label.place(x=0, y=30)
 label = CTk.CTkLabel(
-    app, text="Please select a Word file \n\n\nFile Selected:")
-label.place(x=0, y=0)
+    app, text="Please select a Word file \n\n\nFile Selected: None", font=(
+        "Arial", 14))
+label.place(x=0, y=90)
 
-browse_button = CTk.CTkButton(app, text="Browse", command=browse_file)
-browse_button.place(x=30, y=40)
+browse_button = CTk.CTkButton(
+    app, text="Browse", command=browse_file, font=("Arial", 14))
+browse_button.place(x=30, y=180)
 
-convert_button = CTk.CTkButton(app, text="Convert", command=convert_to_pdf)
-convert_button.place(x=180, y=40)
+convert_button = CTk.CTkButton(app, text="Convert", command=convert_to_pdf, font=("Arial", 14))
+convert_button.place(x=180, y=180)
 
-clear_button = CTk.CTkButton(app, text="Clear", command=clear_selection)
-clear_button.place(x=30, y=90)
+clear_button = CTk.CTkButton(app, text="Clear", command=clear_selection, font=("Arial", 14))
+clear_button.place(x=30, y=230)
 
-exit_button = CTk.CTkButton(app, text="Exit", command=exit)
-exit_button.place(x=180, y=90)
+exit_button = CTk.CTkButton(app, text="Exit", command=exit, font=("Arial", 14))
+exit_button.place(x=180, y=230)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", command=back_to_desky)
-back_to_desky_button.place(x=105, y=130)
+    app, text="Back To Desky", command=back_to_desky, font=("Arial", 14))
+back_to_desky_button.place(x=105, y=270)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
-toggle_theme_button.place(x=290, y=130)
+    "Arial", 18), width=3, command=toggle_theme)
+toggle_theme_button.place(x=290, y=270)
 app.mainloop()

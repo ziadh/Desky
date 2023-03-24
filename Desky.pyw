@@ -30,10 +30,10 @@ def update_username():
     change_username_entry.place(x=10, y=50)
     global update_password_button
     update_password_button = CTk.CTkButton(
-        app, text="\u2714", width=5, font=("Courier New", 20), command=save_username)
+        app, text="\u2714", width=5, font=("Arial", 20), command=save_username)
     update_password_button.place(x=250, y=50)
     global cancel_change_button
-    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=("Courier New", 20), command=cancel_username_changes)
+    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=("Arial", 20), command=cancel_username_changes)
     cancel_change_button.place(x=290, y=50)
 
 
@@ -203,60 +203,60 @@ app.resizable(False, False)
 app.wm_iconbitmap('assets/logos/Desky-logo.ico')
 
 welcome_label = CTk.CTkLabel(
-    app, text=f"Welcome, {username}!", font=("Courier New", 22))
+    app, text=f"Welcome, {username}!", font=("Arial", 20))
 
 
 welcome_label.place(x=10, y=10)
 change_username_button = CTk.CTkButton(
-    app, text="Change Name", font=("Courier New", 22), command=update_username)
+    app, text="Change Name", font=("Arial", 20), command=update_username)
 change_username_button.place(x=430, y=10)
 
 top_seperator = CTk.CTkLabel(
     app, text="^"*157)
 top_seperator.place(x=-20, y=50)
 
-apps_label = CTk.CTkLabel(app, text="My Apps", font=("Courier New", 22))
+apps_label = CTk.CTkLabel(app, text="My Apps", font=("Arial", 20))
 apps_label.place(x=250, y=70)
 
 DSP_button = CTk.CTkButton(app, text="Daily Sneak Peek", font=(
-    "Courier New", 22), command=open_DSP)
+    "Arial", 20), command=open_DSP)
 DSP_button.place(x=10, y=110)
 DO_button = CTk.CTkButton(app, text="Downloads Organizer", font=(
-    "Courier New", 22), command=open_DO)
+    "Arial", 20), command=open_DO)
 DO_button.place(x=10, y=170)
 
 FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
-                            font=("Courier New", 22), command=open_FDCL)
+                            font=("Arial", 20), command=open_FDCL)
 FDCL_button.place(x=10, y=230)
 
 
-GPTS_button = CTk.CTkButton(app,text='GPT Search',font=("Courier New", 22), command=open_GPTS)
+GPTS_button = CTk.CTkButton(app,text='GPT Search',font=("Arial", 20), command=open_GPTS)
 GPTS_button.place(x=10, y=290)
 
 MN_button = CTk.CTkButton(app, text="My Notes",
-                            font=("Courier New", 22), command=open_MN, anchor="w",width=20)
+                            font=("Arial", 20), command=open_MN, anchor="w",width=20)
 MN_button.place(x=10, y=350)
-PCW_button = CTk.CTkButton(app, text="PC Watcher", font=("Courier New", 22), command=open_PCW, width=20, anchor="w")
+PCW_button = CTk.CTkButton(app, text="PC Watcher", font=("Arial", 20), command=open_PCW, width=20, anchor="w")
 PCW_button.place(x=10, y=410)
 
-QRG_button = CTk.CTkButton(app, text="QR Generator", font=("Courier New", 22), command=open_QRG, width=20, anchor="w")
+QRG_button = CTk.CTkButton(app, text="QR Generator", font=("Arial", 20), command=open_QRG, width=20, anchor="w")
 QRG_button.place(x=10, y=470)
 
 TT_button = CTk.CTkButton(app, text='Tock Tick',
-                          font=("Courier New", 22), command=open_TT, width=20, anchor="w")
+                          font=("Arial", 20), command=open_TT, width=20, anchor="w")
 TT_button.place(x=410, y=110)
 
 
 W2PDF_button = CTk.CTkButton(app, text="Word To PDF", font=(
-    "Courier New", 22), command=open_W2PDF)
+    "Arial", 20), command=open_W2PDF)
 W2PDF_button.place(x=410, y=170)
 
 v2txt_button = CTk.CTkButton(app, text="Voice to Text", font=(
-    "Courier New", 22), command=open_V2TXT)
+    "Arial", 20), command=open_V2TXT)
 v2txt_button.place(x=410, y=230)
 
 YTD_button = CTk.CTkButton(app, text="YT Downloader", font=(
-    "Courier New", 22), command=open_YTD)
+    "Arial", 20), command=open_YTD)
 YTD_button.place(x=410, y=290)
 
 bottom_seperator = CTk.CTkLabel(app, text="v"*157)
@@ -268,20 +268,20 @@ github_page_button = CTk.CTkButton(
 github_page_button.place(x=110, y=585)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 16), width=3, command=toggle_theme)
 toggle_theme_button.place(x=385, y=585)
 check_for_updates_button = CTk.CTkButton(app, text="Check for Updates", font=(
-    "Courier New", 18), command=check_for_updates)
+    "Arial", 16), command=check_for_updates)
 check_for_updates_button.place(x=170, y=585)
 
 exit_button = CTk.CTkButton(app, text="Exit", font=(
-    "Courier New", 18), command=exit_app)
+    "Arial", 16), command=exit_app)
 exit_button.place(x=430, y=585)
 
 
-version_message = CTk.CTkLabel(app, text="", font=("Courier New", 16))
+version_message = CTk.CTkLabel(app, text="", font=("Arial", 16))
 version_message.place(x=0, y=530)
-whats_new_label = CTk.CTkLabel(app,text="", font=("Courier New", 16))
+whats_new_label = CTk.CTkLabel(app,text="", font=("Arial", 16))
 whats_new_label.place(x=0, y=530)
 
 app.mainloop()

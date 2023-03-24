@@ -69,11 +69,11 @@ def update_zip_code():
     change_zip_code_entry.place(x=580, y=50)
     global update_zip_code_button
     update_zip_code_button = CTk.CTkButton(
-        app, text="\u2714", width=5, font=("Courier New", 20), command=save_zip_code)
+        app, text="\u2714", width=5, font=("Arial", 20), command=save_zip_code)
     update_zip_code_button.place(x=820, y=50)
     global cancel_change_button
     cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
-        "Courier New", 20), command=cancel_zip_code_changes)
+        "Arial", 20), command=cancel_zip_code_changes)
     cancel_change_button.place(x=860, y=50)
 
 
@@ -283,55 +283,55 @@ create_reminder_labels()
 load_tasks()
 create_task_labels()
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=240, y=500)
 welcome_label = CTk.CTkLabel(
-    app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Courier New", 20))
+    app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Arial", 20))
 welcome_label.place(x=0, y=0)
 change_zip_code_button = CTk.CTkButton(
-    app, text="Change", font=("Courier New", 22), command=update_zip_code)
+    app, text="Change", font=("Arial", 22), command=update_zip_code)
 change_zip_code_button.place(x=770, y=10)
 
 get_weather_button = CTk.CTkButton(
-    app, text="Get Today's Weather", font=("Courier New", 20), command=get_weather)
+    app, text="Get Today's Weather", font=("Arial", 20), command=get_weather)
 get_weather_button.place(x=30, y=60)
 weather_info = CTk.CTkLabel(app, text="")
 weather_info.place(x=5, y=110)
 
 clear_weather_info_button = CTk.CTkButton(
-    app, text='Clear All', font=("Courier New", 20), command=clear_weather_info)
+    app, text='Clear All', font=("Arial", 20), command=clear_weather_info)
 clear_weather_info_button.place(x=70, y=500)
 todo_top_label = CTk.CTkLabel(
-    app, text="Today's To-Dos", font=("Courier New", 20))
+    app, text="Today's To-Dos", font=("Arial", 20))
 todo_top_label.place(x=370, y=60)
 
 todo_entry = CTk.CTkEntry(app, width=260)
 todo_entry.place(x=370, y=120)
 add_todo_button = CTk.CTkButton(
-    app, text="+", font=("Courier New", 20), width=40, command=add_task)
+    app, text="+", font=("Arial", 20), width=40, command=add_task)
 add_todo_button.place(x=650, y=120)
 
 delete_all_button = CTk.CTkButton(app, text="Delete All To-Dos", font=(
-    "Courier New", 20), width=40, command=delete_all_tasks)
+    "Arial", 20), width=40, command=delete_all_tasks)
 delete_all_button.place(x=370, y=550)
 
 reminders_top_label = CTk.CTkLabel(
-    app, text="All-Time Reminders", font=("Courier New", 20))
+    app, text="All-Time Reminders", font=("Arial", 20))
 reminders_top_label.place(x=760, y=60)
 reminder_entry = CTk.CTkEntry(app, width=260)
 reminder_entry.place(x=760, y=120)
 add_reminder_button = CTk.CTkButton(
-    app, text="+", font=("Courier New", 20), width=40, command=add_reminder)
+    app, text="+", font=("Arial", 20), width=40, command=add_reminder)
 add_reminder_button.place(x=1040, y=120)
 
 delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
-    "Courier New", 20), width=40, command=delete_all_reminders)
+    "Arial", 20), width=40, command=delete_all_reminders)
 delete_all_reminders_button.place(x=760, y=550)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", font=("Courier New", 20), command=back_to_desky)
+    app, text="Back To Desky", font=("Arial", 20), command=back_to_desky)
 back_to_desky_button.place(x=5, y=550)
 exit_button = CTk.CTkButton(
-    app, text="Exit", font=("Courier New", 20), command=exit)
+    app, text="Exit", font=("Arial", 20), command=exit)
 exit_button.place(x=190, y=550)
 app.mainloop()

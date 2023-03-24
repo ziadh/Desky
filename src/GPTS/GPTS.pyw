@@ -76,7 +76,7 @@ app.resizable(False, False)
 app.title(f'GPT Search v{version}')
 
 top_title = CTk.CTkLabel(
-    app, text='Welcome To GPT Search!', font=("Courier New", 20))
+    app, text='Welcome To GPT Search!', font=("Arial", 20))
 top_title.place(x=30, y=30)
 
 query_entry = CTk.CTkEntry(app, width=300)
@@ -85,7 +85,7 @@ clear_button = CTk.CTkButton(app, text='Clear', command=clear, width=70)
 clear_button.place(x=30, y=130)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
-    "Courier New", 18), width=3, command=toggle_theme)
+    "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=120, y=130)
 
 app.bind("<Return>", lambda _: submit_button.invoke())
