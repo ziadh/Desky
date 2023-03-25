@@ -44,7 +44,11 @@ app.bind("<Escape>", lambda _: cancel_change_button.invoke())
 app.resizable(False, False)
 global show_12_hour_button
 global twlve_hour_time
-
+### START OF GLOBAL FUNCTIONS ###
+def back_to_desky():
+    app.destroy()
+    subprocess.run(["python", "Desky.pyw"],
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 def toggle_theme():
     with open("src/settings.json", "r")as f:
@@ -61,6 +65,9 @@ def toggle_theme():
     with open('src/settings.json', 'w') as f:
         json.dump(settings, f)
 
+### END OF GLOBAL FUNCTIONS ###
+
+### START OF WEATHER FUNCTIONS ###
 
 def update_zip_code():
     global change_zip_code_entry
@@ -157,6 +164,17 @@ def kelvin_to_celsius_fahrenheit(kelvin):
     return celsius, fahreinheit
 
 
+def clear_weather_info():
+    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear weather info?')
+    if confirm_clear:
+        weather_info.configure(text='')
+        show_12_hour_button.destroy()
+        twlve_hour_time.configure(text='')
+
+### END OF WEATHER FUNCTIONS ###
+
+### START OF TODOS FUNCTIONS ###
+
 if os.path.getsize('src/DSP/tasks.json') == 0:
     tasks = []
 else:
@@ -208,9 +226,10 @@ def delete_all_tasks():
         tasklabels.clear()
         with open("src/DSP/tasks.json", "w") as f:
             json.dump([], f)
+### END OF TODOS FUNCTIONS ###
 
+### START OF REMINDERS FUNCTIONS ###
 
-# reminders
 if os.path.getsize('src/DSP/reminders.json') == 0:
     reminders = []
 else:
@@ -264,30 +283,13 @@ def delete_all_reminders():
             json.dump([], f)
 
 
-def back_to_desky():
-    app.destroy()
-    subprocess.run(["python", "Desky.pyw"],
-                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+### END OF REMINDERS FUNCTIONS ###
 
 
-def clear_weather_info():
-    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear weather info?')
-    if confirm_clear:
-        weather_info.configure(text='')
-        show_12_hour_button.destroy()
-        twlve_hour_time.configure(text='')
 
 
-tasklabels = []
-taskbuttons = []
-reminderlabels = []
-reminderbuttons = []
-
-load_reminders()
-create_reminder_labels()
-
-load_tasks()
-create_task_labels()
+### START OF WEATHER ELEMENTS ###
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=240, y=500)
@@ -307,6 +309,16 @@ weather_info.place(x=5, y=110)
 clear_weather_info_button = CTk.CTkButton(
     app, text='Clear All', font=("Arial", 20), command=clear_weather_info)
 clear_weather_info_button.place(x=70, y=500)
+### END OF WEATHER ELEMENTS ###
+
+
+
+### START OF TODOS ELEMENTS ###
+tasklabels = []
+taskbuttons = []
+load_tasks()
+create_task_labels()
+
 todo_top_label = CTk.CTkLabel(
     app, text="Today's To-Dos", font=("Arial", 20))
 todo_top_label.place(x=370, y=60)
@@ -321,6 +333,15 @@ delete_all_button = CTk.CTkButton(app, text="Delete All To-Dos", font=(
     "Arial", 20), width=40, command=delete_all_tasks)
 delete_all_button.place(x=370, y=550)
 
+### END OF TODOS ELEMENTS ###
+
+
+### START OF REMINDERS ELEMENTS ###
+reminderlabels = []
+reminderbuttons = []
+load_reminders()
+create_reminder_labels()
+
 reminders_top_label = CTk.CTkLabel(
     app, text="All-Time Reminders", font=("Arial", 20))
 reminders_top_label.place(x=760, y=60)
@@ -333,6 +354,8 @@ add_reminder_button.place(x=1040, y=120)
 delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
     "Arial", 20), width=40, command=delete_all_reminders)
 delete_all_reminders_button.place(x=760, y=550)
+### END OF REMINDERS ELEMENTS ###
+
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Arial", 20), command=back_to_desky)

@@ -84,11 +84,11 @@ transcribed_text_field.insert(tk.END, 'Your speech goes here...')
 transcribed_text_field.place(x=10, y=170)
 
 
-exit_button = CTk.CTkButton(app, text="Exit", command=exit, font=("Arial", 14))
+exit_button = CTk.CTkButton(app, text="Exit", command=exit, font=("Arial", 16))
 exit_button.place(x=240, y=350)
 
 back_to_desky_button = CTk.CTkButton(
-    app, text="Back To Desky", command=back_to_desky)
+    app, text="Back To Desky", command=back_to_desky, font=('Arial', 14))
 back_to_desky_button.place(x=10, y=350)
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Arial", 18), width=3, command=toggle_theme)
