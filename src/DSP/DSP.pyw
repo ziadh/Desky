@@ -36,7 +36,7 @@ else:
 
 CTk.set_default_color_theme("blue")
 app = CTk.CTk()
-app.geometry("1200x600")
+app.geometry("1200x690")
 app.wm_iconbitmap("assets/logos/DSP-logo.ico")
 app.title(f"Daily Sneak Peek v{version}")
 app.bind("<Return>", lambda _: update_zip_code_button.invoke())
@@ -45,10 +45,13 @@ app.resizable(False, False)
 global show_12_hour_button
 global twlve_hour_time
 ### START OF GLOBAL FUNCTIONS ###
+
+
 def back_to_desky():
     app.destroy()
     subprocess.run(["python", "Desky.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+
 
 def toggle_theme():
     with open("src/settings.json", "r")as f:
@@ -69,19 +72,20 @@ def toggle_theme():
 
 ### START OF WEATHER FUNCTIONS ###
 
+
 def update_zip_code():
     global change_zip_code_entry
     change_zip_code_entry = CTk.CTkEntry(app, width=230)
     change_zip_code_entry.focus()
-    change_zip_code_entry.place(x=580, y=50)
+    change_zip_code_entry.place(x=420, y=40)
     global update_zip_code_button
     update_zip_code_button = CTk.CTkButton(
         app, text="\u2714", width=5, font=("Arial", 20), command=save_zip_code)
-    update_zip_code_button.place(x=820, y=50)
+    update_zip_code_button.place(x=660, y=40)
     global cancel_change_button
     cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
         "Arial", 20), command=cancel_zip_code_changes)
-    cancel_change_button.place(x=860, y=50)
+    cancel_change_button.place(x=700, y=40)
 
 
 def save_zip_code():
@@ -155,7 +159,7 @@ def get_weather():
         show_12_hour_button.place(x=40, y=390)
     except:
         weather_info.configure(
-            text="Something went wrong...\nPlease try again later. \nCurrently only USA zip codes are supported.")
+            text="Something went wrong...\nPlease try again later.")
 
 
 def kelvin_to_celsius_fahrenheit(kelvin):
@@ -165,7 +169,8 @@ def kelvin_to_celsius_fahrenheit(kelvin):
 
 
 def clear_weather_info():
-    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear weather info?')
+    confirm_clear = messagebox.showinfo(
+        'Confirm Clear', 'Are you sure you would like to clear weather info?')
     if confirm_clear:
         weather_info.configure(text='')
         show_12_hour_button.destroy()
@@ -174,6 +179,7 @@ def clear_weather_info():
 ### END OF WEATHER FUNCTIONS ###
 
 ### START OF TODOS FUNCTIONS ###
+
 
 if os.path.getsize('src/DSP/tasks.json') == 0:
     tasks = []
@@ -218,7 +224,8 @@ def create_task_labels():
 
 
 def delete_all_tasks():
-    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear your to-do list?')
+    confirm_clear = messagebox.showinfo(
+        'Confirm Clear', 'Are you sure you would like to clear your to-do list?')
     if confirm_clear:
         for tasklabel in tasklabels:
             tasklabel.destroy()
@@ -229,6 +236,7 @@ def delete_all_tasks():
 ### END OF TODOS FUNCTIONS ###
 
 ### START OF REMINDERS FUNCTIONS ###
+
 
 if os.path.getsize('src/DSP/reminders.json') == 0:
     reminders = []
@@ -273,7 +281,8 @@ def create_reminder_labels():
 
 
 def delete_all_reminders():
-    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear all reminders?')
+    confirm_clear = messagebox.showinfo(
+        'Confirm Clear', 'Are you sure you would like to clear all reminders?')
     if confirm_clear:
         for reminderlabel in reminderlabels:
             reminderlabel.destroy()
@@ -283,34 +292,40 @@ def delete_all_reminders():
             json.dump([], f)
 
 
-
 ### END OF REMINDERS FUNCTIONS ###
-
-
 
 
 ### START OF WEATHER ELEMENTS ###
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Arial", 18), width=3, command=toggle_theme)
-toggle_theme_button.place(x=240, y=500)
+toggle_theme_button.place(x=240, y=590)
 welcome_label = CTk.CTkLabel(
-    app, text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}", font=("Arial", 20))
-welcome_label.place(x=0, y=0)
+    app, text=f"Welcome to your Daily Sneak Peek!", font=("Arial", 20))
+zipcode_label = CTk.CTkLabel(
+    app, text=f"Your zip code is set to {zip_code}", font=("Arial", 20))
+welcome_label.place(x=10, y=0)
+zipcode_label.place(x=10, y=40)
 change_zip_code_button = CTk.CTkButton(
     app, text="Change", font=("Arial", 22), command=update_zip_code)
-change_zip_code_button.place(x=770, y=10)
+change_zip_code_button.place(x=270, y=40)
+
+outside_US_label = CTk.CTkLabel(
+    app, text="Outside the U.S.?", font=("Arial", 22))
+outside_US_label.place(x=850, y=10)
+international_button = CTk.CTkButton(
+    app, text="International", font=("Arial", 22))
+international_button.place(x=1040, y=10)
 
 get_weather_button = CTk.CTkButton(
     app, text="Get Today's Weather", font=("Arial", 20), command=get_weather)
-get_weather_button.place(x=30, y=60)
+get_weather_button.place(x=30, y=100)
 weather_info = CTk.CTkLabel(app, text="", font=("Arial", 15))
-weather_info.place(x=5, y=110)
+weather_info.place(x=5, y=150)
 
 clear_weather_info_button = CTk.CTkButton(
     app, text='Clear All', font=("Arial", 20), command=clear_weather_info)
-clear_weather_info_button.place(x=70, y=500)
+clear_weather_info_button.place(x=70, y=590)
 ### END OF WEATHER ELEMENTS ###
-
 
 
 ### START OF TODOS ELEMENTS ###
@@ -321,17 +336,17 @@ create_task_labels()
 
 todo_top_label = CTk.CTkLabel(
     app, text="Today's To-Dos", font=("Arial", 20))
-todo_top_label.place(x=370, y=60)
+todo_top_label.place(x=370, y=100)
 
 todo_entry = CTk.CTkEntry(app, width=260)
-todo_entry.place(x=370, y=120)
+todo_entry.place(x=370, y=160)
 add_todo_button = CTk.CTkButton(
     app, text="+", font=("Arial", 20), width=40, command=add_task)
-add_todo_button.place(x=650, y=120)
+add_todo_button.place(x=650, y=160)
 
 delete_all_button = CTk.CTkButton(app, text="Delete All To-Dos", font=(
     "Arial", 20), width=40, command=delete_all_tasks)
-delete_all_button.place(x=370, y=550)
+delete_all_button.place(x=370, y=640)
 
 ### END OF TODOS ELEMENTS ###
 
@@ -344,23 +359,23 @@ create_reminder_labels()
 
 reminders_top_label = CTk.CTkLabel(
     app, text="All-Time Reminders", font=("Arial", 20))
-reminders_top_label.place(x=760, y=60)
+reminders_top_label.place(x=760, y=100)
 reminder_entry = CTk.CTkEntry(app, width=260)
-reminder_entry.place(x=760, y=120)
+reminder_entry.place(x=760, y=160)
 add_reminder_button = CTk.CTkButton(
     app, text="+", font=("Arial", 20), width=40, command=add_reminder)
-add_reminder_button.place(x=1040, y=120)
+add_reminder_button.place(x=1040, y=160)
 
 delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
     "Arial", 20), width=40, command=delete_all_reminders)
-delete_all_reminders_button.place(x=760, y=550)
+delete_all_reminders_button.place(x=760, y=640)
 ### END OF REMINDERS ELEMENTS ###
 
 
 back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Arial", 20), command=back_to_desky)
-back_to_desky_button.place(x=5, y=550)
+back_to_desky_button.place(x=5, y=640)
 exit_button = CTk.CTkButton(
     app, text="Exit", font=("Arial", 20), command=exit)
-exit_button.place(x=190, y=550)
+exit_button.place(x=190, y=640)
 app.mainloop()
