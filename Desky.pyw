@@ -265,14 +265,14 @@ bottom_seperator.place(x=-20, y=510)
 
 github_page_button = CTk.CTkButton(
     app, text='GitHub', width=30, command=open_github_page)
-github_page_button.place(x=110, y=585)
+github_page_button.place(x=150, y=585)
 
 toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Arial", 16), width=3, command=toggle_theme)
 toggle_theme_button.place(x=385, y=585)
 check_for_updates_button = CTk.CTkButton(app, text="Check for Updates", font=(
     "Arial", 16), command=check_for_updates)
-check_for_updates_button.place(x=170, y=585)
+check_for_updates_button.place(x=220, y=585)
 
 exit_button = CTk.CTkButton(app, text="Exit", font=(
     "Arial", 16), command=exit_app)

@@ -109,7 +109,7 @@ def get_weather():
 
     def check_and_convert_time(sunrise_time, sunset_time):
         global twlve_hour_time
-        twlve_hour_time = CTk.CTkLabel(app, text='')
+        twlve_hour_time = CTk.CTkLabel(app, text='', font=("Arial", 15))
         twlve_hour_time.place(x=10, y=420)
         if sunrise_time.strftime('%H:%M') == sunrise_time.strftime('%I:%M %p') and sunset_time.strftime('%H:%M') == sunset_time.strftime('%I:%M %p'):
             twlve_hour_time.configure(text='Already 12 formats')
@@ -117,7 +117,7 @@ def get_weather():
             sunrise_12hr = sunrise_time.strftime('%I:%M %p')
             sunset_12hr = sunset_time.strftime('%I:%M %p')
             twlve_hour_time.configure(
-                text=f"Sunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
+                text=f"\nSunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
     global zip_code
     try:
         request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
@@ -145,7 +145,7 @@ def get_weather():
              or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
         show_12_hour_button = CTk.CTkButton(
             app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
-        show_12_hour_button.place(x=40, y=380)
+        show_12_hour_button.place(x=40, y=390)
     except:
         weather_info.configure(
             text="Something went wrong...\nPlease try again later. \nCurrently only USA zip codes are supported.")
@@ -200,12 +200,14 @@ def create_task_labels():
 
 
 def delete_all_tasks():
-    for tasklabel in tasklabels:
-        tasklabel.destroy()
-    tasks.clear()
-    tasklabels.clear()
-    with open("src/DSP/tasks.json", "w") as f:
-        json.dump([], f)
+    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear your to-do list?')
+    if confirm_clear:
+        for tasklabel in tasklabels:
+            tasklabel.destroy()
+        tasks.clear()
+        tasklabels.clear()
+        with open("src/DSP/tasks.json", "w") as f:
+            json.dump([], f)
 
 
 # reminders
@@ -252,12 +254,14 @@ def create_reminder_labels():
 
 
 def delete_all_reminders():
-    for reminderlabel in reminderlabels:
-        reminderlabel.destroy()
-    reminders.clear()
-    reminderlabels.clear()
-    with open("src/DSP/reminders.json", "w") as f:
-        json.dump([], f)
+    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear all reminders?')
+    if confirm_clear:
+        for reminderlabel in reminderlabels:
+            reminderlabel.destroy()
+        reminders.clear()
+        reminderlabels.clear()
+        with open("src/DSP/reminders.json", "w") as f:
+            json.dump([], f)
 
 
 def back_to_desky():
@@ -267,9 +271,11 @@ def back_to_desky():
 
 
 def clear_weather_info():
-    weather_info.configure(text='')
-    show_12_hour_button.destroy()
-    twlve_hour_time.configure(text='')
+    confirm_clear = messagebox.showinfo('Confirm Clear','Are you sure you would like to clear weather info?')
+    if confirm_clear:
+        weather_info.configure(text='')
+        show_12_hour_button.destroy()
+        twlve_hour_time.configure(text='')
 
 
 tasklabels = []
@@ -295,7 +301,7 @@ change_zip_code_button.place(x=770, y=10)
 get_weather_button = CTk.CTkButton(
     app, text="Get Today's Weather", font=("Arial", 20), command=get_weather)
 get_weather_button.place(x=30, y=60)
-weather_info = CTk.CTkLabel(app, text="")
+weather_info = CTk.CTkLabel(app, text="", font=("Arial", 15))
 weather_info.place(x=5, y=110)
 
 clear_weather_info_button = CTk.CTkButton(

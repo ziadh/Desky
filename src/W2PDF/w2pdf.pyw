@@ -78,8 +78,7 @@ app.wm_iconbitmap("assets/logos/w2pdf-logo.ico")
 
 app.title(f"Word to PDF Converter v{version}")
 
-top_label = CTk.CTkLabel(app, text=f"Welcome to Word to PDF Converter v{version}!", font=(
-    "Arial", 17))
+top_label = CTk.CTkLabel(app, text="Welcome to Word to PDF Converter!", font=("Arial", 17))
 top_label.place(x=0, y=30)
 label = CTk.CTkLabel(
     app, text="Please select a Word file \n\n\nFile Selected: None", font=(
