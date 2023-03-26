@@ -21,7 +21,7 @@ with open("src/user_settings.json", 'r')as f:
 version = settings['version']
 username = user_settings['username']
 theme = settings['theme']
-
+city = user_settings['City']
 if not os.path.exists('src/DSP/tasks.json'):
     with open('src/DSP/tasks.json', 'w') as file:
         json.dump([], file)
@@ -78,52 +78,75 @@ def toggle_theme():
 
 
 def international_location_weather():
+    global set_city_entry, top_city_label, update_city_button, cancel_city_change_button
     set_city_entry = CTk.CTkEntry(app, width=230)
     set_city_entry.focus()
     set_city_entry.place(x=730, y=80)
-    top_city_label = CTk.CTkLabel(app, text="Type in your city below: \n(Make sure zipcode is set to 00000)", font=("Arial", 16))
+    top_city_label = CTk.CTkLabel(
+        app, text="Type in your city below: \n(Make sure zipcode is set to 00000)", font=("Arial", 16))
     top_city_label.place(x=730, y=40)
-    update_city_button=CTk.CTkButton(
+    update_city_button = CTk.CTkButton(
         app, text="\u2714", width=5, font=("Arial", 20), command=update_city)
     update_city_button.place(x=970, y=80)
-    cancel_city_change_button=CTk.CTkButton(app, width=5, text="\u274C", font=(
+    cancel_city_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
         "Arial", 20), command=cancel_city_changes)
     cancel_city_change_button.place(x=1010, y=80)
 
+
 def update_city():
-    pass
+    global city
+    city = set_city_entry.get()
+    with open("src/user_settings.json", "r+") as json_file:
+        data = json.load(json_file)
+    if not city:
+        city = 'No City'
+        data['City'] = city
+        international_city_label.configure(text=f"Your city is set to {city}")
+        cancel_city_changes()
+    else:
+        data["City"] = city
+        international_city_label.configure(text=f"Your city is set to {city}")
+        cancel_city_changes()
+    with open('src/user_settings.json', 'w') as f:
+        json.dump(data, f)
+    weather_info.configure(text="")
+
+
 def cancel_city_changes():
-    pass
+    set_city_entry.destroy()
+    top_city_label.destroy()
+    update_city_button.destroy()
+    cancel_city_change_button.destroy()
 
 
 def update_zip_code():
     global change_zip_code_entry
-    change_zip_code_entry=CTk.CTkEntry(app, width=230)
+    change_zip_code_entry = CTk.CTkEntry(app, width=230)
     change_zip_code_entry.focus()
     change_zip_code_entry.place(x=430, y=40)
     global update_zip_code_button
-    update_zip_code_button=CTk.CTkButton(
+    update_zip_code_button = CTk.CTkButton(
         app, text="\u2714", width=5, font=("Arial", 20), command=save_zip_code)
     update_zip_code_button.place(x=670, y=40)
     global cancel_change_button
-    cancel_change_button=CTk.CTkButton(app, width=5, text="\u274C", font=(
+    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
         "Arial", 20), command=cancel_zip_code_changes)
     cancel_change_button.place(x=710, y=40)
 
 
 def save_zip_code():
     global zip_code
-    zip_code=change_zip_code_entry.get()
+    zip_code = change_zip_code_entry.get()
     with open("src/user_settings.json", "r+") as json_file:
-        data=json.load(json_file)
+        data = json.load(json_file)
     if not zip_code:
-        zip_code='00000'
-        data['zip_code']=zip_code
+        zip_code = '00000'
+        data['zip_code'] = zip_code
         zipcode_label.configure(
             text=f"Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
     else:
-        data["zip_code"]=zip_code
+        data["zip_code"] = zip_code
         zipcode_label.configure(
             text=f"Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
@@ -143,41 +166,41 @@ def get_weather():
 
     def check_and_convert_time(sunrise_time, sunset_time):
         global twlve_hour_time
-        twlve_hour_time=CTk.CTkLabel(app, text='', font=("Arial", 15))
+        twlve_hour_time = CTk.CTkLabel(app, text='', font=("Arial", 15))
         twlve_hour_time.place(x=10, y=420)
         if sunrise_time.strftime('%H:%M') == sunrise_time.strftime('%I:%M %p') and sunset_time.strftime('%H:%M') == sunset_time.strftime('%I:%M %p'):
             twlve_hour_time.configure(text='Already 12 formats')
         else:
-            sunrise_12hr=sunrise_time.strftime('%I:%M %p')
-            sunset_12hr=sunset_time.strftime('%I:%M %p')
+            sunrise_12hr = sunrise_time.strftime('%I:%M %p')
+            sunset_12hr = sunset_time.strftime('%I:%M %p')
             twlve_hour_time.configure(
                 text=f"\nSunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
     global zip_code
     try:
-        request_url=BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
-        response=requests.get(request_url).json()
-        state_response=requests.get(
+        request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
+        response = requests.get(request_url).json()
+        state_response = requests.get(
             f'http://api.zippopotam.us/us/{zip_code}')
-        data=state_response.json()
-        state=data['places'][0]['state']
-        city_name=response['name']
-        temp_kelvin=response['main']['temp']
-        temp_celsius, temp_fahrenheit=kelvin_to_celsius_fahrenheit(
+        data = state_response.json()
+        state = data['places'][0]['state']
+        city_name = response['name']
+        temp_kelvin = response['main']['temp']
+        temp_celsius, temp_fahrenheit = kelvin_to_celsius_fahrenheit(
             temp_kelvin)
-        feels_like_kelvin=response["main"]['feels_like']
-        feels_like_celsius, feels_like_fahrenheit=kelvin_to_celsius_fahrenheit(
+        feels_like_kelvin = response["main"]['feels_like']
+        feels_like_celsius, feels_like_fahrenheit = kelvin_to_celsius_fahrenheit(
             feels_like_kelvin)
-        wind_speed=response['wind']['speed']
-        humidity=response["main"]['humidity']
-        description=response["weather"][0]["description"]
-        sunrise_time=dt.datetime.utcfromtimestamp(
+        wind_speed = response['wind']['speed']
+        humidity = response["main"]['humidity']
+        description = response["weather"][0]["description"]
+        sunrise_time = dt.datetime.utcfromtimestamp(
             response['sys']['sunrise']+response['timezone'])
-        sunset_time=dt.datetime.utcfromtimestamp(
+        sunset_time = dt.datetime.utcfromtimestamp(
             response['sys']['sunset']+response['timezone'])
         weather_info.configure(
             text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
              or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
-        show_12_hour_button=CTk.CTkButton(
+        show_12_hour_button = CTk.CTkButton(
             app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
         show_12_hour_button.place(x=40, y=430)
     except:
@@ -186,13 +209,13 @@ def get_weather():
 
 
 def kelvin_to_celsius_fahrenheit(kelvin):
-    celsius=kelvin - 273.15
-    fahreinheit=celsius * (9/5) + 32
+    celsius = kelvin - 273.15
+    fahreinheit = celsius * (9/5) + 32
     return celsius, fahreinheit
 
 
 def clear_weather_info():
-    confirm_clear=messagebox.askyesno(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear weather info?')
     if confirm_clear:
         weather_info.configure(text='')
@@ -205,10 +228,10 @@ def clear_weather_info():
 
 
 if os.path.getsize('src/DSP/tasks.json') == 0:
-    tasks=[]
+    tasks = []
 else:
     with open('src/DSP/tasks.json', 'r') as file:
-        tasks=json.load(file)
+        tasks = json.load(file)
 
 
 def save_tasks():
@@ -220,18 +243,18 @@ def load_tasks():
     global tasks
     try:
         with open("src/DSP/tasks.json", "r")as file:
-            tasks=json.load(file)
+            tasks = json.load(file)
             create_task_labels()
     except:
         pass
 
 
 def add_task():
-    task=todo_entry.get()
+    task = todo_entry.get()
     if task == "":
         pass
     else:
-        task=todo_entry.get()
+        task = todo_entry.get()
         tasks.append(task)
         with open('src/DSP/tasks.json', 'w') as file:
             json.dump(tasks, file)
@@ -241,13 +264,13 @@ def add_task():
 
 def create_task_labels():
     for i, task in enumerate(tasks):
-        tasklabel=CTk.CTkLabel(app, text=task)
+        tasklabel = CTk.CTkLabel(app, text=task)
         tasklabel.place(x=370, y=120+(i+1)*30)
         tasklabels.append(tasklabel)
 
 
 def delete_all_tasks():
-    confirm_clear=messagebox.askyesno(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear your to-do list?')
     if confirm_clear:
         for tasklabel in tasklabels:
@@ -262,10 +285,10 @@ def delete_all_tasks():
 
 
 if os.path.getsize('src/DSP/reminders.json') == 0:
-    reminders=[]
+    reminders = []
 else:
     with open('src/DSP/reminders.json', 'r') as file:
-        reminders=json.load(file)
+        reminders = json.load(file)
 
 
 def save_reminders():
@@ -277,18 +300,18 @@ def load_reminders():
     global reminders
     try:
         with open("src/DSP/reminders.json", "r")as file:
-            reminders=json.load(file)
+            reminders = json.load(file)
             create_reminder_labels()
     except:
         pass
 
 
 def add_reminder():
-    reminder=reminder_entry.get()
+    reminder = reminder_entry.get()
     if reminder == "":
         pass
     else:
-        reminder=reminder_entry.get()
+        reminder = reminder_entry.get()
         reminders.append(reminder)
         with open('src/DSP/reminders.json', 'w') as file:
             json.dump(reminders, file)
@@ -298,13 +321,13 @@ def add_reminder():
 
 def create_reminder_labels():
     for i, reminder in enumerate(reminders):
-        reminderlabel=CTk.CTkLabel(app, text=reminder)
+        reminderlabel = CTk.CTkLabel(app, text=reminder)
         reminderlabel.place(x=760, y=120+(i+1)*30)
         reminderlabels.append(reminderlabel)
 
 
 def delete_all_reminders():
-    confirm_clear=messagebox.askyesno(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear all reminders?')
     if confirm_clear:
         for reminderlabel in reminderlabels:
@@ -319,55 +342,58 @@ def delete_all_reminders():
 
 
 ### START OF WEATHER ELEMENTS ###
-toggle_theme_button=CTk.CTkButton(app, text="\u2600", font=(
+toggle_theme_button = CTk.CTkButton(app, text="\u2600", font=(
     "Arial", 18), width=3, command=toggle_theme)
 toggle_theme_button.place(x=240, y=590)
-welcome_label=CTk.CTkLabel(
+welcome_label = CTk.CTkLabel(
     app, text=f"Welcome to your Daily Sneak Peek!", font=("Arial", 20))
-zipcode_label=CTk.CTkLabel(
+zipcode_label = CTk.CTkLabel(
     app, text=f"Your zip code is set to {zip_code}", font=("Arial", 20))
 welcome_label.place(x=10, y=0)
 zipcode_label.place(x=10, y=40)
-change_zip_code_button=CTk.CTkButton(
+change_zip_code_button = CTk.CTkButton(
     app, text="Change", font=("Arial", 22), command=update_zip_code)
 change_zip_code_button.place(x=280, y=40)
 
-outside_US_label=CTk.CTkLabel(
+outside_US_label = CTk.CTkLabel(
     app, text="Outside the U.S.?", font=("Arial", 22))
 outside_US_label.place(x=850, y=10)
-international_button=CTk.CTkButton(
+international_button = CTk.CTkButton(
     app, text="International", font=("Arial", 22), command=international_location_weather)
 international_button.place(x=1040, y=10)
+international_city_label = CTk.CTkLabel(
+    app, text=f"City set to: {city}", font=("Arial", 18))
+international_city_label.place(x=1000, y=50)
 
-get_weather_button=CTk.CTkButton(
+get_weather_button = CTk.CTkButton(
     app, text="Get Today's Weather", font=("Arial", 20), command=get_weather)
 get_weather_button.place(x=30, y=100)
-weather_info=CTk.CTkLabel(app, text="", font=("Arial", 15))
+weather_info = CTk.CTkLabel(app, text="", font=("Arial", 15))
 weather_info.place(x=5, y=150)
 
-clear_weather_info_button=CTk.CTkButton(
+clear_weather_info_button = CTk.CTkButton(
     app, text='Clear All', font=("Arial", 20), command=clear_weather_info)
 clear_weather_info_button.place(x=70, y=590)
 ### END OF WEATHER ELEMENTS ###
 
 
 ### START OF TODOS ELEMENTS ###
-tasklabels=[]
-taskbuttons=[]
+tasklabels = []
+taskbuttons = []
 load_tasks()
 create_task_labels()
 
-todo_top_label=CTk.CTkLabel(
+todo_top_label = CTk.CTkLabel(
     app, text="Today's To-Dos", font=("Arial", 20))
 todo_top_label.place(x=370, y=100)
 
-todo_entry=CTk.CTkEntry(app, width=260)
+todo_entry = CTk.CTkEntry(app, width=260)
 todo_entry.place(x=370, y=160)
-add_todo_button=CTk.CTkButton(
+add_todo_button = CTk.CTkButton(
     app, text="+", font=("Arial", 20), width=40, command=add_task)
 add_todo_button.place(x=650, y=160)
 
-delete_all_button=CTk.CTkButton(app, text="Delete All To-Dos", font=(
+delete_all_button = CTk.CTkButton(app, text="Delete All To-Dos", font=(
     "Arial", 20), width=40, command=delete_all_tasks)
 delete_all_button.place(x=370, y=640)
 
@@ -375,30 +401,30 @@ delete_all_button.place(x=370, y=640)
 
 
 ### START OF REMINDERS ELEMENTS ###
-reminderlabels=[]
-reminderbuttons=[]
+reminderlabels = []
+reminderbuttons = []
 load_reminders()
 create_reminder_labels()
 
-reminders_top_label=CTk.CTkLabel(
+reminders_top_label = CTk.CTkLabel(
     app, text="All-Time Reminders", font=("Arial", 20))
 reminders_top_label.place(x=760, y=100)
-reminder_entry=CTk.CTkEntry(app, width=260)
+reminder_entry = CTk.CTkEntry(app, width=260)
 reminder_entry.place(x=760, y=160)
-add_reminder_button=CTk.CTkButton(
+add_reminder_button = CTk.CTkButton(
     app, text="+", font=("Arial", 20), width=40, command=add_reminder)
 add_reminder_button.place(x=1040, y=160)
 
-delete_all_reminders_button=CTk.CTkButton(app, text="Delete All Reminders", font=(
+delete_all_reminders_button = CTk.CTkButton(app, text="Delete All Reminders", font=(
     "Arial", 20), width=40, command=delete_all_reminders)
 delete_all_reminders_button.place(x=760, y=640)
 ### END OF REMINDERS ELEMENTS ###
 
 
-back_to_desky_button=CTk.CTkButton(
+back_to_desky_button = CTk.CTkButton(
     app, text="Back To Desky", font=("Arial", 20), command=back_to_desky)
 back_to_desky_button.place(x=5, y=640)
-exit_button=CTk.CTkButton(
+exit_button = CTk.CTkButton(
     app, text="Exit", font=("Arial", 20), command=exit)
 exit_button.place(x=190, y=640)
 app.mainloop()
