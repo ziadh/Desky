@@ -2,12 +2,16 @@ import requests
 import datetime as dt
 import customtkinter as CTk
 from tkinter import *
+import tkinter as tk
 import json
 from tkinter import messagebox
 import os
 import subprocess
+from dotenv import load_dotenv
 
-API_KEY = "6c55313b14fc0b07b3ea751d41103c12"
+load_dotenv()
+
+API_KEY = os.environ.get("API_KEY")
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 with open("src/settings.json", 'r')as f:
@@ -73,19 +77,49 @@ def toggle_theme():
 ### START OF WEATHER FUNCTIONS ###
 
 
+def international_location_weather():
+
+    COUNTRIES = {
+        "Canada": ["Toronto", "Montreal", "Vancouver"],
+        "China": ["Beijing", "Shanghai", "Guangzhou"],
+        "France": ["Paris", "Marseille", "Lyon"],
+        "Germany": ["Berlin", "Hamburg", "Munich"],
+        "India": ["New Delhi", "Mumbai", "Bangalore"],
+        "Italy": ["Rome", "Milan", "Naples"],
+        "Japan": ["Tokyo", "Osaka", "Nagoya"],
+        "Russia": ["Moscow", "Saint Petersburg", "Novosibirsk"],
+        "Spain": ["Madrid", "Barcelona", "Valencia"],
+        "United Kingdom": ["London", "Birmingham", "Manchester"]
+    }
+    intlapp = CTk.CTk()
+    intlapp.title("Country/City Selection")
+    intlapp.geometry('200x200')
+    country_var = tk.StringVar(value='Select a Country')
+    city_var = tk.StringVar(value='Select a City')
+    country_dropdown = CTk.CTkOptionMenu(
+        intlapp, country_var, *COUNTRIES.keys())
+    city_dropdown = CTk.CTkOptionMenu(intlapp, city_var, "")
+    submit_button = CTk.CTkButton(intlapp, text="Submit")
+    country_dropdown.pack()
+    city_dropdown.pack()
+    submit_button.pack()
+
+    intlapp.mainloop()
+
+
 def update_zip_code():
     global change_zip_code_entry
     change_zip_code_entry = CTk.CTkEntry(app, width=230)
     change_zip_code_entry.focus()
-    change_zip_code_entry.place(x=420, y=40)
+    change_zip_code_entry.place(x=430, y=40)
     global update_zip_code_button
     update_zip_code_button = CTk.CTkButton(
         app, text="\u2714", width=5, font=("Arial", 20), command=save_zip_code)
-    update_zip_code_button.place(x=660, y=40)
+    update_zip_code_button.place(x=670, y=40)
     global cancel_change_button
     cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
         "Arial", 20), command=cancel_zip_code_changes)
-    cancel_change_button.place(x=700, y=40)
+    cancel_change_button.place(x=710, y=40)
 
 
 def save_zip_code():
@@ -96,13 +130,13 @@ def save_zip_code():
     if not zip_code:
         zip_code = '00000'
         data['zip_code'] = zip_code
-        welcome_label.configure(
-            text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
+        zipcode_label.configure(
+            text=f"Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
     else:
         data["zip_code"] = zip_code
-        welcome_label.configure(
-            text=f"Welcome to your Daily Sneak Peek! Your zip code is set to {zip_code}")
+        zipcode_label.configure(
+            text=f"Your zip code is set to {zip_code}")
         cancel_zip_code_changes()
     with open('src/user_settings.json', 'w') as f:
         json.dump(data, f)
@@ -156,7 +190,7 @@ def get_weather():
              or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
         show_12_hour_button = CTk.CTkButton(
             app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
-        show_12_hour_button.place(x=40, y=390)
+        show_12_hour_button.place(x=40, y=430)
     except:
         weather_info.configure(
             text="Something went wrong...\nPlease try again later.")
@@ -169,7 +203,7 @@ def kelvin_to_celsius_fahrenheit(kelvin):
 
 
 def clear_weather_info():
-    confirm_clear = messagebox.showinfo(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear weather info?')
     if confirm_clear:
         weather_info.configure(text='')
@@ -224,7 +258,7 @@ def create_task_labels():
 
 
 def delete_all_tasks():
-    confirm_clear = messagebox.showinfo(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear your to-do list?')
     if confirm_clear:
         for tasklabel in tasklabels:
@@ -281,7 +315,7 @@ def create_reminder_labels():
 
 
 def delete_all_reminders():
-    confirm_clear = messagebox.showinfo(
+    confirm_clear = messagebox.askyesno(
         'Confirm Clear', 'Are you sure you would like to clear all reminders?')
     if confirm_clear:
         for reminderlabel in reminderlabels:
@@ -307,13 +341,13 @@ welcome_label.place(x=10, y=0)
 zipcode_label.place(x=10, y=40)
 change_zip_code_button = CTk.CTkButton(
     app, text="Change", font=("Arial", 22), command=update_zip_code)
-change_zip_code_button.place(x=270, y=40)
+change_zip_code_button.place(x=280, y=40)
 
 outside_US_label = CTk.CTkLabel(
     app, text="Outside the U.S.?", font=("Arial", 22))
 outside_US_label.place(x=850, y=10)
 international_button = CTk.CTkButton(
-    app, text="International", font=("Arial", 22))
+    app, text="International", font=("Arial", 22), command=international_location_weather)
 international_button.place(x=1040, y=10)
 
 get_weather_button = CTk.CTkButton(
