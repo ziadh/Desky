@@ -160,10 +160,8 @@ def cancel_zip_code_changes():
     change_zip_code_entry.destroy()
     cancel_change_button.destroy()
 
-
 def get_weather():
     global show_12_hour_button
-
     def check_and_convert_time(sunrise_time, sunset_time):
         global twlve_hour_time
         twlve_hour_time = CTk.CTkLabel(app, text='', font=("Arial", 15))
@@ -175,37 +173,41 @@ def get_weather():
             sunset_12hr = sunset_time.strftime('%I:%M %p')
             twlve_hour_time.configure(
                 text=f"\nSunrise time (12 hour format): {sunrise_12hr} \n\nSunset time (12 hour format): {sunset_12hr}")
-    global zip_code
-    try:
+
+    if zip_code == "00000":
+        request_url = BASE_URL + "?appid="+API_KEY+"&q="+city
+    else:
         request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
-        response = requests.get(request_url).json()
-        state_response = requests.get(
-            f'http://api.zippopotam.us/us/{zip_code}')
-        data = state_response.json()
-        state = data['places'][0]['state']
-        city_name = response['name']
-        temp_kelvin = response['main']['temp']
-        temp_celsius, temp_fahrenheit = kelvin_to_celsius_fahrenheit(
-            temp_kelvin)
-        feels_like_kelvin = response["main"]['feels_like']
-        feels_like_celsius, feels_like_fahrenheit = kelvin_to_celsius_fahrenheit(
-            feels_like_kelvin)
-        wind_speed = response['wind']['speed']
-        humidity = response["main"]['humidity']
-        description = response["weather"][0]["description"]
-        sunrise_time = dt.datetime.utcfromtimestamp(
-            response['sys']['sunrise']+response['timezone'])
-        sunset_time = dt.datetime.utcfromtimestamp(
-            response['sys']['sunset']+response['timezone'])
+    
+    response = requests.get(request_url).json()
+    
+    if response["cod"] == "404":
         weather_info.configure(
-            text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
-             or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
-        show_12_hour_button = CTk.CTkButton(
-            app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
-        show_12_hour_button.place(x=40, y=430)
-    except:
-        weather_info.configure(
-            text="Something went wrong...\nPlease try again later.")
+            text="Could not find weather information for the specified location.")
+        return
+    
+    state = response["sys"]["country"] if zip_code != "00000" else ""
+    city_name = response['name'] if zip_code != "00000" else city
+    temp_kelvin = response['main']['temp']
+    temp_celsius, temp_fahrenheit = kelvin_to_celsius_fahrenheit(
+        temp_kelvin)
+    feels_like_kelvin = response["main"]['feels_like']
+    feels_like_celsius, feels_like_fahrenheit = kelvin_to_celsius_fahrenheit(
+        feels_like_kelvin)
+    wind_speed = response['wind']['speed']
+    humidity = response["main"]['humidity']
+    description = response["weather"][0]["description"]
+    sunrise_time = dt.datetime.utcfromtimestamp(
+        response['sys']['sunrise']+response['timezone'])
+    sunset_time = dt.datetime.utcfromtimestamp(
+        response['sys']['sunset']+response['timezone'])
+    weather_info.configure(
+        text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
+        or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
+    
+    show_12_hour_button = CTk.CTkButton(
+        app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
+    show_12_hour_button.place(x=40, y=430)
 
 
 def kelvin_to_celsius_fahrenheit(kelvin):
