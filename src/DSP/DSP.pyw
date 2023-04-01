@@ -185,8 +185,11 @@ def get_weather():
         weather_info.configure(
             text="Could not find weather information for the specified location.")
         return
-    
-    state = response["sys"]["country"] if zip_code != "00000" else ""
+    try:
+        state = response["sys"]["country"] if zip_code != "00000" else ""
+    except KeyError:
+        state = ""
+
     city_name = response['name'] if zip_code != "00000" else city
     temp_kelvin = response['main']['temp']
     temp_celsius, temp_fahrenheit = kelvin_to_celsius_fahrenheit(

@@ -33,7 +33,8 @@ def update_username():
         app, text="\u2714", width=5, font=("Arial", 20), command=save_username)
     update_password_button.place(x=250, y=50)
     global cancel_change_button
-    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=("Arial", 20), command=cancel_username_changes)
+    cancel_change_button = CTk.CTkButton(app, width=5, text="\u274C", font=(
+        "Arial", 20), command=cancel_username_changes)
     cancel_change_button.place(x=290, y=50)
 
 
@@ -95,10 +96,14 @@ def open_FDCL():
     app.destroy()
     subprocess.run(["python", "src/FD/FDCL.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+
+
 def open_GPTS():
     app.destroy()
     subprocess.run(["python", "src/GPTS/GPTS.pyw"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
+
+
 def open_TT():
     app.destroy()
     subprocess.run(["python", "src/TT/TT.pyw"],
@@ -108,12 +113,15 @@ def open_TT():
 def open_PCW():
     app.destroy()
     subprocess.run(["python", "src/PCW/PCW.pyw"],
-                       creationflags=subprocess.CREATE_NO_WINDOW)
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
 
 def open_QRG():
     app.destroy()
     subprocess.run(["python", "src/QRG/QRG.pyw"],
-                       creationflags=subprocess.CREATE_NO_WINDOW)
+                   creationflags=subprocess.CREATE_NO_WINDOW)
+
+
 def open_MN():
     app.destroy()
     subprocess.run(["python", "src/MN/MN.pyw"],
@@ -136,18 +144,18 @@ def toggle_theme():
         json.dump(settings, f)
 
 
-
 def check_for_updates():
     r = requests.get("https://api.github.com/repos/ziadh/Desky/releases")
     json_data = r.json()
     newest_version = json_data[0]["tag_name"]
     if float(newest_version) > float(version):
-        version_message.configure(text=f"New update v{newest_version} available. Click me to update.")
+        version_message.configure(
+            text=f"New update v{newest_version} available. Click me to update.")
         version_message.bind("<Button-1>", download_update)
     else:
-        whats_new_label.configure(text=f"You are running the latest version v{version}. Click me to view\nthe latest changes.")
+        whats_new_label.configure(
+            text=f"You are running the latest version v{version}. Click me to view\nthe latest changes.")
         whats_new_label.bind("<Button-1>", open_release_notes)
-
 
 
 def open_release_notes(event):
@@ -220,7 +228,12 @@ apps_label.place(x=250, y=70)
 
 DSP_button = CTk.CTkButton(app, text="Daily Sneak Peek", font=(
     "Arial", 20), command=open_DSP)
+DSP_button.configure(state="disabled")
 DSP_button.place(x=10, y=110)
+
+DSP_NA_label = CTk.CTkLabel(
+    app, text="Under Construction...\nShould be back in v1.60")
+DSP_NA_label.place(x=180, y=110)
 DO_button = CTk.CTkButton(app, text="Downloads Organizer", font=(
     "Arial", 20), command=open_DO)
 DO_button.place(x=10, y=170)
@@ -230,16 +243,19 @@ FDCL_button = CTk.CTkButton(app, text="Fresh Desktop Checklist",
 FDCL_button.place(x=10, y=230)
 
 
-GPTS_button = CTk.CTkButton(app,text='GPT Search',font=("Arial", 20), command=open_GPTS)
+GPTS_button = CTk.CTkButton(app, text='GPT Search',
+                            font=("Arial", 20), command=open_GPTS)
 GPTS_button.place(x=10, y=290)
 
 MN_button = CTk.CTkButton(app, text="My Notes",
-                            font=("Arial", 20), command=open_MN, anchor="w",width=20)
+                          font=("Arial", 20), command=open_MN, anchor="w", width=20)
 MN_button.place(x=10, y=350)
-PCW_button = CTk.CTkButton(app, text="PC Watcher", font=("Arial", 20), command=open_PCW, width=20, anchor="w")
+PCW_button = CTk.CTkButton(app, text="PC Watcher", font=(
+    "Arial", 20), command=open_PCW, width=20, anchor="w")
 PCW_button.place(x=10, y=410)
 
-QRG_button = CTk.CTkButton(app, text="QR Generator", font=("Arial", 20), command=open_QRG, width=20, anchor="w")
+QRG_button = CTk.CTkButton(app, text="QR Generator", font=(
+    "Arial", 20), command=open_QRG, width=20, anchor="w")
 QRG_button.place(x=10, y=470)
 
 TT_button = CTk.CTkButton(app, text='Tock Tick',
@@ -281,7 +297,7 @@ exit_button.place(x=430, y=585)
 
 version_message = CTk.CTkLabel(app, text="", font=("Arial", 16))
 version_message.place(x=0, y=530)
-whats_new_label = CTk.CTkLabel(app,text="", font=("Arial", 16))
+whats_new_label = CTk.CTkLabel(app, text="", font=("Arial", 16))
 whats_new_label.place(x=0, y=530)
 
 app.mainloop()
