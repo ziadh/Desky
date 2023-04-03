@@ -48,10 +48,12 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 
 # Daily Sneak Peek:
 
-## Stay up to date with your day. Currently only shows today's weather for your zipcode, launch will include daily reminders as well as all-time To-Do list.
-Support for cities outside the U.S. will be added in a future update.
+__Under construction until v1.60. Sorry about that.__
 
-![DSP-ss](assets/ss/DSP-ss.png)
+~~## Stay up to date with your day. Currently only shows today's weather for your zipcode, launch will include daily reminders as well as all-time To-Do list.
+Support for cities outside the U.S. will be added in a future update.~~
+
+<!-- ![DSP-ss](assets/ss/DSP-ss.png) -->
 
 
 # Downloads Folder Organizer
@@ -64,6 +66,14 @@ Support for cities outside the U.S. will be added in a future update.
 
 
 ![FDCL-ss](assets/ss/FDCL-ss.png)
+# Quick Google Search
+## Get your quick Google search in with this handy mini-app.  
+
+![GPTS-ss](assets/ss/GS-ss.png)
+
+
+### It does not track or save your queries
+
 
 # Chat GPT Quick Search
 ## Got a question on your mind for Chat GPT that you want to ask right away? This mini-app launches your web browser and types in the query for you in one click! 
