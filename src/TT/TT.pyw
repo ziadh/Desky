@@ -5,7 +5,7 @@ import json
 import pytz
 from datetime import datetime
 import time
-
+from tkinter import messagebox
 
 def start_stopwatch():
     global sw_running, sw_time_elapsed
@@ -91,6 +91,7 @@ def update_cd():
         update_cd_label()
         app.after(1000, update_cd)
     elif cd_remaining == 0:
+        time_over = messagebox.showinfo("Time is up", "Countdown is over!")
         cd_is_running = False
 
 
