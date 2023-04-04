@@ -15,7 +15,7 @@ CTk.set_default_color_theme("blue")
 
 def open_downloads():
     vars_list = [bnetvar.get(), spotifyvar.get(), chromevar.get(), firefoxvar.get(), discordvar.get(),
-                 vscvar.get(), ghdvar.get(), npppvar.get(), skypevar.get(), steamvar.get(), evernotevar.get(), itunesvar.get(), gitvar.get()]
+                 vscvar.get(), vsvar.get(), ghdvar.get(), npppvar.get(), skypevar.get(), steamvar.get(), evernotevar.get(), itunesvar.get(), gitvar.get()]
     if not any(var == 1 for var in vars_list):
         result = messagebox.showinfo(
             title="Nothing selected", message="Please select at least one.")
@@ -47,6 +47,8 @@ def open_downloads():
             webbrowser.open("https://support.apple.com/downloads/itunes")
         if gitvar.get() == 1:
             webbrowser.open("https://git-scm.com/downloads")
+        if vsvar.get() == 1:
+            webbrowser.open("https://visualstudio.microsoft.com/downloads/")
         reset_selections()
 
 
@@ -64,6 +66,7 @@ def reset_selections():
     evernotevar.set(0)
     itunesvar.set(0)
     gitvar.set(0)
+    vsvar.set(0)
 
 
 def select_all():
@@ -80,6 +83,7 @@ def select_all():
     evernotevar.set(1)
     itunesvar.set(1)
     gitvar.set(1)
+    vsvar.set(1)
 
 
 def back_to_desky():
@@ -96,7 +100,8 @@ def download_it_for_me():
                  'Chrome': chromevar.get(),
                  'Firefox': firefoxvar.get(),
                  'Discord': discordvar.get(),
-                 'VSC': vscvar.get(),
+                 'Visual Studio': vsvar.get(),
+                 'VS Code': vscvar.get(),
                  'GitHubDesktop': ghdvar.get(),
                  'Notepad++': npppvar.get(),
                  'Skype': skypevar.get(),
@@ -118,6 +123,7 @@ def download_it_for_me():
                 webbrowser.open(download_link)
                 reset_selections()
 
+
 def toggle_theme():
     with open("src/settings.json", "r")as f:
         settings = json.load(f)
@@ -132,6 +138,7 @@ def toggle_theme():
         settings['theme'] = 'Dark'
     with open('src/settings.json', 'w') as f:
         json.dump(settings, f)
+
 
 with open("src/settings.json", 'r')as f:
     settings = json.load(f)
@@ -158,7 +165,7 @@ steamvar = IntVar()
 evernotevar = IntVar()
 itunesvar = IntVar()
 gitvar = IntVar()
-
+vsvar = IntVar()
 
 if theme == 'Dark':
     CTk.set_appearance_mode("Dark")
@@ -177,7 +184,9 @@ np = CTk.CTkCheckBox(app, text="NotePad++", variable=npppvar)
 skype = CTk.CTkCheckBox(app, text="Skype", variable=skypevar)
 spotify = CTk.CTkCheckBox(app, text="Spotify", variable=spotifyvar)
 steam = CTk.CTkCheckBox(app, text="Steam", variable=steamvar)
-vs = CTk.CTkCheckBox(app, text="VS Code", variable=vscvar)
+vsc = CTk.CTkCheckBox(app, text="VS Code", variable=vscvar)
+vs = CTk.CTkCheckBox(app, text="Visual Studio", variable=vsvar)
+
 
 BattleNet.place(x=10, y=90)
 Chrome.place(x=10, y=120)
@@ -191,7 +200,9 @@ np.place(x=270, y=150)
 skype.place(x=400, y=90)
 spotify.place(x=400, y=120)
 steam.place(x=400, y=150)
-vs.place(x=480, y=90)
+vsc.place(x=480, y=90)
+vs.place(x=480, y=120)
+
 msg = """
 Welcome to Fresh Desktop Downloads. If your computer recently got through a factory reset, simply \ncheck the boxes for the applications that you would like to install then press the download button.
 """

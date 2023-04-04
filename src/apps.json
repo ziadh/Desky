@@ -64,6 +64,11 @@
             "name": "VS Code",
             "windows_download_link": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user",
             "darwin_download_link": "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
+        },
+        {
+            "name": "Visual Studio",
+            "windows_download_link": "https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet",
+            "darwin_download_link": "https://visualstudio.microsoft.com/thank-you-downloading-visual-studio-mac/?sku=communitymac&rel=17"
         }
     ]
 }
