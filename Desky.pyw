@@ -186,8 +186,10 @@ def exit_app():
 
 
 def open_github_page():
-    link = "https://github.com/ziadh/Desky/"
-    webbrowser.open(link)
+    confirm_open = messagebox.askyesno("Confirm Open GitHub","Are you sure you would like to open the project's GitHub page?")
+    if confirm_open:
+        link = "https://github.com/ziadh/Desky/"
+        webbrowser.open(link)
 
 
 with open("src/settings.json", 'r')as f:
