@@ -66,6 +66,7 @@ def set_countdown(minutes):
 def set_custom_time():
     global countdown, cd_remaining
     custom_time = custom_time_entry.get()
+    custom_time_entry.delete(0,'end')
     try:
         minutes, seconds = custom_time.split(':')
         minutes = int(minutes)
