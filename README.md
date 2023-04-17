@@ -1,5 +1,3 @@
-V1.60 will be a day or two late! I apologize but it should be out soon with the DSP fixes
-
 ![read-me-wide](assets/logos/read-me-wide.png)
 
 

@@ -9,7 +9,7 @@ import subprocess
 def generate_qr():
     link = link_entry.get()
 
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr = qrcode.QRCode(version=1, box_size=8, border=5)
     qr.add_data(link)
     qr.make(fit=True)
 
