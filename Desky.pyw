@@ -234,12 +234,8 @@ apps_label.place(x=250, y=70)
 
 DSP_button = CTk.CTkButton(app, text="Daily Sneak Peek", font=(
     "Arial", 20), command=open_DSP)
-# DSP_button.configure(state="disabled")
 DSP_button.place(x=10, y=110)
 
-DSP_NA_label = CTk.CTkLabel(
-    app, text="Under Construction...\nShould be back in v1.60")
-DSP_NA_label.place(x=180, y=110)
 DO_button = CTk.CTkButton(app, text="Downloads Organizer", font=(
     "Arial", 20), command=open_DO)
 DO_button.place(x=10, y=170)
