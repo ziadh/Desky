@@ -48,10 +48,10 @@ Desky contains a plenty of mini-applications™ that aims to make your everyday 
 
 # Daily Sneak Peek:
 
-__Under construction until v1.60. Sorry about that.__
 
-~~## Stay up to date with your day. Currently only shows today's weather for your zipcode, launch will include daily reminders as well as all-time To-Do list.
-Support for cities outside the U.S. will be added in a future update.~~
+ Stay up to date with your day.
+ It now supports internation cities!
+
 
 <!-- ![DSP-ss](assets/ss/DSP-ss.png) -->
 
