@@ -6,6 +6,7 @@ import subprocess
 
 
 def download_highest_res():
+    show_progress()
     try:
         ytLink = link_entry.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
@@ -19,6 +20,7 @@ def download_highest_res():
 
 
 def download_lowest_res():
+    show_progress()
     try:
         ytLink = link_entry.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
@@ -32,6 +34,7 @@ def download_lowest_res():
 
 
 def download_720p():
+    show_progress()
     try:
         ytLink = link_entry.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
@@ -45,6 +48,7 @@ def download_720p():
 
 
 def audio_only():
+    show_progress()
     try:
         ytLink = link_entry.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
@@ -87,6 +91,10 @@ def toggle_theme():
         settings['theme'] = 'Dark'
     with open('src/settings.json', 'w') as f:
         json.dump(settings, f)
+def show_progress():
+    finishLabel.place(x=10, y=150)
+    progressPercent.place(x=140, y=180)
+    progressBar.place(x=10, y=230)
 
 
 CTk.set_appearance_mode("System")
@@ -123,16 +131,19 @@ link_entry = CTk.CTkEntry(
 link_entry.focus()
 link_entry.place(x=10, y=110)
 
+#hide finishlabel and progressbar until after download button has been pressed
+
+
 finishLabel = CTk.CTkLabel(app, text="", font=("Arial", 10))
-finishLabel.place(x=10, y=150)
 
 progressPercent = CTk.CTkLabel(app, text="0%", font=("Arial", 16))
-progressPercent.place(x=140, y=180)
 
 progressBar = CTk.CTkProgressBar(app, width=400)
 progressBar.set(0)
-progressBar.place(x=10, y=230)
 
+finishLabel.place_forget()
+progressPercent.place_forget()
+progressBar.place_forget()
 download_highest_res_button = CTk.CTkButton(
     app, text="Highest Res Download", command=download_highest_res, font=("Arial", 12))
 download_highest_res_button.place(x=13, y=260)
