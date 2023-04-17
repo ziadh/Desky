@@ -47,19 +47,34 @@ global twlve_hour_time
 import webbrowser
 
 load_dotenv()
+#check if .env file is empty
+
+
+global API_KEY
+
+
 if not os.path.exists('.env'):
     no_api_label = CTk.CTkLabel(
-        app, text="No API Key found. Please click me to fix this.")
+        app, text="No API Key found. Please click me to fix this.",fg_color='red')
     no_api_label.bind("<Button-1>", lambda _: fix_api_key())
     no_api_label.place(x=350, y=0)
 else:
     API_KEY = os.environ.get("API_KEY")
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
+if API_KEY == None:
+    no_api_label = CTk.CTkLabel(
+    app, text="API key is not found. Please click me to follow tutorial on how to fix that",fg_color='red')
+    no_api_label.bind("<Button-1>", lambda _: fix_api_key())
+    no_api_label.place(x=350, y=0)
+else:
+    print('yes code')
+
+    
 ### START OF GLOBAL FUNCTIONS ###
 def fix_api_key():
     #PLACEHOLDER LINK
-    webbrowser.open_new("https://home.openweathermap.org/users/sign_in")
+    webbrowser.open_new("https://github.com/ziadh/Desky/blob/main/fix_api_error.md")
 
 def back_to_desky():
     app.destroy()
