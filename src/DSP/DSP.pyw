@@ -73,7 +73,6 @@ else:
 
 ### START OF GLOBAL FUNCTIONS ###
 def fix_api_key():
-    #PLACEHOLDER LINK
     webbrowser.open_new("https://github.com/ziadh/Desky/blob/main/src/fix_api_error.md")
 
 def back_to_desky():
