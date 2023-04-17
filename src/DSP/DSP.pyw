@@ -9,10 +9,6 @@ import os
 import subprocess
 from dotenv import load_dotenv
 
-load_dotenv()
-
-API_KEY = os.environ.get("API_KEY")
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 with open("src/settings.json", 'r')as f:
     settings = json.load(f)
@@ -48,8 +44,22 @@ app.bind("<Escape>", lambda _: cancel_change_button.invoke())
 app.resizable(False, False)
 global show_12_hour_button
 global twlve_hour_time
-### START OF GLOBAL FUNCTIONS ###
+import webbrowser
 
+load_dotenv()
+if not os.path.exists('.env'):
+    no_api_label = CTk.CTkLabel(
+        app, text="No API Key found. Please click me to fix this.")
+    no_api_label.bind("<Button-1>", lambda _: fix_api_key())
+    no_api_label.place(x=350, y=0)
+else:
+    API_KEY = os.environ.get("API_KEY")
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+### START OF GLOBAL FUNCTIONS ###
+def fix_api_key():
+    #PLACEHOLDER LINK
+    webbrowser.open_new("https://home.openweathermap.org/users/sign_in")
 
 def back_to_desky():
     app.destroy()
@@ -160,8 +170,10 @@ def cancel_zip_code_changes():
     change_zip_code_entry.destroy()
     cancel_change_button.destroy()
 
+
 def get_weather():
     global show_12_hour_button
+
     def check_and_convert_time(sunrise_time, sunset_time):
         global twlve_hour_time
         twlve_hour_time = CTk.CTkLabel(app, text='', font=("Arial", 15))
@@ -178,9 +190,9 @@ def get_weather():
         request_url = BASE_URL + "?appid="+API_KEY+"&q="+city
     else:
         request_url = BASE_URL + "?appid="+API_KEY+"&zip="+zip_code
-    
+
     response = requests.get(request_url).json()
-    
+
     if response["cod"] == "404":
         weather_info.configure(
             text="Could not find weather information for the specified location.")
@@ -207,7 +219,7 @@ def get_weather():
     weather_info.configure(
         text=f"""Weather in {city_name}, {state}: \n\n General Weather Description: {description}\n\n Temperature: {temp_fahrenheit: .2f}°F or {temp_celsius: .2f}°C \n\nTemperature feels like: {feels_like_fahrenheit: .2f}°F
         or {feels_like_celsius: .2f}°C\n\nHumidity: {humidity}%\n\nWind Speed: {wind_speed}m/s\n\nSun rises: at {sunrise_time} local time\n\nSun sets: at {sunset_time} local time""")
-    
+
     show_12_hour_button = CTk.CTkButton(
         app, text='Show In 12-hour', command=lambda: check_and_convert_time(sunrise_time, sunset_time))
     show_12_hour_button.place(x=40, y=430)
