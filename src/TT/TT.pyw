@@ -1,4 +1,3 @@
-import tkinter as tk
 import customtkinter as CTk
 import subprocess
 import json

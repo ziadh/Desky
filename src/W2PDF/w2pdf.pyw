@@ -14,14 +14,14 @@ def browse_file():
     word_file = filedialog.askopenfilename(
         initialdir="/", title="Select file", filetypes=(("Word files", "*.docx"), ("all files", "*.*")))
     if word_file == "":
-        label.configure(text=f"No file has been selected")
+        select_label.configure(text=f"No file has been selected")
     else:
-        label.configure(text=f"File Selected: \n{word_file}")
+        select_label.configure(text=f"File Selected: \n{word_file}")
 
 
 def convert_to_pdf():
     if word_file == "":
-        label.configure(text="Please select a file")
+        select_label.configure(text="Please select a file")
     else:
         word = comtypes.client.CreateObject('Word.Application')
         doc = word.Documents.Open(word_file)
@@ -29,13 +29,13 @@ def convert_to_pdf():
         doc.SaveAs(pdf_file, FileFormat=17)
         doc.Close()
         word.Quit()
-        label.configure(text='Conversion Done, check the same folder')
+        select_label.configure(text='Conversion Done, check the same folder')
 
 
 def clear_selection():
     global word_file
     word_file = ""
-    label.configure(text="File selection cleared.")
+    select_label.configure(text="File selection cleared.")
 
 
 def back_to_desky():
@@ -79,11 +79,11 @@ app.wm_iconbitmap("assets/logos/w2pdf-logo.ico")
 app.title(f"Word to PDF Converter v{version}")
 
 top_label = CTk.CTkLabel(app, text="Welcome to Word to PDF Converter!", font=("Arial", 17))
-top_label.place(x=0, y=30)
-label = CTk.CTkLabel(
+top_label.place(x=20, y=30)
+select_label = CTk.CTkLabel(
     app, text="Please select a Word file \n\n\nFile Selected: None", font=(
         "Arial", 14))
-label.place(x=0, y=90)
+select_label.place(x=20, y=90)
 
 browse_button = CTk.CTkButton(
     app, text="Browse", command=browse_file, font=("Arial", 14))
